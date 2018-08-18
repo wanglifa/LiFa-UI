@@ -22,5 +22,8 @@
   "homepage": "https://github.com/wanglifa/gulu-demo#readme",
   "dependencies": {
     "vue": "^2.5.17"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.9.7"
   }
 }
