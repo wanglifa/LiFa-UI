@@ -1,9 +1,17 @@
 <template>
-    <button class="g-button">按钮</button>
+    <button class="g-button" :class="{[`icon-${iconPosition}`]:true}">
+        <svg v-if="icon" class="icon">
+            <use :xlink:href="`#i-${icon}`"></use>
+        </svg>
+        <div class="content">
+            <slot></slot>
+        </div>
+    </button>
 </template>
 <script>
-    //默认导出一个对象
-    export default {}
+    export default {
+        props: ['icon','iconPosition']
+    }
 </script>
 <style lang="scss">
     .g-button{
@@ -13,6 +21,11 @@
         border-radius: var(--border-radius);
         border: 1px solid var(--border-color);
         background: var(--button-bg);
+        display: inline-flex;
+        vertical-align: middle;
+        justify-content: center;
+        align-items: center;
+        padding: 0 1em;
         &:hover{
             border-color: var(--border-color-hover);
         }
@@ -22,5 +35,23 @@
         &:focus{
             outline: none;
         }
+        > .icon{
+            order: 1;
+            margin-right: .1em;
+        }
+        > .content{
+            order: 2;
+        }
+        &.icon-right{
+            > .icon{
+                order: 2;
+                margin-right: 0;
+                margin-left: .1em;
+            }
+            > .content{
+                order: 1;
+            }
+        }
     }
+
 </style>

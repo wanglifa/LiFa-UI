@@ -15,7 +15,8 @@
     body{
         font-size: var(--font-size);
     }
-    :root{
+
+    :root {
         --button-height: 32px;
         --font-size: 14px;
         --button-bg: white;
@@ -30,10 +31,25 @@
     }
 
 </style>
+<style>
+    .icon {
+        width: 1em;
+        height: 1em
+    }
+</style>
 <body>
 <div id="app">
-    <g-button></g-button>
+    <g-button>
+        按钮
+    </g-button>
+    <g-button icon="settings">
+        按钮
+    </g-button>
+    <g-button icon="settings" icon-position="right">
+        按钮
+    </g-button>
 </div>
 <script src="./src/app.js"></script>
+<script src="//at.alicdn.com/t/font_799333_gxps5heyl9p.js"></script>
 </body>
 </html>
