@@ -16,7 +16,9 @@ new Vue({
     }
 })
 import chai from 'chai'
-let expect = chai.expect
+import spies from 'chai-spies'
+chai.use(spies)
+let expect = chai.expec
 //单元测试
 {
     //将Button由对象转为名为Constructor的函数
@@ -94,6 +96,7 @@ let expect = chai.expect
     vm.$destroy()
 }
 {
+    //mock
     let Constructor = Vue.extend(Button)
     let vm = new Constructor({
         propsData: {
@@ -101,10 +104,15 @@ let expect = chai.expect
         }
     })
     vm.$mount()
-    vm.$on('click',function () {
-        expect(1).to.eq(1)
-    })
+
+    //间谍函数来伪装成事件里的函数
+    let spy = chai.spy(function(){})
+
+    //当个click事件触发了执行了间谍函数，也就是上面spy里的匿名函数
+    vm.$on('click', spy)
     //希望这个函数被执行
     let button = vm.$el
     button.click()
+    //期待间谍函数被调用
+    expect(spy).to.have.been.called()
 }
