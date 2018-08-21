@@ -18,7 +18,7 @@ new Vue({
 import chai from 'chai'
 import spies from 'chai-spies'
 chai.use(spies)
-let expect = chai.expec
+let expect = chai.expect
 //单元测试
 {
     //将Button由对象转为名为Constructor的函数
