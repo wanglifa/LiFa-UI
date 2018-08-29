@@ -16,6 +16,7 @@ new Vue({
         loading1: false,
         loading2: false,
         loading3: false,
+        message: '李四'
     },
     methods: {
         inputChange(e){
