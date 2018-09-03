@@ -38,6 +38,21 @@
 </style>
 <body>
 <div id="app">
+    <g-row>
+        <g-col>1</g-col>
+        <g-col>2</g-col>
+    </g-row>
+    <g-row>
+        <g-col>1</g-col>
+        <g-col>2</g-col>
+        <g-col>3</g-col>
+    </g-row>
+    <g-row>
+        <g-col>1</g-col>
+        <g-col>2</g-col>
+        <g-col>3</g-col>
+        <g-col span="1">4</g-col>
+    </g-row>
     <div class="box">
         <g-input value="张三" disabled></g-input>
         <g-input @change="inputChange" v-model="message"></g-input>
