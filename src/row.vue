@@ -1,5 +1,5 @@
 <template>
-    <div class="row" :gutter="gutter" :class="{gutter: gutter}" :style="{marginLeft:-gutter/2+'px', marginRight: -gutter/2+'px'}" >
+    <div class="row" :gutter="gutter" :style="rowStyle" >
         <slot></slot>
     </div>
 </template>
@@ -11,9 +11,15 @@ export default {
             type: [Number, String]
         }
     },
-    created(){},
+    computed: {
+        rowStyle(){
+            return {
+                marginLeft:-this.gutter/2+'px', 
+                marginRight: -this.gutter/2+'px'
+            }
+        }
+    },
     mounted(){
-        console.log(this)
         this.$children.forEach((value)=>{
             value.gutter = this.gutter
         })
@@ -23,9 +29,7 @@ export default {
 <style lang="scss" scoped>
     .row{
         display: flex;
-        .col{
-            width: 50%;
-        }
+
     }
     
 </style>
