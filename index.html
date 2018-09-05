@@ -35,10 +35,41 @@
     .box{
         margin: 20px;
     }
+    .demoBox{
+        height: 50px;
+        background: gray;
+        border: 1px solid red;
+    }
 </style>
 <body>
 <div id="app">
-    <div style="border:1px solid black">
+    <g-row class="topbar">
+        <g-col class="demoBox" span="9">
+            <g-row align="right">
+                <g-col>1</g-col>
+                <g-col>2</g-col>
+                <g-col>3</g-col>
+                <g-col>4</g-col>
+            </g-row>
+        </g-col>
+        <g-col class="demoBox" span="15">
+            <g-row align="center">
+                <g-col>1</g-col>
+                <g-col>2</g-col>
+                <g-col>3</g-col>
+                <g-col>4</g-col>
+                <g-col>5</g-col>
+                <g-col>6</g-col>
+                <g-col>7</g-col>
+            </g-row>
+        </g-col>
+    </g-row>
+    <g-row class="logo-and-search-and-qrcode">
+        <g-col class="demoBox" span="4"></g-col>
+        <g-col class="demoBox" span="14"></g-col>
+        <g-col class="demoBox" span="6"></g-col>
+    </g-row>
+    <!-- <div style="border:1px solid black">
         <g-row>
             <g-col>1</g-col>
             <g-col>2</g-col>
@@ -99,7 +130,7 @@
             <g-button icon="right" icon-position="right">下一页</g-button>
         </g-button-group>
     </div>
-    <div id="test"></div>
+    <div id="test"></div> -->
 </div>
 <script src="./src/app.js"></script>
 </body>
