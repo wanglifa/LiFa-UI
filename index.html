@@ -44,26 +44,21 @@
 <body>
 <div id="app">
     <div style="border:1px solid black">
-        <g-row>
-            <g-col>1</g-col>
-            <g-col>2</g-col>
-        </g-row>
-        <g-row>
-            <g-col>1</g-col>
-            <g-col>2</g-col>
-            <g-col>3</g-col>
-        </g-row>
-        <g-row>
-            <g-col>1</g-col>
-            <g-col offset="2">2</g-col>
-            <g-col>3</g-col>
-            <g-col span="1">4</g-col>
-        </g-row>
         <g-row gutter="20">
-            <g-col span="4">1</g-col>
-            <g-col span="6" offset="2">2</g-col>
-            <g-col span="5">3</g-col>
-            <g-col span="8">4</g-col>
+            <g-col span="2" 
+            :phone="{span:24}"
+            :ipad="{span:8}"
+            :narrow-pc="{span:4}"
+            :pc="{span:2}"
+            :wide-pc="{span:1}"
+            >1</g-col>
+            <g-col span="20" 
+            :phone="{span:24,offset:0}"
+            :ipad="{span:16}"
+            :narrow-pc="{span:20}"
+            :pc="{span:22}"
+            :wide-pc="{span:23}"
+            >2</g-col>
         </g-row>
         <g-row gutter="20">
             <g-col span="4">1</g-col>
