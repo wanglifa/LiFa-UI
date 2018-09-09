@@ -49,16 +49,34 @@ export default {
             
         }
     },
+    methods: {
+        //str=''的意思是如果你不传入第二个参数，那么str=''
+        createClasses(obj,str=''){
+            let arr = []
+            if(obj){
+                if(obj.span){
+                    arr.push(`col-${str}${obj.span}`)
+                }
+                if(obj.offset){
+                    arr.push(`offset-${str}${obj.offset}`)
+                }
+            }
+            return arr;
+        }
+    },
     computed:{
         colClass(){
             let {span,offset,ipad,narrowPc,pc,widePc} = this
+            let createClasses = this.createClasses
             return [
-                span && `col-${span}`, 
-                offset && `offset-${offset}`,
-                ipad && `col-ipad-${ipad.span}`,
-                narrowPc && `col-narrow-pc-${narrowPc.span}`,
-                pc && `col-pc-${pc.span}`,
-                widePc && `col-wide-pc-${widePc.span}`,
+                //span和offset都是变量，在调用组件的时候比如<g-col span="24" offset="0"></g-col>
+                //这时候就相当于x({span:'24',offset:'0'})
+                ...createClasses({span,offset}),
+                ...createClasses(ipad,'ipad-'),
+                ...createClasses(narrowPc, 'narrow-pc-'),
+                ...createClasses(pc, 'pc-'),
+                ...createClasses(widePc, 'wide-pc-'),
+                //之所以使用...，是因为createClasses返回的是一个数组，而这里面有多个createClasses也就是多个数组，使用...可以将数组连接起来，比如上面的createClasses({span,offset})最后得到的是[col-24,offset-0]，而假设createClasses(ipad,'ipad-')得到的是[col-ipad-2]，那么在他们前面都加...就相当于[col-24,offset-0,col-ipad-2]
             ]
         },
         colStyle(){
