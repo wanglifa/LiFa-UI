@@ -27,7 +27,6 @@ describe('Row', () => {
         const vm = new Vue({
             el: div
         })
-        console.log(vm.$el.outerHTML)
         //这里之所以写在setTimeout里是因为，gutter是写在mounted里的，而mounted是异步操作，需要时间，所以需要加一个延时，才能在mounted后获取到最新的gutter,否则就是在mounted前获取的gutter
         setTimeout(()=>{
             const row = vm.$el.querySelector('.row')
