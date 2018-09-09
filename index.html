@@ -26,57 +26,26 @@
         --border-color: #999;
         --border-color-hover: #666;
     }
-    #app{
-        margin: 20px;
-    }
+    
 
 </style>
 <style>
-    .box{
-        margin: 20px;
-    }
-    .demoBox{
-        height: 50px;
-        background: gray;
-        border: 1px solid red;
-    }
     .demo{
-        background: #ddd;
         border: 1px solid #666;
-        height: 100px;
+        min-height: 100px;
     }
 </style>
 <body>
 <div id="app">
-    <g-row gutter="20">
-        <g-col sapn="12"></g-col>
-        <g-col sapn="12"></g-col>
-    </g-row>
-    <div class="box">
-        <g-input value="张三" disabled></g-input>
-        <g-input @change="inputChange" v-model="message"></g-input>
-        <p>{{message}}</p>
-        <g-input value="张三" readonly></g-input>
-    </div>
-    <div class="box">
-        <g-input value="李" error="姓名不能少于两个字"></g-input>
-    </div>
-    <div style="margin-top: 20px">
-        <g-button :loading="loading1" @click="loading1 = !loading1">
-            按钮
-        </g-button>
-        <g-button icon="settings" :loading=" loading2" @click="loading2 = !loading2">
-            按钮
-        </g-button>
-        <g-button icon="settings" icon-position="right" :loading="loading3" @click="loading3 = !loading3">
-            按钮
-        </g-button>
-        <g-button-group>
-            <g-button icon="left">上一页</g-button>
-            <g-button icon="right" icon-position="right">下一页</g-button>
-        </g-button-group>
-    </div>
-    <div id="test"></div>
+    <g-layout height="100vh">
+        <g-sider class="demo">sider</g-sider>
+        <g-layout>
+            <g-header class="demo">header</g-header>
+            <g-content class="demo">content</g-content>
+            <g-footer class="demo">footer</g-footer>
+        </g-layout>
+        
+    </g-layout>
 </div>
 <script src="./src/app.js"></script>
 </body>
