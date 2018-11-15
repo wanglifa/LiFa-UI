@@ -3,7 +3,7 @@ import Button from './button'
 import Icon from './icon'
 import Input from './input'
 import ButtonGroup from './button-group'
-import Svg from './svg'
+import Svg from './svg.js'
 import Row from './row'
 import Col from './col'
 import Layout from './layout'
@@ -37,11 +37,19 @@ new Vue({
         message: '李四'
     },
     created(){
-        
+        this.$toast('文字',{
+            closeBtn: {
+                text: '关闭',
+                callback: (a)=>{
+                    a.log()
+                }
+            }
+        }) 
+
     },
     methods: {
         showToast(){
-            this.$toast('hello')
+            
         }
     }
 })
