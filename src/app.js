@@ -58,7 +58,8 @@ new Vue({
                     callback: (a)=>{
                         a.log()
                     }
-                }   
+                },
+                autoClose: 1   
             })  
         }
     }
