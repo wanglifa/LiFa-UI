@@ -37,21 +37,20 @@ new Vue({
         message: '李四'
     },
     created(){
-        this.$toast('文字',{
-            position: 'middle',
-            closeBtn: {
-                text: '测试',
-                callback: (a)=>{
-                    a.log()
-                }
-            },
-            
-        }) 
+        
 
     },
     methods: {
         showToast(){
-            
+            this.$toast(`你的智商余额为${parseInt(Math.random()*100)}`,{
+                position: 'middle',
+                closeBtn: {
+                    text: '测试',
+                    callback: (a)=>{
+                        a.log()
+                    }
+                }   
+            })  
         }
     }
 })

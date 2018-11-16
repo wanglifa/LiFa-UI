@@ -70,7 +70,7 @@ export default {
             if(this.autoClose){
                 setTimeout(()=>{
                     this.close()
-                },this.autoCloseDelay*10000)
+                },this.autoCloseDelay*1000)
             }
         },
         close(){
