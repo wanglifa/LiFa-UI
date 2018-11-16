@@ -76,6 +76,7 @@ export default {
         close(){
             //移除这个dom元素
             this.$el.remove()
+            this.$emit('close')
             //完全销毁一个实例
             this.$destroy()
         },
@@ -95,7 +96,18 @@ export default {
 $font-size: 14px;
 $toast-height: 40px;
 $toast-bg: rgba(0,0,0,.75);
+@keyframes fade-in {
+    0%{
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0%)
+    }
+}
 .toast {
+    animation: fade-in .5s;
     font-size: $font-size;
     line-height: 1.8;
     min-height: $toast-height;
