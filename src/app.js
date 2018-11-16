@@ -38,12 +38,14 @@ new Vue({
     },
     created(){
         this.$toast('文字',{
+            position: 'middle',
             closeBtn: {
-                text: '关闭',
+                text: '测试',
                 callback: (a)=>{
                     a.log()
                 }
-            }
+            },
+            
         }) 
 
     },
