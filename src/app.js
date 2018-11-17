@@ -13,6 +13,11 @@ import Sider from './sider'
 import Footer from './footer'
 import Toast from './toast'
 import plugin from './plugin'
+import Tabs from './tabs.vue'
+import TabsHead from './tabs-head'
+import TabsBody from './tabs-body'
+import TabsItem from './tabs-item'
+import TabsPane from './tabs-pane'
 Vue.component('g-button',Button)
 Vue.component('g-icon',Icon)
 Vue.component('g-button-group',ButtonGroup)
@@ -25,16 +30,18 @@ Vue.component('g-content',Content)
 Vue.component('g-sider',Sider)
 Vue.component('g-footer',Footer)
 Vue.component('g-toast',Toast)
+Vue.component('g-tabs',Tabs)
+Vue.component('g-tabs-head',TabsHead)
+Vue.component('g-tabs-body',TabsBody)
+Vue.component('g-tabs-item',TabsItem)
+Vue.component('g-tabs-pane',TabsPane)
 Vue.use(plugin)//会去执行install方法
 
 
 new Vue({
     el: '#app',
     data: {
-        loading1: false,
-        loading2: false,
-        loading3: false,
-        message: '李四'
+        selectedTab: 'sports'
     },
     created(){
         
