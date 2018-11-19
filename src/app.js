@@ -70,6 +70,9 @@ new Vue({
                 },
                 autoClose: 1   
             })  
+        },
+        yyy(){
+            console.log('yyy')
         }
     }
 })

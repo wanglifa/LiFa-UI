@@ -1,9 +1,11 @@
 <template>
     <div class="popover" @click.stop="toggle">
-        <div class="content-wrapper" v-if="visibility" @click.stop>
+        <div ref="content" class="content-wrapper" v-if="visibility" @click.stop>
             <slot name="content"></slot>
         </div>
-        <slot></slot>
+        <span ref="button">
+            <slot></slot>
+        </span>
     </div>
 </template>
 <script>
@@ -19,6 +21,10 @@
                 this.visibility = !this.visibility
                 if(this.visibility){
                     this.$nextTick(()=>{
+                        document.body.appendChild(this.$refs.content)
+                        let {left, top} = this.$refs.button.getBoundingClientRect()
+                        this.$refs.content.style.left = left + window.scrollX + 'px'
+                        this.$refs.content.style.top = top + window.scrollY + 'px'
                         let x = ()=>{
                             this.visibility = false
                             console.log('document隐藏popover')
@@ -30,6 +36,10 @@
                     console.log('vm隐藏popover')
                 }
             }
+        },
+        mounted(){
+            
+            
         }
     }
 </script>
@@ -38,12 +48,11 @@
         display: inline-block;
         vertical-align: top;
         position: relative;
-        .content-wrapper{
-            position: absolute;
-            bottom: 100%;
-            left: 0;
-            box-shadow: 0 0 3px rgba(0,0,0,.5);
-            border: 1px solid red;
-        }
+    }
+    .content-wrapper{
+        position: absolute;
+        box-shadow: 0 0 3px rgba(0,0,0,.5);
+        border: 1px solid red;
+        transform: translateY(-100%)
     }
 </style>
