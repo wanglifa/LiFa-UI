@@ -1,5 +1,5 @@
 <template>
-    <div class="tabs-item" @click="xxx" :class="{active:active}">
+    <div class="tabs-item" @click="onClick" :class="{active:active,disabled:disabled}">
         <slot></slot>
     </div>
 </template>
@@ -33,7 +33,8 @@
             })
         },
         methods: {
-            xxx(){
+            onClick(){
+                if(this.disabled) return
                 this.eventBus.$emit('update:selected',this.name,this)
             }
         }
@@ -50,6 +51,9 @@
         cursor: pointer;
         &.active{
             color: $blue;
+        }
+        &.disabled{
+            color: #999;
         }
     }
 </style>
