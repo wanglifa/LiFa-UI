@@ -1,6 +1,6 @@
 <template>
-    <div class="popover" @click="toggle">
-        <div class="content-wrapper" v-if="visibility">
+    <div class="popover" @click.stop="toggle">
+        <div class="content-wrapper" v-if="visibility" @click.stop>
             <slot name="content"></slot>
         </div>
         <slot></slot>
@@ -17,6 +17,18 @@
         methods: {
             toggle(){
                 this.visibility = !this.visibility
+                if(this.visibility){
+                    this.$nextTick(()=>{
+                        let x = ()=>{
+                            this.visibility = false
+                            console.log('document隐藏popover')
+                            document.removeEventListener('click',x)
+                        }
+                        document.addEventListener('click',x)
+                    })
+                }else{
+                    console.log('vm隐藏popover')
+                }
             }
         }
     }
