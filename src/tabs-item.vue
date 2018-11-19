@@ -23,7 +23,8 @@
         },
         inject: ['eventBus'],
         created(){
-            this.eventBus.$on('update:selected',(name)=>{
+            this.eventBus.$on('update:selected',(name,vm)=>{
+                console.log(vm.$el)
                 if(this.name === name){
                     this.active = true
                 }else{
@@ -33,21 +34,22 @@
         },
         methods: {
             xxx(){
-                this.eventBus.$emit('update:selected',this.name)
+                this.eventBus.$emit('update:selected',this.name,this)
             }
         }
     }
 </script>
 <style lang="scss" scoped>
+    $blue: blue;
     .tabs-item {
         flex-shrink: 0;
         padding: 0 2em;
-        border: 1px solid black;
         height: 100%;
         align-items: center;
         display: flex;
+        cursor: pointer;
         &.active{
-            background: red;
+            color: $blue;
         }
     }
 </style>
