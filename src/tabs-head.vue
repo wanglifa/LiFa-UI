@@ -15,11 +15,14 @@
             
         },
         created(){
-           this.eventBus.$on('update:selected',(name, vm)=>{
+            if(this.eventBus){
+                this.eventBus.$on('update:selected',(name, vm)=>{
                let {left, width} = vm.$el.getBoundingClientRect()
                this.$refs.line.style.width = `${width}px`
                this.$refs.line.style.left = `${left}px`
-           })
+             })
+            }
+           
            
         }
     }

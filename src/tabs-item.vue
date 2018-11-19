@@ -1,5 +1,8 @@
 <template>
-    <div class="tabs-item" @click="onClick" :class="{active:active,disabled:disabled}">
+    <div class="tabs-item" @click="onClick" 
+    :class="{active:active,disabled:disabled}"
+    :data-name="name"
+    >
         <slot></slot>
     </div>
 </template>
@@ -23,19 +26,22 @@
         },
         inject: ['eventBus'],
         created(){
-            this.eventBus.$on('update:selected',(name,vm)=>{
-                console.log(vm.$el)
-                if(this.name === name){
-                    this.active = true
-                }else{
-                    this.active = false
-                }
-            })
+            if(this.eventBus){
+                this.eventBus.$on('update:selected',(name,vm)=>{
+                    if(this.name === name){
+                        this.active = true
+                    }else{
+                        this.active = false
+                    }
+                })
+            }
+            
         },
         methods: {
             onClick(){
                 if(this.disabled) return
-                this.eventBus.$emit('update:selected',this.name,this)
+                this.eventBus && this.eventBus.$emit('update:selected',this.name,this)
+                this.$emit('click',this)
             }
         }
     }

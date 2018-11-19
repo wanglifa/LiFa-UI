@@ -36,6 +36,9 @@
         
         },
         mounted(){
+            if(this.$children.length === 0){
+                console.warn('你tabs组件的子组件应该是tabs-head和tabs-body')
+            }
             this.$children.forEach(vm=>{
                 if(vm.$el.classList[0] === 'tabs-head'){
                     vm.$children.forEach(item=>{
