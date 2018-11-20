@@ -36,8 +36,9 @@
 <div id="app" style="padding: 100px;">
     <div style="padding: 20px"> 
         <g-popover position="top">
-            <template slot="content">
+            <template slot="content" slot-scope="{close}">
                 <div>asdfsdgsdgsadfsdagsdagdsgsdgdswgdsgsdgsdg</div>
+                <g-button @click="close">关闭</g-button>
             </template>
             <g-button>点我</g-button>
         </g-popover>

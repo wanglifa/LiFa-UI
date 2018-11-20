@@ -1,7 +1,9 @@
 <template>
     <div class="popover" ref="popover">
-        <div ref="content" class="content-wrapper" v-if="visibility" :class="`position-${position}`">
-            <slot name="content"></slot>
+        <div ref="content" class="content-wrapper" v-if="visibility" 
+        :class="`position-${position}`"
+        >
+            <slot name="content" :close="close"></slot>
         </div>
         <span ref="button">
             <slot></slot>
