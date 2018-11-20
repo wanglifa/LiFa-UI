@@ -156,10 +156,12 @@
                 left: 10px;
             }
             &::before{
+                border-bottom: none;
                 border-top-color: #000;
                 top: 100%;
             }
             &::after{
+                border-bottom: none;
                 border-top-color: white;
                 top: calc(100% - 1px);
             }
@@ -170,10 +172,12 @@
                 left: 10px;
             }
             &::before{
+                border-top: none;
                 border-bottom-color: #000;
                 bottom: 100%;
             }
             &::after{
+                border-top: none;
                 border-bottom-color: white;
                 bottom: calc(100% - 1px);
             }
@@ -184,6 +188,7 @@
             &::before,&::after{
                 transform: translateY(-50%);
                 top: 50%;
+                border-right: none;
             }
             &::before{
                 border-left-color: #000;
@@ -199,6 +204,7 @@
             &::before,&::after{
                 transform: translateY(-50%);
                 top: 50%;
+                border-left: none;
             }
             &::before{
                 border-right-color: #000;
