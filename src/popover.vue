@@ -30,22 +30,27 @@
                 let {content,button} = this.$refs
                 document.body.appendChild(content)
                 let {left, top, height, width} = button.getBoundingClientRect()
-                if(this.position === 'top'){
-                    content.style.left = left + window.scrollX + 'px'
-                    content.style.top = top + window.scrollY + 'px'
-                }else if(this.position === 'bottom'){
-                    content.style.left = left + window.scrollX + 'px'
-                    content.style.top = top  + height + window.scrollY + 'px'
-                }else if(this.position === 'left'){
-                    let {height: height2} = content.getBoundingClientRect();
-                    content.style.left = left  + window.scrollX + 'px'
-                    content.style.top = top  + (height-height2)/2 + window.scrollY + 'px'
-                }else if(this.position === 'right'){
-                    let {height: height2} = content.getBoundingClientRect();
-                    content.style.left = left + width+ window.scrollX + 'px'
-                    content.style.top = top  + (height-height2)/2 + window.scrollY + 'px'
+                let {height: height2} = content.getBoundingClientRect();
+                let positions = {
+                    top: {
+                        left: left + window.scrollX,
+                        top: top + window.scrollY
+                    },
+                    bottom: {
+                        left: left + window.scrollX,
+                        top: top  + height + window.scrollY
+                    },
+                    left: {
+                        left: left  + window.scrollX,
+                        top: top  + (height-height2)/2 + window.scrollY
+                    },
+                    right: {
+                        left: left + width+ window.scrollX,
+                        top: top  + (height-height2)/2 + window.scrollY
+                    }
                 }
-                
+                content.style.left = positions[this.position].left + 'px'
+                content.style.top = positions[this.position].top + 'px'
             },
             onClickDocument(e){
                 if(this.$refs.popover.contains(e.target)){
