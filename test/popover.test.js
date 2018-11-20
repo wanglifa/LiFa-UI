@@ -33,7 +33,32 @@ describe('Popover', () => {
             expect(content.classList.contains('position-bottom')).to.eq(true)
             done()
         })
-    
+    })
+    xit('可以设置 trigger', ()=>{
+        Vue.component('g-popover',Popover)
+        const div = document.createElement('div')
+        document.body.appendChild(div)
+        div.innerHTML = `
+        <g-popover trigger="hover" ref="a">
+            <template slot="content">
+                弹出内容
+            </template>
+            <button></button>
+        </g-popover>
+        `
+        const vm = new Vue({
+            el: div
+        })
+        vm.$nextTick(()=>{
+            let event = new Event('mouseenter')
+            vm.$el.dispatchEvent(event)
+            vm.$nextTick(()=>{
+                const {content} = vm.$refs.a.$refs
+                expect(content).to.exist
+                done()
+               
+            })
+        })
     })
     
 
