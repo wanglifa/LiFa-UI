@@ -27,10 +27,12 @@
                 if(this.$refs.popover.contains(e.target)){
                     return
                 }
+                if(this.$refs.content && this.$refs.content.contains(e.target)) return
                 this.close()
             },
             close(){
                 this.visibility = false;
+                console.log('关闭')
                 document.removeEventListener('click',this.onClickDocument)
             },
             open(){
@@ -65,8 +67,31 @@
     }
     .content-wrapper{
         position: absolute;
-        box-shadow: 0 0 3px rgba(0,0,0,.5);
-        border: 1px solid red;
-        transform: translateY(-100%)
+        border: 1px solid #333;
+        transform: translateY(-100%);
+        filter: drop-shadow(0 1px 1px rgba(0,0,0,.5));
+        background: white;
+        margin-top: -10px;
+        padding: .5em 1em;
+        max-width: 20em;
+        word-break: break-all;
+        &::before,&::after{
+            content: '';
+            display: block;
+            border: 10px solid transparent;
+            width: 0;
+            height: 0;
+            position: absolute;
+            left: 10px;
+        }
+        &::before{
+            border-top-color: #000;
+            top: 100%;
+        }
+        &::after{
+            border: 10px solid transparent;
+            border-top-color: white;
+            top: calc(100% - 1px);
+        }
     }
 </style>
