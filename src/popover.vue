@@ -1,6 +1,6 @@
 <template>
-    <div class="popover" @click.stop="toggle">
-        <div ref="content" class="content-wrapper" v-if="visibility" @click.stop>
+    <div class="popover" @click="toggle" ref="popover">
+        <div ref="content" class="content-wrapper" v-if="visibility">
             <slot name="content"></slot>
         </div>
         <span ref="button">
@@ -17,24 +17,38 @@
             }
         },
         methods: {
-            toggle(){
-                this.visibility = !this.visibility
-                if(this.visibility){
-                    this.$nextTick(()=>{
-                        document.body.appendChild(this.$refs.content)
-                        let {left, top} = this.$refs.button.getBoundingClientRect()
-                        this.$refs.content.style.left = left + window.scrollX + 'px'
-                        this.$refs.content.style.top = top + window.scrollY + 'px'
-                        let x = ()=>{
-                            this.visibility = false
-                            console.log('document隐藏popover')
-                            document.removeEventListener('click',x)
-                        }
-                        document.addEventListener('click',x)
-                    })
-                }else{
-                    console.log('vm隐藏popover')
+            positionContent(){
+                document.body.appendChild(this.$refs.content)
+                let {left, top} = this.$refs.button.getBoundingClientRect()
+                this.$refs.content.style.left = left + window.scrollX + 'px'
+                this.$refs.content.style.top = top + window.scrollY + 'px'
+            },
+            onClickDocument(e){
+                if(this.$refs.popover.contains(e.target)){
+                    return
                 }
+                this.close()
+            },
+            close(){
+                this.visibility = false;
+                document.removeEventListener('click',this.onClickDocument)
+            },
+            open(){
+                this.visibility = true
+                this.$nextTick(()=>{
+                    this.positionContent()
+                    document.addEventListener('click',this.onClickDocument)
+                })
+            },
+            toggle(e){
+                //说明点击了按钮
+                if(this.$refs.button.contains(e.target)){
+                    if(this.visibility === true){
+                        this.close()
+                    }else{
+                        this.open()
+                    }
+                }   
             }
         },
         mounted(){
