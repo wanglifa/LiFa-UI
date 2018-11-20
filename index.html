@@ -34,7 +34,7 @@
 </style>
 <body>
 <div id="app" style="padding: 100px;">
-    <div>
+    <div style="padding: 20px"> 
         <g-popover position="top">
             <template slot="content">
                 <div>asdfsdgsdgsadfsdagsdagdsgsdgdswgdsgsdgsdg</div>
@@ -54,6 +54,32 @@
             <g-button>点我</g-button>
         </g-popover>
         <g-popover position="right">
+            <template slot="content">
+                <div>popover内容</div>
+            </template>
+            <g-button>点我</g-button>
+        </g-popover>
+    </div>
+    <div style="padding: 20px">
+        <g-popover position="top" trigger="hover">
+            <template slot="content">
+                <div>asdfsdgsdgsadfsdagsdagdsgsdgdswgdsgsdgsdg</div>
+            </template>
+            <g-button>点我</g-button>
+        </g-popover>
+        <g-popover position="bottom" trigger="hover">
+            <template slot="content">
+                <div>popover内容</div>
+            </template>
+            <g-button>点我</g-button>
+        </g-popover>
+        <g-popover position="left" trigger="hover">
+            <template slot="content">
+                <div>popover内容</div>
+            </template>
+            <g-button>点我</g-button>
+        </g-popover>
+        <g-popover position="right" trigger="hover">
             <template slot="content">
                 <div>popover内容</div>
             </template>
