@@ -47,7 +47,7 @@ Vue.use(plugin)//会去执行install方法
 new Vue({
     el: '#app',
     data: {
-        selectedTab: 'sports'
+        selectedTab: '2'
     },
     created(){
         

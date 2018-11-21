@@ -8,8 +8,14 @@
     export default {
         name: 'GuluCollapse',
         props: {
-            signle: Boolean,
-            default: false
+            signle: {
+                type: Boolean,
+                default: false
+            },
+            selected: {
+                type: String,
+                default: '1'
+            }
         },
         data(){
             return {
@@ -17,11 +23,18 @@
             }
         },
         provide(){
-            if(this.signle){
+            
                 return {
                     eventBus: this.eventBus
                 }
-            }
+            
+        },
+        mounted(){
+            this.eventBus.$on('update:selected',(name)=>{
+                this.$emit('update:selected',name)
+            })
+            this.eventBus.$emit('update:selected',this.selected)
+            
         }
     }
 </script>
