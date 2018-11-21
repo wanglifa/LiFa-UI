@@ -1,4 +1,5 @@
 module.exports = {
+  base: '/gulu-demo/',
   title: 'WheelUI',
   description: '一个好用的UI框架',
   themeConfig: {
