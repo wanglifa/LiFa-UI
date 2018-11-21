@@ -13,8 +13,7 @@
                 default: false
             },
             selected: {
-                type: String,
-                default: '1'
+                type: Array
             }
         },
         data(){
@@ -30,10 +29,25 @@
             
         },
         mounted(){
-            this.eventBus.$on('update:selected',(name)=>{
-                this.$emit('update:selected',name)
-            })
             this.eventBus.$emit('update:selected',this.selected)
+            let selectedCopy = JSON.parse(JSON.stringify(this.selected))
+            this.eventBus.$on('update:addSelected',(name)=>{ 
+                if(this.signle){
+                    selectedCopy = [name]
+                }else {
+                    selectedCopy.push(name)
+                }
+                this.eventBus.$emit('update:selected', selectedCopy)
+                this.$emit('update:selected',selectedCopy)
+            })
+            this.eventBus.$on('update:removeSelected',(name)=>{
+                
+                let index = selectedCopy.indexOf(name)
+                selectedCopy.splice(index,1)
+                this.eventBus.$emit('update:selected', selectedCopy)
+                this.$emit('update:selected',selectedCopy)
+            })
+            
             
         }
     }
