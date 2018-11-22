@@ -1,89 +1,59 @@
 <template>
   <div style="padding-top: 16px;">
-    <h2>24格网格</h2>
+    <h2>使用offset属性设置空隙</h2>
     <p>
       <strong>预览</strong>
     </p>
-    <g-row class="demoRow">
+    <g-row class="demoRow" gutter="10">
       <g-col span="8">
         <div class="demoCol">8</div>
       </g-col>
-      <g-col span="8">
-        <div class="demoCol">8</div>
-      </g-col>
-      <g-col span="8">
+      <g-col span="8" offset="8">
         <div class="demoCol">8</div>
       </g-col>
     </g-row>
-    <g-row class="demoRow">
-      <g-col span="6">
+    <g-row class="demoRow" gutter="10">
+      <g-col span="6" offset="6">
         <div class="demoCol">6</div>
       </g-col>
-      <g-col span="6">
-        <div class="demoCol">6</div>
-      </g-col>
-      <g-col span="6">
-        <div class="demoCol">6</div>
-      </g-col>
-      <g-col span="6">
+      <g-col span="6" offset="6">
         <div class="demoCol">6</div>
       </g-col>
     </g-row>
-    <g-row class="demoRow">
+    <g-row class="demoRow" gutter="10">
       <g-col span="4">
         <div class="demoCol">4</div>
       </g-col>
-      <g-col span="4">
+      <g-col span="4" offset="4">
         <div class="demoCol">4</div>
       </g-col>
-      <g-col span="4">
-        <div class="demoCol">4</div>
-      </g-col>
-      <g-col span="4">
-        <div class="demoCol">4</div>
-      </g-col>
-      <g-col span="4">
-        <div class="demoCol">4</div>
-      </g-col>
-      <g-col span="4">
+      <g-col span="4" offset="8">
         <div class="demoCol">4</div>
       </g-col>
     </g-row>
-    <g-row class="demoRow">
+    <g-row class="demoRow" gutter="10">
       <g-col span="2">
+        <div class="demoCol">2</div>
+      </g-col>
+      <g-col span="2" offset="2">
         <div class="demoCol">2</div>
       </g-col>
       <g-col span="2">
         <div class="demoCol">2</div>
       </g-col>
-      <g-col span="2">
+      <g-col span="2" offset="2">
         <div class="demoCol">2</div>
       </g-col>
       <g-col span="2">
         <div class="demoCol">2</div>
       </g-col>
-      <g-col span="2">
+      <g-col span="2" offset="2">
         <div class="demoCol">2</div>
       </g-col>
       <g-col span="2">
         <div class="demoCol">2</div>
       </g-col>
-      <g-col span="2">
-        <div class="demoCol">2</div>
-      </g-col>
-      <g-col span="2">
-        <div class="demoCol">2</div>
-      </g-col>
-      <g-col span="2">
-        <div class="demoCol">2</div>
-      </g-col>
-      <g-col span="2">
-        <div class="demoCol">2</div>
-      </g-col>
-      <g-col span="2">
-        <div class="demoCol">2</div>
-      </g-col>
-      <g-col span="2">
+      <g-col span="2" offset="2">
         <div class="demoCol">2</div>
       </g-col>
     </g-row>
@@ -92,8 +62,6 @@
       <strong>代码</strong>
     </p>
     <pre><code>{{content}}</code></pre>
-
-    <p>使用<code>g-row</code>来划分行，<code>g-col</code>来划分列，每行最多24格，通过给<code>g-col</code>添加<code>span</code>属性来定义格数。</p>
   </div>
 </template>
 <style scoped>
@@ -125,89 +93,56 @@
             box-sizing: border-box;
           }
 
-          <g-row class="demoRow">
+          <g-row class="demoRow" gutter="10">
             <g-col span="8">
               <div class="demoCol">8</div>
             </g-col>
-            <g-col span="8">
-              <div class="demoCol">8</div>
-            </g-col>
-            <g-col span="8">
+            <g-col span="8" offset="8">
               <div class="demoCol">8</div>
             </g-col>
           </g-row>
-
-          <g-row class="demoRow">
-            <g-col span="6">
+          <g-row class="demoRow" gutter="10">
+            <g-col span="6" offset="6">
               <div class="demoCol">6</div>
             </g-col>
-            <g-col span="6">
-              <div class="demoCol">6</div>
-            </g-col>
-            <g-col span="6">
-              <div class="demoCol">6</div>
-            </g-col>
-            <g-col span="6">
+            <g-col span="6" offset="6">
               <div class="demoCol">6</div>
             </g-col>
           </g-row>
-
-          <g-row class="demoRow">
+          <g-row class="demoRow" gutter="10">
             <g-col span="4">
               <div class="demoCol">4</div>
             </g-col>
-            <g-col span="4">
+            <g-col span="4" offset="4">
               <div class="demoCol">4</div>
             </g-col>
-            <g-col span="4">
-              <div class="demoCol">4</div>
-            </g-col>
-            <g-col span="4">
-              <div class="demoCol">4</div>
-            </g-col>
-            <g-col span="4">
-              <div class="demoCol">4</div>
-            </g-col>
-            <g-col span="4">
+            <g-col span="4" offset="8">
               <div class="demoCol">4</div>
             </g-col>
           </g-row>
-
-          <g-row class="demoRow">
+          <g-row class="demoRow" gutter="10">
             <g-col span="2">
+              <div class="demoCol">2</div>
+            </g-col>
+            <g-col span="2" offset="2">
               <div class="demoCol">2</div>
             </g-col>
             <g-col span="2">
               <div class="demoCol">2</div>
             </g-col>
-            <g-col span="2">
+            <g-col span="2" offset="2">
               <div class="demoCol">2</div>
             </g-col>
             <g-col span="2">
               <div class="demoCol">2</div>
             </g-col>
-            <g-col span="2">
+            <g-col span="2" offset="2">
               <div class="demoCol">2</div>
             </g-col>
             <g-col span="2">
               <div class="demoCol">2</div>
             </g-col>
-            <g-col span="2">
-              <div class="demoCol">2</div>
-            </g-col>
-            <g-col span="2">
-              <div class="demoCol">2</div>
-            </g-col>
-            <g-col span="2">
-              <div class="demoCol">2</div>
-            </g-col>
-            <g-col span="2">
-              <div class="demoCol">2</div>
-            </g-col>
-            <g-col span="2">
-              <div class="demoCol">2</div>
-            </g-col>
-            <g-col span="2">
+            <g-col span="2" offset="2">
               <div class="demoCol">2</div>
             </g-col>
           </g-row>
