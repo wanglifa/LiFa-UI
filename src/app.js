@@ -21,33 +21,69 @@ import TabsPane from './tabs/tabs-pane'
 import Popover from './popover.vue'
 import Collapse from './collapse/collapse.vue'
 import CollapseItem from './collapse/collapse-item.vue'
+import Cascader from './cascader.vue'
 Vue.component('g-button',Button)
-Vue.component('g-icon',Icon)
 Vue.component('g-button-group',ButtonGroup)
-Vue.component('g-input',Input)
-Vue.component('g-row',Row)
 Vue.component('g-col',Col)
-Vue.component('g-layout',Layout)
-Vue.component('g-header',Header)
-Vue.component('g-content',Content)
-Vue.component('g-sider',Sider)
-Vue.component('g-footer',Footer)
-Vue.component('g-toast',Toast)
-Vue.component('g-tabs',Tabs)
-Vue.component('g-tabs-head',TabsHead)
-Vue.component('g-tabs-body',TabsBody)
-Vue.component('g-tabs-item',TabsItem)
-Vue.component('g-tabs-pane',TabsPane)
-Vue.component('g-popover',Popover)
 Vue.component('g-collapse',Collapse)
 Vue.component('g-collapse-item',CollapseItem)
+Vue.component('g-content',Content)
+Vue.component('g-footer',Footer)
+Vue.component('g-header',Header)
+Vue.component('g-icon',Icon)
+Vue.component('g-input',Input)
+Vue.component('g-layout',Layout)
+Vue.component('g-popover',Popover)
+Vue.component('g-row',Row)
+Vue.component('g-sider',Sider)
+Vue.component('g-tabs',Tabs)
+Vue.component('g-tabs-body',TabsBody)
+Vue.component('g-tabs-head',TabsHead)
+Vue.component('g-tabs-item',TabsItem)
+Vue.component('g-tabs-pane',TabsPane)
+Vue.component('g-toast',Toast)
+Vue.component('g-cascader',Cascader)
 Vue.use(plugin)//会去执行install方法
 
 
 new Vue({
     el: '#app',
     data: {
-        selectedTab: ['2']
+        source: [
+            {
+                name: '浙江',
+                children: [
+                    {
+                        name: '杭州',
+                        children: [
+                            {name: '上城'},
+                            {name: '下城'},
+                            {name: '江干'}
+                        ]
+                    },{
+                        name: '嘉兴',
+                        children: [
+                            {name: '南湖'},
+                            {name: '秀洲'},
+                            {name: '嘉善'}
+                        ]
+                    }
+                ]
+            },
+            {
+                name: '福建',
+                children: [
+                    {
+                        name: '福州',
+                        children: [
+                            {name: '鼓楼'},
+                            {name: '台江'},
+                            {name: '苍山'}
+                        ]
+                    }
+                ]
+            }
+        ]
     },
     created(){
         
