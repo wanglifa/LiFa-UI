@@ -1,6 +1,8 @@
 <template>
     <div>
-        <g-cascader :source="source" height="200px"></g-cascader>
+        <g-cascader :source="source" height="200px" :selected="selected"
+        @update:selected="onUpdateSelected"
+        ></g-cascader>
     </div>
 </template>
 
@@ -49,7 +51,13 @@
                             }
                         ]
                     }
-                ]
+                ],
+                selected: []
+            }
+        },
+        methods: {
+            onUpdateSelected(val){
+                this.selected = val
             }
         }
     }
