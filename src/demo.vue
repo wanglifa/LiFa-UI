@@ -2,7 +2,7 @@
     <div>
         <div style="padding: 20px;">
             <g-cascader :source="source" height="200px" :selected="selected"
-                        @update:selected="onUpdateSelected"
+                        @update:selected="selected = $event"
             ></g-cascader>
         </div>
     </div>
@@ -11,6 +11,7 @@
 <script>
     import Button from './button/button.vue'
     import Cascader from  './cascader.vue'
+    import db from './db.js'
     export default {
         name: "demo",
         components: {
@@ -58,9 +59,20 @@
             }
         },
         methods: {
-            onUpdateSelected(val){
-                this.selected = val
+            ajax(id=0){
+                return new Promise((resolve,reject)=>{
+                    let result = db.filter(item=>item.parent_id === id)
+                    resolve(result)
+                })
+            },
+            xxx(){
+              console.log(item)
             }
+        },
+        created() {
+            this.ajax().then((result)=>{
+                this.source = result
+            })
         }
     }
 </script>

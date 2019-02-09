@@ -76,6 +76,8 @@ export default {
         .left{
             height: 100%;
             padding: .3em 0;
+            overflow: auto;
+            box-sizing: border-box;
             .label{
                 padding: 0.3em 1em;
                 display: flex;
