@@ -1,8 +1,10 @@
 <template>
     <div>
-        <g-cascader :source="source" height="200px" :selected="selected"
-        @update:selected="onUpdateSelected"
-        ></g-cascader>
+        <div style="padding: 20px;">
+            <g-cascader :source="source" height="200px" :selected="selected"
+                        @update:selected="onUpdateSelected"
+            ></g-cascader>
+        </div>
     </div>
 </template>
 

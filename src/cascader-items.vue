@@ -26,7 +26,7 @@ export default {
         },
         selected: {
             type: Array,
-            default: []
+            default: ()=>{return []}
         },
         level: {
             type: Number,
@@ -35,7 +35,7 @@ export default {
     },
     data(){
         return {
-            leftSelected: null
+
         }
     },
     computed: {
@@ -54,7 +54,11 @@ export default {
     methods: {
         onSelected(item){
             let copy = JSON.parse(JSON.stringify(this.selected))
+            //之所以写copy[this.level]是为了你点击当前层的每一个都让数组里只保留一个
+            //而不是点一个就往数组里加一个，如果不写的话你点杭州数组里有一个杭州，再点福建
+            //数组就会变成['杭州','福建']可这两个属于同一层，我们统一层只想保留一个
             copy[this.level]= item
+            copy.splice(this.level+1)
             this.$emit('update:selected',copy)
         },
         onUpdateSelected(val){
