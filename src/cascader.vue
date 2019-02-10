@@ -88,7 +88,10 @@ export default {
                 console.log(copy)
                 this.$emit('update:source',copy)
             }
-            this.loadData(lastVal,updateSource)
+            if(!lastVal.isLeaf && this.loadData){
+                console.log(1)
+                this.loadData(lastVal,updateSource)
+            }
         }
     }
 }

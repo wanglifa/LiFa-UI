@@ -2,8 +2,8 @@
     <div class="cascader-item">
         <div class="left">
             <div class="label" v-for="item in items" @click="onSelected(item)" >
-                {{item.name}}
-                <icon name="right" v-if="item.children"></icon>
+                <span class="name">{{item.name}}</span>
+                <icon name="right" v-if="rightArrowVisible(item)"></icon>
             </div>
         </div>
         <div class="right" v-if="rightItems">
@@ -62,12 +62,15 @@ export default {
             //数组就会变成['杭州','福建']可这两个属于同一层，我们统一层只想保留一个
             copy[this.level]= item
             copy.splice(this.level+1)
-            console.log(copy)
+            console.log(item)
             this.$emit('update:selected',copy)
         },
         onUpdateSelected(val){
             this.$emit('update:selected',val)
 
+        },
+        rightArrowVisible(item){
+            return this.loadData ? !item.isLeaf : item.children
         }
     }
 }
@@ -87,7 +90,16 @@ export default {
                 padding: 0.3em 1em;
                 display: flex;
                 align-items: center;
+                cursor: pointer;
+                &:hover{
+                    background: $gray;
+                }
+                .name{
+                    margin-right: 1em;
+                    user-select: none;
+                }
                 .g-icon{
+                    margin-left: auto;
                     transform: scale(.6);
                 }
             }
