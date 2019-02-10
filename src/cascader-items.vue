@@ -8,7 +8,7 @@
         </div>
         <div class="right" v-if="rightItems">
             <gulu-cascader-item :items="rightItems" :style="{height}" :height="height" :selected="selected" :level="level+1"
-              @update:selected="onUpdateSelected"
+              @update:selected="onUpdateSelected" :loadData="loadData"
             ></gulu-cascader-item>
         </div>
     </div>
@@ -31,6 +31,9 @@ export default {
         level: {
             type: Number,
             default: 0
+        },
+        loadData: {
+            type: Function
         }
     },
     data(){
@@ -40,11 +43,11 @@ export default {
     },
     computed: {
         rightItems(){
-            let currentSelected= this.selected[this.level]
-            if(currentSelected && currentSelected.children){
-                return currentSelected.children
-            }else {
-                return null
+            if(this.selected[this.level]){
+                let selected = this.items.filter((item)=>item.name === this.selected[this.level].name)
+                if(selected && selected[0].children&&selected[0].children.length > 0){
+                    return selected[0].children
+                }
             }
         }
     },
@@ -59,10 +62,12 @@ export default {
             //数组就会变成['杭州','福建']可这两个属于同一层，我们统一层只想保留一个
             copy[this.level]= item
             copy.splice(this.level+1)
+            console.log(copy)
             this.$emit('update:selected',copy)
         },
         onUpdateSelected(val){
             this.$emit('update:selected',val)
+
         }
     }
 }

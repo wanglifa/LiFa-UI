@@ -1,8 +1,8 @@
 <template>
     <div>
         <div style="padding: 20px;">
-            <g-cascader :source="source" height="200px" :selected="selected"
-                        @update:selected="selected = $event"
+            <g-cascader :source.sync="source" height="200px" :selected.sync="selected"
+               @update:selected="xxx" :loadData="loadData"
             ></g-cascader>
         </div>
     </div>
@@ -21,52 +21,32 @@
         data(){
             return {
                 source: [
-                    {
-                        name: '浙江',
-                        children: [
-                            {
-                                name: '杭州',
-                                children: [
-                                    {name: '上城'},
-                                    {name: '下城'},
-                                    {name: '江干'}
-                                ]
-                            },{
-                                name: '嘉兴',
-                                children: [
-                                    {name: '南湖'},
-                                    {name: '秀洲'},
-                                    {name: '嘉善'}
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        name: '福建',
-                        children: [
-                            {
-                                name: '福州',
-                                children: [
-                                    {name: '鼓楼'},
-                                    {name: '台江'},
-                                    {name: '苍山'}
-                                ]
-                            }
-                        ]
-                    }
+
                 ],
-                selected: []
+                selected: [],
             }
         },
         methods: {
+            loadData(node,fn){
+                let {id}=node
+                this.ajax(id).then((result)=>{
+                    fn(result)
+                })
+            },
             ajax(id=0){
                 return new Promise((resolve,reject)=>{
                     let result = db.filter(item=>item.parent_id === id)
-                    resolve(result)
+                        setTimeout(()=>{
+                            resolve(result)
+                        },300)
                 })
             },
             xxx(){
-              console.log(item)
+              this.ajax(this.selected[0].id).then((result)=>{
+                  let lastLevelSelected = this.source.filter(item=>item.id === this.selected[0].id)[0]
+                  let parent = this.selected[0]
+                  this.$set(parent,'children',result)
+              })
             }
         },
         created() {
