@@ -52,7 +52,7 @@
                     })
                     setTimeout(()=>{
                         resolve(result)
-                    },300)
+                    },1000)
                 })
             },
         },

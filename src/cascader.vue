@@ -5,7 +5,7 @@
         </div>
         <div class="popover" v-if="popoverVisibility">
             <cascader-item :items="source" :style="{height}" :height="height" :selected="selected" :level="level"
-            @update:selected="onUpdateSelected" :loadData="loadData"
+            @update:selected="onUpdateSelected" :loadData="loadData" :loadItem="loadItem"
             ></cascader-item>
         </div>
     </div>
@@ -38,7 +38,8 @@ export default {
     data(){
         return {
             popoverVisibility: false,
-            target: null
+            target: null,
+            loadItem: {}
         }
     },
     computed: {
@@ -51,6 +52,7 @@ export default {
         onUpdateSelected(val){
             this.$emit('update:selected',val)
             let lastVal = val[val.length-1]
+            this.loadItem = lastVal
             let simplest = (children,id)=>{
                 return children.filter(item=>item.id === id)[0]
             }
@@ -85,10 +87,10 @@ export default {
                 }
             }
             let updateSource = (result)=>{
+                this.loadItem={}
                 let copy = JSON.parse(JSON.stringify(this.source))
                 let toUpdate = complex(copy,lastVal.id)
                 toUpdate.children = result
-                console.log(copy)
                 this.$emit('update:source',copy)
             }
             if(!lastVal.isLeaf && this.loadData){
@@ -133,6 +135,7 @@ export default {
         height: 200px;
         display: flex;
         margin-top: 8px;
+        z-index: 1;
         @extend .box-shadow;
     }
 }
