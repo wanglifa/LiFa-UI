@@ -2,8 +2,7 @@
     <div>
         <div style="padding: 20px;">
             <g-cascader :source.sync="source" height="200px" :selected.sync="selected"
-            @update:selected="onUpdateSelected"
-                        @update:source="onUpdateSource"
+             :loadData="loadData"
             ></g-cascader>
         </div>
     </div>
@@ -22,39 +21,7 @@
         data(){
             return {
                 source: [
-                    {
-                        name: '浙江',
-                        children: [
-                            {
-                                name: '杭州',
-                                children: [
-                                    {name: '上城'},
-                                    {name: '下城'},
-                                    {name: '江干'}
-                                ]
-                            },{
-                                name: '嘉兴',
-                                children: [
-                                    {name: '南湖'},
-                                    {name: '秀洲'},
-                                    {name: '嘉善'}
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        name: '福建',
-                        children: [
-                            {
-                                name: '福州',
-                                children: [
-                                    {name: '鼓楼'},
-                                    {name: '台江'},
-                                    {name: '苍山'}
-                                ]
-                            }
-                        ]
-                    }
+
                 ],
                 selected: [],
             }
@@ -83,22 +50,12 @@
                     },300)
                 })
             },
-            onUpdateSelected(){
-              // this.ajax(this.selected[0].id).then((result)=>{
-              //     let lastLevelSelected = this.source.filter(item=>item.id === this.selected[0].id)[0]
-              //     let parent = this.selected[0]
-              //     this.$set(parent,'children',result)
-              // })
-            },
-            onUpdateSource(){
-
-            }
         },
         created() {
 
-            // this.ajax().then((result)=>{
-            //     this.source = result
-            // })
+            this.ajax().then((result)=>{
+                this.source = result
+            })
         }
     }
 </script>

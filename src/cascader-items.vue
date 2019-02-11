@@ -1,7 +1,7 @@
 <template>
     <div class="cascader-item">
         <div class="left">
-            <div class="label" v-for="item in items" @click="onSelected(item)" >
+            <div class="label" v-for="(item,index) in items" @click="onSelected(item,index)" :class="{active: currentItem === index}">
                 <span class="name">{{item.name}}</span>
                 <icon name="right" v-if="rightArrowVisible(item)"></icon>
             </div>
@@ -38,7 +38,7 @@ export default {
     },
     data(){
         return {
-
+            currentIndex: -1
         }
     },
     computed: {
@@ -49,20 +49,23 @@ export default {
                     return selected[0].children
                 }
             }
+        },
+        currentItem(){
+            return this.currentIndex
         }
     },
     components: {
         Icon
     },
     methods: {
-        onSelected(item){
+        onSelected(item,index){
             let copy = JSON.parse(JSON.stringify(this.selected))
             //之所以写copy[this.level]是为了你点击当前层的每一个都让数组里只保留一个
             //而不是点一个就往数组里加一个，如果不写的话你点杭州数组里有一个杭州，再点福建
             //数组就会变成['杭州','福建']可这两个属于同一层，我们统一层只想保留一个
             copy[this.level]= item
             copy.splice(this.level+1)
-            console.log(item)
+            this.currentIndex = index
             this.$emit('update:selected',copy)
         },
         onUpdateSelected(val){
@@ -91,7 +94,11 @@ export default {
                 display: flex;
                 align-items: center;
                 cursor: pointer;
+                white-space: nowrap;
                 &:hover{
+                    background: $gray;
+                }
+                &.active{
                     background: $gray;
                 }
                 .name{
