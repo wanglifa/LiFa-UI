@@ -5,6 +5,11 @@
              :loadData="loadData"
             ></g-cascader>
         </div>
+        <div style="padding: 20px;">
+            <g-cascader :source.sync="source" height="200px" :selected.sync="selected"
+                        :loadData="loadData"
+            ></g-cascader>
+        </div>
     </div>
 </template>
 
