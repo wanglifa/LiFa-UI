@@ -13,6 +13,7 @@
 <script>
 import CascaderItem from './cascader-items.vue'
 import clickOutside from './click-outside.js'
+console.log(clickOutside)
 export default {
     name: 'GuluCascader',
     props: {
