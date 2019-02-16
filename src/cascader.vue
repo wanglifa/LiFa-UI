@@ -3,7 +3,7 @@
         <div class="trigger" @click="toggle">
             {{result || '&nbsp;'}}
         </div>
-        <div class="popover" v-if="popoverVisibility">
+        <div class="popover" v-show="popoverVisibility">
             <cascader-item :items="source" :style="{height}" :height="height" :selected="selected" :level="level"
             @update:selected="onUpdateSelected" :loadData="loadData" :loadItem="loadItem"
             ></cascader-item>
@@ -13,7 +13,6 @@
 <script>
 import CascaderItem from './cascader-items.vue'
 import clickOutside from './click-outside.js'
-console.log(clickOutside)
 export default {
     name: 'GuluCascader',
     props: {
@@ -96,6 +95,10 @@ export default {
             }
             if(!lastVal.isLeaf && this.loadData){
                 this.loadData(lastVal,updateSource)
+            }else if(lastVal.isLeaf){
+                setTimeout(()=>{
+                    this.close()
+                },500)
             }
         },
         close(){
@@ -110,6 +113,9 @@ export default {
             }else{
                 this.open()
             }
+        },
+        handle(val){
+            this.close()
         }
     }
 }
