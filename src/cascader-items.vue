@@ -120,6 +120,7 @@ export default {
                 .icons{
                     display: flex;
                     align-items: center;
+                    margin-left: auto;
                     .loading{
                         animation: spin 2s infinite linear;
                     }
