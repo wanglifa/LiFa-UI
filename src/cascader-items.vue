@@ -17,16 +17,16 @@
             </div>
         </div>
         <div class="right" v-if="rightItems">
-            <gulu-cascader-item :items="rightItems" :style="{height}" :height="height" :selected="selected" :level="level+1"
+            <lifa-cascader-item :items="rightItems" :style="{height}" :height="height" :selected="selected" :level="level+1"
               @update:selected="onUpdateSelected" :loadData="loadData" :loadItem="loadItem"
-            ></gulu-cascader-item>
+            ></lifa-cascader-item>
         </div>
     </div>
 </template>
 <script>
 import Icon from './icon.vue'
 export default {
-    name: 'GuluCascaderItem',
+    name: 'lifaCascaderItem',
     props: {
         items: {
             type: Array

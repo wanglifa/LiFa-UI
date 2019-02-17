@@ -5,7 +5,7 @@
 </template>
 <script>
     export default {
-        name: 'GuluIcon',
+        name: 'LiFaIcon',
         props: ['name']
     }
 </script>

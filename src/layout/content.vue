@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-    name: 'GuluContent',
+    name: 'LiFaContent',
 }
 </script>
 <style lang="scss" scoped>

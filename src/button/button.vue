@@ -12,7 +12,7 @@
     import Icon from '../icon'
     import '../svg.js'
     export default {
-        name: 'GuluButton',
+        name: 'LiFaButton',
         components: {
             'g-icon': Icon
         },

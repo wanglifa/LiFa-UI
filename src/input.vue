@@ -18,7 +18,7 @@
         components: {
             'g-icon':Icon
         },
-        name: 'GuluInput',
+        name: 'LiFaInput',
         props: {
             value:{
                 type: String

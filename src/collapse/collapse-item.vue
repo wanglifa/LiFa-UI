@@ -10,7 +10,7 @@
 </template>
 <script>
     export default {
-        name: 'GuluCollapseItem',
+        name: 'LiFaCollapseItem',
         props: {
             title: {
                 type: String,

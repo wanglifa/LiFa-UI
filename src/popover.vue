@@ -12,7 +12,7 @@
 </template>
 <script>
     export default {
-        name: 'GuluPopover',
+        name: 'LiFaPopover',
         data(){
             return {
                 visibility: false

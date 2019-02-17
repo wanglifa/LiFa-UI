@@ -14,7 +14,7 @@
 import CascaderItem from './cascader-items.vue'
 import clickOutside from './click-outside.js'
 export default {
-    name: 'GuluCascader',
+    name: 'LiFaCascader',
     props: {
         source: {
             type: Array

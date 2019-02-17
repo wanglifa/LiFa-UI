@@ -1,6 +1,6 @@
 module.exports = {
-  base: '/gulu-demo/',
-  title: 'WheelUI',
+  base: '/LiFa-UI/',
+  title: 'LiFa UI',
   description: '一个好用的UI框架',
   themeConfig: {
     nav: [

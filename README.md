@@ -1,4 +1,4 @@
-# 轱辘 - 一个Vue UI 组件
+# LiFa - 一个Vue UI 组件
 
 [![Build Status](https://travis-ci.org/wanglifa/gulu-demo.svg?branch=master)](https://travis-ci.org/wanglifa/gulu-demo)
 
@@ -32,11 +32,11 @@
    ```
    IE15及以上浏览器都支持此样式
 
-2. 安装 gulu
+2. 安装 LiFa UI
    ```
    npm i --save wang-test-1-1
    ```
-3. 引入 gulu
+3. 引入 LiFa UI
    ```
    import {Button, ButtonGroup, Icon, Svg} from 'wang-test-1-1'
    import 'wang-test-1-1/dist/index.css'

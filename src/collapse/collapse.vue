@@ -6,7 +6,7 @@
 <script>
     import Vue from 'vue'
     export default {
-        name: 'GuluCollapse',
+        name: 'LiFaCollapse',
         props: {
             signle: {
                 type: Boolean,

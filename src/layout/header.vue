@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-    name: 'GuluHeader',
+    name: 'LiFaHeader',
 }
 </script>
 <style lang="scss" scoped>
