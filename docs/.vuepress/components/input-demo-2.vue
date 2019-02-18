@@ -1,25 +1,27 @@
 <template>
   <div style="padding-top: 16px;">
     <h2>双向绑定</h2>
-    <p>
-      <strong>预览</strong>
-    </p>
-    <lf-input v-model="value"></lf-input>
-    <div>
-      value: {{value}}
+    <div class="demo-box">
+      <div class="top">
+        <lf-input v-model="value"></lf-input>
+        <div>
+          value: {{value}}
+        </div>
+      </div>
+      <lf-collaspe>
+        <p slot="one">
+        </p>
+        <code slot="two">{{content}}</code>
+      </lf-collaspe>
     </div>
-
-    <p>
-      <strong>代码</strong>
-    </p>
-    <pre><code>{{content}}</code></pre>
   </div>
 </template>
 <script>
   import LfInput from '../../../src/input'
-
+  import LfCollaspe from './collspse-demo.vue'
+  import LfIcon from  '../../../src/icon.vue'
   export default {
-    components: {LfInput},
+    components: {LfInput, LfCollaspe, LfIcon},
     data () {
       return {
         value: '1',
@@ -37,3 +39,13 @@
     }
   }
 </script>
+<style scoped lang="scss">
+  .demo-box{
+    border: solid 1px #ebebeb;
+    border-radius: 3px;
+    transition: .2s;
+    .top{
+      padding: 24px;
+    }
+  }
+</style>

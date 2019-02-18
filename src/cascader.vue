@@ -1,7 +1,8 @@
 <template>
     <div class="cascader" v-click-outside="close">
         <div class="trigger" @click="toggle">
-            {{result || '&nbsp;'}}
+            <div v-if="result">{{result}}</div>
+            <span v-else style="color: #ccc">请选择</span>
         </div>
         <div class="popover" v-show="popoverVisibility">
             <cascader-item :items="source" :style="{height}" :height="height" :selected="selected" :level="level"
@@ -139,7 +140,6 @@ export default {
         top: 100%;
         left: 0;
         background: #fff;
-        height: 200px;
         display: flex;
         margin-top: 8px;
         z-index: 1;

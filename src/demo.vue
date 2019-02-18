@@ -1,5 +1,7 @@
 <template>
     <div>
+        <lf-icon name="error"></lf-icon>
+        <lf-input value="哈哈" error="你好啊"></lf-input>
         <div style="padding: 20px;">
             <lf-cascader :source.sync="source" height="200px" :selected.sync="selected"
              :loadData="loadData"
@@ -14,14 +16,18 @@
 </template>
 
 <script>
+    import LfIcon from './icon.vue'
     import Button from './button/button.vue'
     import Cascader from  './cascader.vue'
     import db from './db.js'
+    import LfInput from './input.vue'
     export default {
         name: "demo",
         components: {
             'lf-button': Button,
-            'lf-cascader': Cascader
+            'lf-cascader': Cascader,
+            LfIcon,
+            LfInput
         },
         data(){
             return {
