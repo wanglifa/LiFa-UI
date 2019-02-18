@@ -5,30 +5,30 @@
       <strong>预览</strong>
     </p>
 
-    <g-popover trigger="hover">
-      <g-button>上方弹出</g-button>
+    <lf-popover trigger="hover">
+      <lf-button>上方弹出</lf-button>
       <template slot="content">
         弹出内容
       </template>
-    </g-popover>
-    <g-popover position="bottom" trigger="hover">
-      <g-button>下方弹出</g-button>
+    </lf-popover>
+    <lf-popover position="bottom" trigger="hover">
+      <lf-button>下方弹出</lf-button>
       <template slot="content">
         弹出内容
       </template>
-    </g-popover>
-    <g-popover position="left" trigger="hover">
-      <g-button>左边弹出</g-button>
+    </lf-popover>
+    <lf-popover position="left" trigger="hover">
+      <lf-button>左边弹出</lf-button>
       <template slot="content">
         弹出内容
       </template>
-    </g-popover>
-    <g-popover position="right" trigger="hover">
-      <g-button>右边弹出</g-button>
+    </lf-popover>
+    <lf-popover position="right" trigger="hover">
+      <lf-button>右边弹出</lf-button>
       <template slot="content">
         弹出内容
       </template>
-    </g-popover>
+    </lf-popover>
 
     <p>
       <strong>代码</strong>
@@ -36,7 +36,7 @@
     <pre><code>{{content}}</code></pre>
 
     <p>
-        如果想要鼠标经过就显示我们定义的内容，那么只需要给<code>g-popover</code>一个<code>trigger</code>属性，给定一个<code>'hover'</code>即可。
+        如果想要鼠标经过就显示我们定义的内容，那么只需要给<code>lf-popover</code>一个<code>trigger</code>属性，给定一个<code>'hover'</code>即可。
     </p>
   </div>
 </template>
@@ -54,30 +54,30 @@
     data () {
       return {
         content: `
-          <g-popover trigger="hover">
-            <g-button>上方弹出</g-button>
+          <lf-popover trigger="hover">
+            <lf-button>上方弹出</lf-button>
             <template slot="content">
               弹出内容
             </template>
-          </g-popover>
-          <g-popover position="bottom" trigger="hover">
-            <g-button>下方弹出</g-button>
+          </lf-popover>
+          <lf-popover position="bottom" trigger="hover">
+            <lf-button>下方弹出</lf-button>
             <template slot="content">
               弹出内容
             </template>
-          </g-popover>
-          <g-popover position="left" trigger="hover">
-            <g-button>左边弹出</g-button>
+          </lf-popover>
+          <lf-popover position="left" trigger="hover">
+            <lf-button>左边弹出</lf-button>
             <template slot="content">
               弹出内容
             </template>
-          </g-popover>
-          <g-popover position="right" trigger="hover">
-            <g-button>右边弹出</g-button>
+          </lf-popover>
+          <lf-popover position="right" trigger="hover">
+            <lf-button>右边弹出</lf-button>
             <template slot="content">
               弹出内容
             </template>
-          </g-popover>
+          </lf-popover>
       `.replace(/^ {8}/gm, '').trim()
       }
     },

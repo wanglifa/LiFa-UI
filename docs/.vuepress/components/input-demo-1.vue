@@ -4,9 +4,9 @@
     <p>
       <strong>预览</strong>
     </p>
-    <g-input value="中文"></g-input>
-    <g-input value="中文" disabled></g-input>
-    <g-input value="中文" readonly></g-input>
+    <lf-input value="中文"></lf-input>
+    <lf-input value="中文" disabled></lf-input>
+    <lf-input value="中文" readonly></lf-input>
 
     <p>
       <strong>代码</strong>
@@ -23,10 +23,10 @@
       return {
         selected: '1',
         content: `
-          <g-input></g-input>
-          <g-input value="中文"></g-input>
-          <g-input value="中文" disabled></g-input>
-          <g-input value="中文" readonly></g-input>
+          <lf-input></lf-input>
+          <lf-input value="中文"></lf-input>
+          <lf-input value="中文" disabled></lf-input>
+          <lf-input value="中文" readonly></lf-input>
       `.replace(/^ {8}/gm, '').trim()
       }
     }

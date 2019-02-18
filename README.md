@@ -1,6 +1,6 @@
 # LiFa - 一个Vue UI 组件
 
-[![Build Status](https://travis-ci.org/wanglifa/gulu-demo.svg?branch=master)](https://travis-ci.org/wanglifa/gulu-demo)
+[![Build Status](https://travis-ci.org/wanglifa/LiFa-UI.svg?branch=master)](https://travis-ci.org/wanglifa/LiFa-UI)
 
 作者：王立发
 
@@ -34,19 +34,19 @@
 
 2. 安装 LiFa UI
    ```
-   npm i --save wang-test-1-1
+   npm i --save lifa-ui
    ```
 3. 引入 LiFa UI
    ```
-   import {Button, ButtonGroup, Icon, Svg} from 'wang-test-1-1'
-   import 'wang-test-1-1/dist/index.css'
+   import {Button, ButtonGroup, Icon, Svg} from 'lifa-ui'
+   
 
    export default {
      name: 'app',
      components: {
        HelloWorld,
-       'g-button': Button,
-       'g-icon': Icon
+       'lf-button': Button,
+       'lf-icon': Icon
      }
    }
    ```

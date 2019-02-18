@@ -5,11 +5,11 @@ import TabsHead from '../../src/tabs/tabs-head'
 import TabsBody from '../../src/tabs/tabs-body'
 import TabsItem from '../../src/tabs/tabs-item'
 import TabsPane from '../../src/tabs/tabs-pane'
-Vue.component('g-tabs',Tabs)
-Vue.component('g-tabs-head',TabsHead)
-Vue.component('g-tabs-body',TabsBody)
-Vue.component('g-tabs-item',TabsItem)
-Vue.component('g-tabs-pane',TabsPane)
+Vue.component('lf-tabs',Tabs)
+Vue.component('lf-tabs-head',TabsHead)
+Vue.component('lf-tabs-body',TabsBody)
+Vue.component('lf-tabs-item',TabsItem)
+Vue.component('lf-tabs-pane',TabsPane)
 
 Vue.config.productionTip = false
 Vue.config.devtools = false
@@ -24,30 +24,30 @@ describe('Tabs', () => {
         const div = document.createElement('div')
         document.body.appendChild(div)
         div.innerHTML = `
-        <g-tabs selected="finance">
-            <g-tabs-head>
-                <g-tabs-item name="woman">
+        <lf-tabs selected="finance">
+            <lf-tabs-head>
+                <lf-tabs-item name="woman">
                     美女
-                </g-tabs-item>
-                <g-tabs-item name="finance">
+                </lf-tabs-item>
+                <lf-tabs-item name="finance">
                     财经
-                </g-tabs-item>
-                <g-tabs-item name="sports">
+                </lf-tabs-item>
+                <lf-tabs-item name="sports">
                     体育
-                </g-tabs-item>
-            </g-tabs-head>
-            <g-tabs-body>
-                <g-tabs-pane name="woman">
+                </lf-tabs-item>
+            </lf-tabs-head>
+            <lf-tabs-body>
+                <lf-tabs-pane name="woman">
                     美女相关资讯
-                </g-tabs-pane>
-                <g-tabs-pane name="finance">
+                </lf-tabs-pane>
+                <lf-tabs-pane name="finance">
                     财经相关资讯
-                </g-tabs-pane>
-                <g-tabs-pane name="sports">
+                </lf-tabs-pane>
+                <lf-tabs-pane name="sports">
                     体育相关资讯
-            </g-tabs-pane>
-        </g-tabs-body>
-    </g-tabs>
+            </lf-tabs-pane>
+        </lf-tabs-body>
+    </lf-tabs>
         `
         let vm = new Vue({
             el: div

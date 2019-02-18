@@ -5,22 +5,22 @@
       <strong>预览</strong>
     </p>
 
-    <g-layout style="color: white; overflow:hidden; margin-bottom:50px;">
-      <g-sider style=" background:#ddd; width:200px; color: black;">
+    <lf-layout style="color: white; overflow:hidden; margin-bottom:50px;">
+      <lf-sider style=" background:#ddd; width:200px; color: black;">
         sider
-      </g-sider>
-      <g-layout>
-        <g-header style="height: 50px; background:lightskyblue;">
+      </lf-sider>
+      <lf-layout>
+        <lf-header style="height: 50px; background:lightskyblue;">
           header
-        </g-header>
-        <g-content style="height: 100px; background:deepskyblue;">
+        </lf-header>
+        <lf-content style="height: 100px; background:deepskyblue;">
           content
-        </g-content>
-        <g-footer style="height: 50px; background:lightskyblue;">
+        </lf-content>
+        <lf-footer style="height: 50px; background:lightskyblue;">
           footer
-        </g-footer>
-      </g-layout>
-    </g-layout>
+        </lf-footer>
+      </lf-layout>
+    </lf-layout>
     <p>
       <strong>代码</strong>
     </p>
@@ -33,33 +33,33 @@
   }
 </style>
 <script>
-  import GLayout from '../../../src/layout/layout'
-  import GHeader from '../../../src/layout/header'
-  import GFooter from '../../../src/layout/footer'
-  import GContent from '../../../src/layout/content'
-  import GSider from '../../../src/layout/sider'
+  import LfLayout from '../../../src/layout/layout'
+  import LfHeader from '../../../src/layout/header'
+  import LfFooter from '../../../src/layout/footer'
+  import LfContent from '../../../src/layout/content'
+  import LfSider from '../../../src/layout/sider'
 
   export default {
-    components: {GLayout, GHeader, GFooter, GContent, GSider},
+    components: {LfLayout, LfHeader, LfFooter, LfContent, LfSider},
     data () {
       return {
         content: `
-          <g-layout style="color: white; overflow:hidden; margin-bottom:50px;">
-            <g-sider style=" background:#ddd; width:200px; color: black;">
+          <lf-layout style="color: white; overflow:hidden; margin-bottom:50px;">
+            <lf-sider style=" background:#ddd; width:200px; color: black;">
               sider
-            </g-sider>
-            <g-layout>
-              <g-header style="height: 50px; background:lightskyblue;">
+            </lf-sider>
+            <lf-layout>
+              <lf-header style="height: 50px; background:lightskyblue;">
                 header
-              </g-header>
-              <g-content style="height: 100px; background:deepskyblue;">
+              </lf-header>
+              <lf-content style="height: 100px; background:deepskyblue;">
                 content
-              </g-content>
-              <g-footer style="height: 50px; background:lightskyblue;">
+              </lf-content>
+              <lf-footer style="height: 50px; background:lightskyblue;">
                 footer
-              </g-footer>
-            </g-layout>
-          </g-layout>
+              </lf-footer>
+            </lf-layout>
+          </lf-layout>
 
       `.replace(/^ {8}/gm, '').trim()
       }

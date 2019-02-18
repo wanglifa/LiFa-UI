@@ -125,7 +125,7 @@ export default {
                         animation: spin 2s infinite linear;
                     }
                 }
-                .g-icon{
+                .lf-icon{
                     margin-left: auto;
                     transform: scale(.8);
                 }

@@ -5,30 +5,30 @@
       <strong>预览</strong>
     </p>
 
-    <g-popover>
-      <g-button>上方弹出</g-button>
+    <lf-popover>
+      <lf-button>上方弹出</lf-button>
       <template slot="content">
         弹出内容
       </template>
-    </g-popover>
-    <g-popover position="bottom">
-      <g-button>下方弹出</g-button>
+    </lf-popover>
+    <lf-popover position="bottom">
+      <lf-button>下方弹出</lf-button>
       <template slot="content">
         弹出内容
       </template>
-    </g-popover>
-    <g-popover position="left">
-      <g-button>左边弹出</g-button>
+    </lf-popover>
+    <lf-popover position="left">
+      <lf-button>左边弹出</lf-button>
       <template slot="content">
         弹出内容
       </template>
-    </g-popover>
-    <g-popover position="right">
-      <g-button>右边弹出</g-button>
+    </lf-popover>
+    <lf-popover position="right">
+      <lf-button>右边弹出</lf-button>
       <template slot="content">
         弹出内容
       </template>
-    </g-popover>
+    </lf-popover>
 
     <p>
       <strong>代码</strong>
@@ -36,7 +36,7 @@
     <pre><code>{{content}}</code></pre>
 
     <p>
-       popover组件使用的时候，因为对于弹出内容的处理是使用了一个具名插槽，所以我们必须要将弹出的内容写在一个<code>template</code>里然后给它一个<code>slot='content'</code> ，这里弹出内容显示的位置通过给<code>g-popover</code>一个<code>positon</code>属性来设置。
+       popover组件使用的时候，因为对于弹出内容的处理是使用了一个具名插槽，所以我们必须要将弹出的内容写在一个<code>template</code>里然后给它一个<code>slot='content'</code> ，这里弹出内容显示的位置通过给<code>lf-popover</code>一个<code>positon</code>属性来设置。
     </p>
   </div>
 </template>
@@ -45,39 +45,39 @@
 <style scoped>
 </style>
 <script>
-  import GButton from '../../../src/button/button'
-  import GPopover from '../../../src/popover'
+  import LfButton from '../../../src/button/button'
+  import LfPopover from '../../../src/popover'
 
 
   export default {
-    components: {GButton, GPopover},
+    components: {LfButton, LfPopover},
     data () {
       return {
         content: `
-          <g-popover>
-            <g-button>上方弹出</g-button>
+          <lf-popover>
+            <lf-button>上方弹出</lf-button>
             <template slot="content">
               弹出内容
             </template>
-          </g-popover>
-          <g-popover position="bottom">
-            <g-button>下方弹出</g-button>
+          </lf-popover>
+          <lf-popover position="bottom">
+            <lf-button>下方弹出</lf-button>
             <template slot="content">
               弹出内容
             </template>
-          </g-popover>
-          <g-popover position="left">
-            <g-button>左边弹出</g-button>
+          </lf-popover>
+          <lf-popover position="left">
+            <lf-button>左边弹出</lf-button>
             <template slot="content">
               弹出内容
             </template>
-          </g-popover>
-          <g-popover position="right">
-            <g-button>右边弹出</g-button>
+          </lf-popover>
+          <lf-popover position="right">
+            <lf-button>右边弹出</lf-button>
             <template slot="content">
               弹出内容
             </template>
-          </g-popover>
+          </lf-popover>
       `.replace(/^ {8}/gm, '').trim()
       }
     },

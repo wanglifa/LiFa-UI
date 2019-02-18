@@ -4,18 +4,18 @@
         <p>
           <strong>预览</strong>
         </p>
-        <g-button-group>
-            <g-button icon="left">按钮1</g-button>
-            <g-button>按钮2</g-button>
-            <g-button icon="right" iconPosition="right">按钮3</g-button>
-        </g-button-group>
+        <lf-button-group>
+            <lf-button icon="left">按钮1</lf-button>
+            <lf-button>按钮2</lf-button>
+            <lf-button icon="right" iconPosition="right">按钮3</lf-button>
+        </lf-button-group>
 
         <p>
           <strong>代码</strong>
         </p>
         <pre><code>{{content}}</code></pre>
 
-        <p>组合按钮需要通过一个<code>g-button-group</code>标签包裹<code>g-button</code>。</p>
+        <p>组合按钮需要通过一个<code>lf-button-group</code>标签包裹<code>lf-button</code>。</p>
     </div>
 </template>
 <script>
@@ -23,17 +23,17 @@
     import ButtonGroup from '../../../src/button/button-group'
     export default {
         components: {
-            'g-button-group': ButtonGroup,
-            'g-button': Button
+            'lf-button-group': ButtonGroup,
+            'lf-button': Button
         },
         data () {
           return {
             content: `
-            <g-button-group>
-                <g-button icon="left">按钮1</g-button>
-                <g-button>按钮2</g-button>
-                <g-button icon="right" iconPosition="right">按钮3</g-button>
-            </g-button-group>
+            <lf-button-group>
+                <lf-button icon="left">按钮1</lf-button>
+                <lf-button>按钮2</lf-button>
+                <lf-button icon="right" iconPosition="right">按钮3</lf-button>
+            </lf-button-group>
           `.replace(/^ {8}/gm, '').trim()
           }
         }

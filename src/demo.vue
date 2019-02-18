@@ -1,14 +1,14 @@
 <template>
     <div>
         <div style="padding: 20px;">
-            <g-cascader :source.sync="source" height="200px" :selected.sync="selected"
+            <lf-cascader :source.sync="source" height="200px" :selected.sync="selected"
              :loadData="loadData"
-            ></g-cascader>
+            ></lf-cascader>
         </div>
         <div style="padding: 20px;">
-            <g-cascader :source.sync="source" height="200px" :selected.sync="selected"
+            <lf-cascader :source.sync="source" height="200px" :selected.sync="selected"
                         :loadData="loadData"
-            ></g-cascader>
+            ></lf-cascader>
         </div>
     </div>
 </template>
@@ -20,8 +20,8 @@
     export default {
         name: "demo",
         components: {
-            'g-button': Button,
-            'g-cascader': Cascader
+            'lf-button': Button,
+            'lf-cascader': Cascader
         },
         data(){
             return {

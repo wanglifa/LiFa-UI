@@ -6,7 +6,7 @@
     </p>
 
     <div>
-      <g-button @click="onClickClose">上方弹出</g-button>
+      <lf-button @click="onClickClose">上方弹出</lf-button>
     </div>
 
     <p>
@@ -15,7 +15,7 @@
     <pre><code>{{content}}</code></pre>
 
     <p>
-        通过点击触发一个<code>onClickClose</code>事件，调用<code>$toast</code>方法，里面接受两个参数，第一个参数是字符串，用于设置你弹出的消息；第二个参数是一个对象，它内部定义了一个<code>closeBtn</code>对象，里面的<code>text</code.就是你关闭按钮的文字内容，<code>callback</code>就是你点击关闭按钮后要做的。
+        通过点击触发一个<code>onClickClose</code>事件，调用<code>$toast</code>方法，里面接受两个参数，第一个参数是字符串，用于设置你弹出的消息；第二个参数是一个对象，它内部定义了一个<code>closeBtn</code>对象，里面的<code>text</code>就是你关闭按钮的文字内容，<code>callback</code>就是你点击关闭按钮后要做的。
     </p>
   </div>
 </template>
@@ -32,13 +32,13 @@
 </style>
 <script>
   import plugin from '../../../src/plugin'
-  import GButton from '../../../src/button/button'
+  import LfButton from '../../../src/button/button'
   import Vue from 'vue'
 
   Vue.use(plugin)
 
   export default {
-    components: {GButton},
+    components: {LfButton},
     data () {
       return {
         content: `
@@ -49,7 +49,7 @@
           </style>
 
           <div>
-            <g-button @click="onClickClose">上方弹出</g-button>
+            <lf-button @click="onClickClose">上方弹出</lf-button>
           </div>
 
           methods: {

@@ -4,96 +4,96 @@
     <p>
       <strong>预览</strong>
     </p>
-    <g-row class="demoRow">
-      <g-col span="8">
+    <lf-row class="demoRow">
+      <lf-col span="8">
         <div class="demoCol">8</div>
-      </g-col>
-      <g-col span="8">
+      </lf-col>
+      <lf-col span="8">
         <div class="demoCol">8</div>
-      </g-col>
-      <g-col span="8">
+      </lf-col>
+      <lf-col span="8">
         <div class="demoCol">8</div>
-      </g-col>
-    </g-row>
-    <g-row class="demoRow">
-      <g-col span="6">
+      </lf-col>
+    </lf-row>
+    <lf-row class="demoRow">
+      <lf-col span="6">
         <div class="demoCol">6</div>
-      </g-col>
-      <g-col span="6">
+      </lf-col>
+      <lf-col span="6">
         <div class="demoCol">6</div>
-      </g-col>
-      <g-col span="6">
+      </lf-col>
+      <lf-col span="6">
         <div class="demoCol">6</div>
-      </g-col>
-      <g-col span="6">
+      </lf-col>
+      <lf-col span="6">
         <div class="demoCol">6</div>
-      </g-col>
-    </g-row>
-    <g-row class="demoRow">
-      <g-col span="4">
+      </lf-col>
+    </lf-row>
+    <lf-row class="demoRow">
+      <lf-col span="4">
         <div class="demoCol">4</div>
-      </g-col>
-      <g-col span="4">
+      </lf-col>
+      <lf-col span="4">
         <div class="demoCol">4</div>
-      </g-col>
-      <g-col span="4">
+      </lf-col>
+      <lf-col span="4">
         <div class="demoCol">4</div>
-      </g-col>
-      <g-col span="4">
+      </lf-col>
+      <lf-col span="4">
         <div class="demoCol">4</div>
-      </g-col>
-      <g-col span="4">
+      </lf-col>
+      <lf-col span="4">
         <div class="demoCol">4</div>
-      </g-col>
-      <g-col span="4">
+      </lf-col>
+      <lf-col span="4">
         <div class="demoCol">4</div>
-      </g-col>
-    </g-row>
-    <g-row class="demoRow">
-      <g-col span="2">
+      </lf-col>
+    </lf-row>
+    <lf-row class="demoRow">
+      <lf-col span="2">
         <div class="demoCol">2</div>
-      </g-col>
-      <g-col span="2">
+      </lf-col>
+      <lf-col span="2">
         <div class="demoCol">2</div>
-      </g-col>
-      <g-col span="2">
+      </lf-col>
+      <lf-col span="2">
         <div class="demoCol">2</div>
-      </g-col>
-      <g-col span="2">
+      </lf-col>
+      <lf-col span="2">
         <div class="demoCol">2</div>
-      </g-col>
-      <g-col span="2">
+      </lf-col>
+      <lf-col span="2">
         <div class="demoCol">2</div>
-      </g-col>
-      <g-col span="2">
+      </lf-col>
+      <lf-col span="2">
         <div class="demoCol">2</div>
-      </g-col>
-      <g-col span="2">
+      </lf-col>
+      <lf-col span="2">
         <div class="demoCol">2</div>
-      </g-col>
-      <g-col span="2">
+      </lf-col>
+      <lf-col span="2">
         <div class="demoCol">2</div>
-      </g-col>
-      <g-col span="2">
+      </lf-col>
+      <lf-col span="2">
         <div class="demoCol">2</div>
-      </g-col>
-      <g-col span="2">
+      </lf-col>
+      <lf-col span="2">
         <div class="demoCol">2</div>
-      </g-col>
-      <g-col span="2">
+      </lf-col>
+      <lf-col span="2">
         <div class="demoCol">2</div>
-      </g-col>
-      <g-col span="2">
+      </lf-col>
+      <lf-col span="2">
         <div class="demoCol">2</div>
-      </g-col>
-    </g-row>
+      </lf-col>
+    </lf-row>
 
     <p>
       <strong>代码</strong>
     </p>
     <pre><code>{{content}}</code></pre>
 
-    <p>使用<code>g-row</code>来划分行，<code>g-col</code>来划分列，每行最多24格，通过给<code>g-col</code>添加<code>span</code>属性来定义格数。</p>
+    <p>使用<code>lf-row</code>来划分行，<code>lf-col</code>来划分列，每行最多24格，通过给<code>lf-col</code>添加<code>span</code>属性来定义格数。</p>
   </div>
 </template>
 <style scoped>
@@ -113,11 +113,11 @@
   }
 </style>
 <script>
-  import GRow from '../../../src/grid/row'
-  import GCol from '../../../src/grid/col'
+  import LfRow from '../../../src/grid/row'
+  import LfCol from '../../../src/grid/col'
 
   export default {
-    components: {GRow, GCol},
+    components: {LfRow, LfCol},
     data () {
       return {
         content: `
@@ -125,92 +125,92 @@
             box-sizing: border-box;
           }
 
-          <g-row class="demoRow">
-            <g-col span="8">
+          <lf-row class="demoRow">
+            <lf-col span="8">
               <div class="demoCol">8</div>
-            </g-col>
-            <g-col span="8">
+            </lf-col>
+            <lf-col span="8">
               <div class="demoCol">8</div>
-            </g-col>
-            <g-col span="8">
+            </lf-col>
+            <lf-col span="8">
               <div class="demoCol">8</div>
-            </g-col>
-          </g-row>
+            </lf-col>
+          </lf-row>
 
-          <g-row class="demoRow">
-            <g-col span="6">
+          <lf-row class="demoRow">
+            <lf-col span="6">
               <div class="demoCol">6</div>
-            </g-col>
-            <g-col span="6">
+            </lf-col>
+            <lf-col span="6">
               <div class="demoCol">6</div>
-            </g-col>
-            <g-col span="6">
+            </lf-col>
+            <lf-col span="6">
               <div class="demoCol">6</div>
-            </g-col>
-            <g-col span="6">
+            </lf-col>
+            <lf-col span="6">
               <div class="demoCol">6</div>
-            </g-col>
-          </g-row>
+            </lf-col>
+          </lf-row>
 
-          <g-row class="demoRow">
-            <g-col span="4">
+          <lf-row class="demoRow">
+            <lf-col span="4">
               <div class="demoCol">4</div>
-            </g-col>
-            <g-col span="4">
+            </lf-col>
+            <lf-col span="4">
               <div class="demoCol">4</div>
-            </g-col>
-            <g-col span="4">
+            </lf-col>
+            <lf-col span="4">
               <div class="demoCol">4</div>
-            </g-col>
-            <g-col span="4">
+            </lf-col>
+            <lf-col span="4">
               <div class="demoCol">4</div>
-            </g-col>
-            <g-col span="4">
+            </lf-col>
+            <lf-col span="4">
               <div class="demoCol">4</div>
-            </g-col>
-            <g-col span="4">
+            </lf-col>
+            <lf-col span="4">
               <div class="demoCol">4</div>
-            </g-col>
-          </g-row>
+            </lf-col>
+          </lf-row>
 
-          <g-row class="demoRow">
-            <g-col span="2">
+          <lf-row class="demoRow">
+            <lf-col span="2">
               <div class="demoCol">2</div>
-            </g-col>
-            <g-col span="2">
+            </lf-col>
+            <lf-col span="2">
               <div class="demoCol">2</div>
-            </g-col>
-            <g-col span="2">
+            </lf-col>
+            <lf-col span="2">
               <div class="demoCol">2</div>
-            </g-col>
-            <g-col span="2">
+            </lf-col>
+            <lf-col span="2">
               <div class="demoCol">2</div>
-            </g-col>
-            <g-col span="2">
+            </lf-col>
+            <lf-col span="2">
               <div class="demoCol">2</div>
-            </g-col>
-            <g-col span="2">
+            </lf-col>
+            <lf-col span="2">
               <div class="demoCol">2</div>
-            </g-col>
-            <g-col span="2">
+            </lf-col>
+            <lf-col span="2">
               <div class="demoCol">2</div>
-            </g-col>
-            <g-col span="2">
+            </lf-col>
+            <lf-col span="2">
               <div class="demoCol">2</div>
-            </g-col>
-            <g-col span="2">
+            </lf-col>
+            <lf-col span="2">
               <div class="demoCol">2</div>
-            </g-col>
-            <g-col span="2">
+            </lf-col>
+            <lf-col span="2">
               <div class="demoCol">2</div>
-            </g-col>
-            <g-col span="2">
+            </lf-col>
+            <lf-col span="2">
               <div class="demoCol">2</div>
-            </g-col>
-            <g-col span="2">
+            </lf-col>
+            <lf-col span="2">
               <div class="demoCol">2</div>
-            </g-col>
-          </g-row>
+            </lf-col>
+          </lf-row>
       `.replace(/^ {8}/gm, '').trim()
       }
     }

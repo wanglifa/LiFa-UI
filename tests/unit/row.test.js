@@ -19,10 +19,10 @@ describe('Row', () => {
         Vue.component('g-col',Col)
         
         div.innerHTML = `
-            <g-row gutter="20">
-                <g-col sapn="12"></g-col>
-                <g-col sapn="12"></g-col>
-            </g-row>
+            <lf-row gutter="20">
+                <lf-col sapn="12"></lf-col>
+                <lf-col sapn="12"></lf-col>
+            </lf-row>
         `
         const vm = new Vue({
             el: div

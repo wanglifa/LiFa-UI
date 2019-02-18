@@ -7,11 +7,11 @@ title: 安装
 本章节待完善
 
 ```bash
-npm install wang-test-1-1
+npm install lifa-ui
 ```
 
 或
 
 ```bash
-yarn add wang-test-1-1
+yarn add lifa-ui
 ```

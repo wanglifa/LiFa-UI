@@ -1,5 +1,5 @@
 <template>
-    <div class="g-button-group">
+    <div class="lf-button-group">
         <slot></slot>
     </div>
 </template>
@@ -10,7 +10,7 @@
             for(let node of this.$el.children){
                 let name = node.nodeName.toLowerCase();
                 if(name !== 'button'){
-                    console.warn(`g-button-group 的子元素应该是 g-button,但是你写的是${name}`)
+                    console.warn(`lf-button-group 的子元素应该是 lf-button,但是你写的是${name}`)
                 }
             }
         }
@@ -18,10 +18,10 @@
 </script>
 <style lang="scss" scoped>
     $border-radius: 4px;
-    .g-button-group{
+    .lf-button-group{
         display: inline-flex;
         vertical-align: middle;
-        > .g-button{
+        > .lf-button{
             border-radius: 0;
             &:not(:first-child){
                 margin-left: -1px;

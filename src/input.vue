@@ -7,7 +7,7 @@
         @blur="$emit('blur',$event.target.value)"
         >
         <template v-if="error">
-            <g-icon name="error" class="icon-error"></g-icon>
+            <lf-icon name="error" class="icon-error"></lf-icon>
             <span class="errorMessage">{{error}}</span>
         </template>
     </div>
@@ -16,7 +16,7 @@
     import Icon from './icon'
     export default {
         components: {
-            'g-icon':Icon
+            'lf-icon':Icon
         },
         name: 'LiFaInput',
         props: {

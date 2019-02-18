@@ -6,7 +6,7 @@
     </p>
 
     <div>
-      <g-button @click="onClickClose">上方弹出</g-button>
+      <lf-button @click="onClickClose">上方弹出</lf-button>
     </div>
 
     <p>
@@ -32,13 +32,13 @@
 </style>
 <script>
   import plugin from '../../../src/plugin'
-  import GButton from '../../../src/button/button'
+  import LfButton from '../../../src/button/button'
   import Vue from 'vue'
 
   Vue.use(plugin)
 
   export default {
-    components: {GButton},
+    components: {LfButton},
     data () {
       return {
         content: `
@@ -49,7 +49,7 @@
 </style>
         
         <div>
-          <g-button @click="onClickClose">上方弹出</g-button>
+          <lf-button @click="onClickClose">上方弹出</lf-button>
         </div>
 
         methods: {

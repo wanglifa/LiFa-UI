@@ -14,13 +14,13 @@ title: 快速上手
 ## Hello World
 
 ```javascript
-import {Button} from 'wang-test-1-1'
+import {Button} from 'lifa-ui'
 import Vue from 'vue'
 
 new Vue({
   el: '#app',
   components: {
-    'g-button':Button
+    'lf-button':Button
   }
 })
 ```

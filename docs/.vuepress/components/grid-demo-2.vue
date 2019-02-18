@@ -4,31 +4,31 @@
     <p>
       <strong>预览</strong>
     </p>
-    <g-row class="demoRow" gutter="10">
-      <g-col span="8">
+    <lf-row class="demoRow" gutter="10">
+      <lf-col span="8">
         <div class="demoCol">8</div>
-      </g-col>
-      <g-col span="8">
+      </lf-col>
+      <lf-col span="8">
         <div class="demoCol">8</div>
-      </g-col>
-      <g-col span="8">
+      </lf-col>
+      <lf-col span="8">
         <div class="demoCol">8</div>
-      </g-col>
-    </g-row>
-    <g-row class="demoRow" gutter="10">
-      <g-col span="6">
+      </lf-col>
+    </lf-row>
+    <lf-row class="demoRow" gutter="10">
+      <lf-col span="6">
         <div class="demoCol">6</div>
-      </g-col>
-      <g-col span="6">
+      </lf-col>
+      <lf-col span="6">
         <div class="demoCol">6</div>
-      </g-col>
-      <g-col span="6">
+      </lf-col>
+      <lf-col span="6">
         <div class="demoCol">6</div>
-      </g-col>
-      <g-col span="6">
+      </lf-col>
+      <lf-col span="6">
         <div class="demoCol">6</div>
-      </g-col>
-    </g-row>
+      </lf-col>
+    </lf-row>
 
     <p>
       <strong>代码</strong>
@@ -36,7 +36,7 @@
     <pre><code>{{content}}</code></pre>
 
     <p>
-        通过给<code>g-row</code>标签添加<code>gutter</code>属性来设置<code>g-col</code>之间的间隔。
+        通过给<code>lf-row</code>标签添加<code>gutter</code>属性来设置<code>lf-col</code>之间的间隔。
     </p>
   </div>
 </template>
@@ -57,11 +57,11 @@
   }
 </style>
 <script>
-  import GRow from '../../../src/grid/row'
-  import GCol from '../../../src/grid/col'
+  import LfRow from '../../../src/grid/row'
+  import LfCol from '../../../src/grid/col'
 
   export default {
-    components: {GRow, GCol},
+    components: {LfRow, LfCol},
     data () {
       return {
         content: `
@@ -69,32 +69,32 @@
             box-sizing: border-box;
           }
 
-          <g-row class="demoRow" gutter="10">
-            <g-col span="8">
+          <lf-row class="demoRow" gutter="10">
+            <lf-col span="8">
               <div class="demoCol">8</div>
-            </g-col>
-            <g-col span="8">
+            </lf-col>
+            <lf-col span="8">
               <div class="demoCol">8</div>
-            </g-col>
-            <g-col span="8">
+            </lf-col>
+            <lf-col span="8">
               <div class="demoCol">8</div>
-            </g-col>
-          </g-row>
+            </lf-col>
+          </lf-row>
 
-          <g-row class="demoRow" gutter="10">
-            <g-col span="6">
+          <lf-row class="demoRow" gutter="10">
+            <lf-col span="6">
               <div class="demoCol">6</div>
-            </g-col>
-            <g-col span="6">
+            </lf-col>
+            <lf-col span="6">
               <div class="demoCol">6</div>
-            </g-col>
-            <g-col span="6">
+            </lf-col>
+            <lf-col span="6">
               <div class="demoCol">6</div>
-            </g-col>
-            <g-col span="6">
+            </lf-col>
+            <lf-col span="6">
               <div class="demoCol">6</div>
-            </g-col>
-          </g-row>
+            </lf-col>
+          </lf-row>
       `.replace(/^ {8}/gm, '').trim()
       }
     }

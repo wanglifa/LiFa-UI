@@ -4,59 +4,59 @@
     <p>
       <strong>预览</strong>
     </p>
-    <g-row class="demoRow" gutter="10">
-      <g-col span="8">
+    <lf-row class="demoRow" gutter="10">
+      <lf-col span="8">
         <div class="demoCol">8</div>
-      </g-col>
-      <g-col span="8" offset="8">
+      </lf-col>
+      <lf-col span="8" offset="8">
         <div class="demoCol">8</div>
-      </g-col>
-    </g-row>
-    <g-row class="demoRow" gutter="10">
-      <g-col span="6" offset="6">
+      </lf-col>
+    </lf-row>
+    <lf-row class="demoRow" gutter="10">
+      <lf-col span="6" offset="6">
         <div class="demoCol">6</div>
-      </g-col>
-      <g-col span="6" offset="6">
+      </lf-col>
+      <lf-col span="6" offset="6">
         <div class="demoCol">6</div>
-      </g-col>
-    </g-row>
-    <g-row class="demoRow" gutter="10">
-      <g-col span="4">
+      </lf-col>
+    </lf-row>
+    <lf-row class="demoRow" gutter="10">
+      <lf-col span="4">
         <div class="demoCol">4</div>
-      </g-col>
-      <g-col span="4" offset="4">
+      </lf-col>
+      <lf-col span="4" offset="4">
         <div class="demoCol">4</div>
-      </g-col>
-      <g-col span="4" offset="8">
+      </lf-col>
+      <lf-col span="4" offset="8">
         <div class="demoCol">4</div>
-      </g-col>
-    </g-row>
-    <g-row class="demoRow" gutter="10">
-      <g-col span="2">
+      </lf-col>
+    </lf-row>
+    <lf-row class="demoRow" gutter="10">
+      <lf-col span="2">
         <div class="demoCol">2</div>
-      </g-col>
-      <g-col span="2" offset="2">
+      </lf-col>
+      <lf-col span="2" offset="2">
         <div class="demoCol">2</div>
-      </g-col>
-      <g-col span="2">
+      </lf-col>
+      <lf-col span="2">
         <div class="demoCol">2</div>
-      </g-col>
-      <g-col span="2" offset="2">
+      </lf-col>
+      <lf-col span="2" offset="2">
         <div class="demoCol">2</div>
-      </g-col>
-      <g-col span="2">
+      </lf-col>
+      <lf-col span="2">
         <div class="demoCol">2</div>
-      </g-col>
-      <g-col span="2" offset="2">
+      </lf-col>
+      <lf-col span="2" offset="2">
         <div class="demoCol">2</div>
-      </g-col>
-      <g-col span="2">
+      </lf-col>
+      <lf-col span="2">
         <div class="demoCol">2</div>
-      </g-col>
-      <g-col span="2" offset="2">
+      </lf-col>
+      <lf-col span="2" offset="2">
         <div class="demoCol">2</div>
-      </g-col>
-    </g-row>
+      </lf-col>
+    </lf-row>
 
     <p>
       <strong>代码</strong>
@@ -81,11 +81,11 @@
   }
 </style>
 <script>
-  import GRow from '../../../src/grid/row'
-  import GCol from '../../../src/grid/col'
+  import LfRow from '../../../src/grid/row'
+  import LfCol from '../../../src/grid/col'
 
   export default {
-    components: {GRow, GCol},
+    components: {LfRow, LfCol},
     data () {
       return {
         content: `
@@ -93,59 +93,59 @@
             box-sizing: border-box;
           }
 
-          <g-row class="demoRow" gutter="10">
-            <g-col span="8">
+          <lf-row class="demoRow" gutter="10">
+            <lf-col span="8">
               <div class="demoCol">8</div>
-            </g-col>
-            <g-col span="8" offset="8">
+            </lf-col>
+            <lf-col span="8" offset="8">
               <div class="demoCol">8</div>
-            </g-col>
-          </g-row>
-          <g-row class="demoRow" gutter="10">
-            <g-col span="6" offset="6">
+            </lf-col>
+          </lf-row>
+          <lf-row class="demoRow" gutter="10">
+            <lf-col span="6" offset="6">
               <div class="demoCol">6</div>
-            </g-col>
-            <g-col span="6" offset="6">
+            </lf-col>
+            <lf-col span="6" offset="6">
               <div class="demoCol">6</div>
-            </g-col>
-          </g-row>
-          <g-row class="demoRow" gutter="10">
-            <g-col span="4">
+            </lf-col>
+          </lf-row>
+          <lf-row class="demoRow" gutter="10">
+            <lf-col span="4">
               <div class="demoCol">4</div>
-            </g-col>
-            <g-col span="4" offset="4">
+            </lf-col>
+            <lf-col span="4" offset="4">
               <div class="demoCol">4</div>
-            </g-col>
-            <g-col span="4" offset="8">
+            </lf-col>
+            <lf-col span="4" offset="8">
               <div class="demoCol">4</div>
-            </g-col>
-          </g-row>
-          <g-row class="demoRow" gutter="10">
-            <g-col span="2">
+            </lf-col>
+          </lf-row>
+          <lf-row class="demoRow" gutter="10">
+            <lf-col span="2">
               <div class="demoCol">2</div>
-            </g-col>
-            <g-col span="2" offset="2">
+            </lf-col>
+            <lf-col span="2" offset="2">
               <div class="demoCol">2</div>
-            </g-col>
-            <g-col span="2">
+            </lf-col>
+            <lf-col span="2">
               <div class="demoCol">2</div>
-            </g-col>
-            <g-col span="2" offset="2">
+            </lf-col>
+            <lf-col span="2" offset="2">
               <div class="demoCol">2</div>
-            </g-col>
-            <g-col span="2">
+            </lf-col>
+            <lf-col span="2">
               <div class="demoCol">2</div>
-            </g-col>
-            <g-col span="2" offset="2">
+            </lf-col>
+            <lf-col span="2" offset="2">
               <div class="demoCol">2</div>
-            </g-col>
-            <g-col span="2">
+            </lf-col>
+            <lf-col span="2">
               <div class="demoCol">2</div>
-            </g-col>
-            <g-col span="2" offset="2">
+            </lf-col>
+            <lf-col span="2" offset="2">
               <div class="demoCol">2</div>
-            </g-col>
-          </g-row>
+            </lf-col>
+          </lf-row>
       `.replace(/^ {8}/gm, '').trim()
       }
     }

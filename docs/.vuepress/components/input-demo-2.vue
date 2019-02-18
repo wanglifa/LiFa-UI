@@ -4,7 +4,7 @@
     <p>
       <strong>预览</strong>
     </p>
-    <g-input v-model="value"></g-input>
+    <lf-input v-model="value"></lf-input>
     <div>
       value: {{value}}
     </div>
@@ -16,10 +16,10 @@
   </div>
 </template>
 <script>
-  import GInput from '../../../src/input'
+  import LfInput from '../../../src/input'
 
   export default {
-    components: {GInput},
+    components: {LfInput},
     data () {
       return {
         value: '1',
@@ -28,7 +28,7 @@
             value: '1'
           }
 
-          <g-input v-model="value"></g-input>
+          <lf-input v-model="value"></lf-input>
           <div>
             value: {{value}}
           </div>

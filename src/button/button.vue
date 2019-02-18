@@ -1,8 +1,8 @@
 <template>
-    <button class="g-button" :class="{[`icon-${iconPosition}`]:true}"
+    <button class="lf-button" :class="{[`icon-${iconPosition}`]:true}"
             @click="$emit('click')">
-        <g-icon class="icon" v-if="icon && !loading" :name="icon"></g-icon>
-        <g-icon class="loading icon" v-if="loading" name="loading"></g-icon>
+        <lf-icon class="icon" v-if="icon && !loading" :name="icon"></lf-icon>
+        <lf-icon class="loading icon" v-if="loading" name="loading"></lf-icon>
         <div class="content">
             <slot></slot>
         </div>
@@ -14,7 +14,7 @@
     export default {
         name: 'LiFaButton',
         components: {
-            'g-icon': Icon
+            'lf-icon': Icon
         },
         //props: ['icon','iconPosition']
         props: {
@@ -39,7 +39,7 @@
     @import '../var.scss';
 
 
-    .g-button {
+    .lf-button {
         font-size: $font-size;
         height: $button-height;
         padding: 0 1em;
