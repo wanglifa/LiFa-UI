@@ -1,7 +1,7 @@
 <template>
     <div class="collapseItem">
         <div class="title" @click="toggle">
-            {{signle}}{{title}}
+            {{title}}
         </div>
         <div class="content" v-if="open">
             <slot></slot>
@@ -60,6 +60,9 @@
             display: flex;
             align-items: center;
             padding: 0 8px;
+            background: #409eff;
+            cursor: pointer;
+            color: #fff;
         }
         &:first-child{
             .title {
@@ -75,6 +78,7 @@
         }
         .content {
             padding: 8px;
+            background: #f0f3f6;
         }
     }
 </style>

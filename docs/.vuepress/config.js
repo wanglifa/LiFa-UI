@@ -26,9 +26,10 @@ module.exports = {
           '/components/input',
           '/components/layout',
           '/components/popover',
+          '/components/collapse',
           '/components/tabs',
           '/components/toast',
-            'components/cascader'
+          'components/cascader'
         ]
       }
     ]

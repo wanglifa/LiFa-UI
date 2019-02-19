@@ -1,4 +1,4 @@
-thead,tbody {
+thead, tbody {
   width: 100%;
   display: inline-table;
 }
@@ -9,21 +9,40 @@ table {
   display: block;
   overflow-x: inherit;
 }
-th{
-  border-bottom:none;
+
+th {
+  border-bottom: none;
   color: #909399;
 }
-th,td{
-  width: 20%;
-  border:none;
+
+th, td {
+  border: none;
 }
-  tr {
-    border-top: none;
-    border-bottom: 1px solid #dcdfe6;
-  }
-td{
+
+tr {
+  border-top: none;
+  border-bottom: 1px solid #dcdfe6;
+}
+
+td {
   color: #606266;
 }
+
 tr:nth-child(2n) {
   background-color: #fff;
+}
+thead tr > th:nth-child(1),tbody tr > td:nth-child(1){
+  width 18%;
+}
+  thead tr > th:nth-child(2),tbody tr > td:nth-child(2){
+    width 35%;
+  }
+thead tr > th:nth-child(3),tbody tr > td:nth-child(3){
+  width 23%;
+}
+thead tr > th:nth-child(4),tbody tr > td:nth-child(4){
+  width 13%;
+}
+thead tr > th:nth-child(5),tbody tr > td:nth-child(5){
+  width 12%;
 }

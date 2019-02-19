@@ -15,10 +15,10 @@ title: Grid 网格布局
 
 | 参数          | 说明          |   类型  | 可选值  | 默认值  |
 | :------------- |:-------------|:-------|:-------|:-------|
-| gutter         | 栅格间的间隙，单位为 px      | String | Number |   ——  |   ——  |
-| offset | 栅格左侧的间隔格数      | String | Number |  —— |    0 |
-| span | 栅格占据的列数     |   String | Number |  —— |     12 |
-| ipad | >=577px 响应式栅格数或者栅格属性对象    |   Object |  —— |   —— |
-| narrow-pc | >=768px 响应式栅格数或者栅格属性对象    |   Object |  —— |   —— |
-| pc | >=993px 响应式栅格数或者栅格属性对象    |   Object |  —— |   —— |
-| wide-p | >=1201px 响应式栅格数或者栅格属性对象    |   Object |  —— |   —— |
+| gutter         | 栅格间的间隙，单位为 px      | String / Number |   —  |   —  |
+| offset | 栅格左侧的间隔格数      | String / Number |  — |    0 |
+| span | 栅格占据的列数     |   String / Number |  — |     12 |
+| ipad | >=577px 响应式栅格数或者栅格属性对象    |   Object |  — |   — |
+| narrow-pc | >=768px 响应式栅格数或者栅格属性对象    |   Object |  — |   — |
+| pc | >=993px 响应式栅格数或者栅格属性对象    |   Object |  — |   — |
+| wide-p | >=1201px 响应式栅格数或者栅格属性对象    |   Object |  — |   — |

@@ -11,6 +11,7 @@
       </div>
       <lf-collaspe>
         <p slot="one">
+          实现 Toast 的原理是利用 toastPlugin 在 Vue.prototype 中添加一个 $toast 全局方法，并通过这个方法调用 Toast 组件。因此，需要先执行 Vue.use(toastPlugin)。
         </p>
         <code slot="two">{{content}}</code>
       </lf-collaspe>
@@ -44,6 +45,11 @@
           <lf-button @click="$toast('点击弹出提示')">上方弹出</lf-button>
           <lf-button @click="$toast('点击弹出提示', {position:'middle'})">中间弹出</lf-button>
           <lf-button @click="$toast('点击弹出提示', {position:'bottom'})">下方弹出</lf-button>
+          <script>
+            import { toastPlugin } from 'lifa-ui'
+            Vue.use(plugin)
+
+          <script>
       `.replace(/^ {8}/gm, '').trim()
       }
     }
