@@ -1,90 +1,48 @@
 <template>
     <div>
-        <lf-icon name="error"></lf-icon>
-        <lf-input value="哈哈" error="你好啊"></lf-input>
-        <div style="padding: 20px;">
-            <lf-cascader :source.sync="source" height="200px" :selected.sync="selected"
-             :loadData="loadData"
-            ></lf-cascader>
-        </div>
-        <div style="padding: 20px;">
-            <lf-cascader :source.sync="source" height="200px" :selected.sync="selected"
-                        :loadData="loadData"
-            ></lf-cascader>
-        </div>
+       <lf-slides :selected.sync="selected">
+           <lf-slides-item name="1">
+               <div class="box">1</div>
+           </lf-slides-item>
+           <lf-slides-item name="2">
+               <div class="box">2</div>
+           </lf-slides-item>
+           <lf-slides-item name="3">
+               <div class="box">3</div>
+           </lf-slides-item>
+       </lf-slides>
     </div>
 </template>
 
 <script>
-    import LfIcon from './icon.vue'
-    import Button from './button/button.vue'
-    import Cascader from  './cascader.vue'
-    import db from './db.js'
-    import LfInput from './input.vue'
+   import LfSlides from './slides.vue'
+   import LfSlidesItem from './slides-item.vue'
     export default {
         name: "demo",
         components: {
-            'lf-button': Button,
-            'lf-cascader': Cascader,
-            LfIcon,
-            LfInput
+            LfSlides,
+            LfSlidesItem
         },
         data(){
             return {
-                source: [
-
-                ],
-                selected: [],
+                selected: '2'
             }
         },
         methods: {
-            loadData(node,fn){
-                let {id}=node
-                this.ajax(id).then((result)=>{
-                    fn(result)
-                })
-            },
-            ajax(id=0){
-                return new Promise((resolve,reject)=>{
-                    let result = db.filter(item=>item.parent_id === id)
-                    result.map(node=>{
-                        //如果数据库里有对应的对象的id等于当前节点的id，说明当前节点有children
-                        if(db.filter(item=>item.parent_id === node.id).length > 0){
-                            node.isLeaf = false
-                        }else{
-                            node.isLeaf = true
-                        }
 
-                    })
-                    setTimeout(()=>{
-                        resolve(result)
-                    },1000)
-                })
-            },
         },
         created() {
 
-            this.ajax().then((result)=>{
-                this.source = result
-            })
         }
     }
 </script>
 
 <style scoped>
-    *{
-        margin: 0;
-        padding: 0;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-    }
-    body{
-        font-size: var(--font-size);
-    }
-
-    html{
-        --font-size: 14px;
+    .box{
+        width: 100%;
+        height: 400px;
+        background: gray;
+        border: 1px solid black;
     }
 
 </style>
