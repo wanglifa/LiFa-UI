@@ -1,6 +1,8 @@
 <template>
     <div class="lf-slides">
-        <div class="lf-slides-window" ref="window">
+        <div class="lf-slides-window" ref="window" @mouseenter="onMouseEnter"
+        @mouseleave="onMouseLeave"
+        >
             <div class="lf-slides-wrapper">
                 <slot></slot>
             </div>
@@ -30,7 +32,8 @@
         data(){
           return {
               childrenLength: 0,
-              lastSelectedIndex: undefined
+              lastSelectedIndex: undefined,
+              timerId: null
           }
         },
         mounted() {
@@ -50,33 +53,56 @@
           }
         },
         methods: {
+            onMouseEnter(){
+                this.pause()
+            },
+            onMouseLeave(){
+              this.automaticPlay()
+            },
+            pause(){
+              window.clearTimeout(this.timerId)
+              this.timerId = null
+            },
             updateChildren(){
                 let selected = this.getSelected()
                 this.$children.forEach((vm)=>{
                     vm.reverse = this.selectedIndex > this.lastSelectedIndex ? false : true
+                    //如果上一张是第一张，当前这张是最后一张（也就是反向动画的时候）就让它依然是反向动画
+                    if(this.lastSelectedIndex === 0 && this.selectedIndex === this.names.length-1){
+                        vm.reverse = true
+                    }
+//如果上一张是最后一张，当前这张是第一张（也就是正向动画的时候）就让它依然是正向
+if(this.lastSelectedIndex === this.names.length-1 && this.selectedIndex === 0){
+    vm.reverse = false
+}
                     this.$nextTick(()=>{
                         vm.selected = selected
                     })
                 })
             },
             automaticPlay(){
+                //如果当前正在轮播中就不再次执行这个方法
+                if(this.timerId){
+                    return
+                }
                 let selected = this.getSelected()
-                //拿到每一次的索引值，下次动画好在基础上累加
+                //拿到初始的索引值
                 let index = this.names.indexOf(selected)
                 let run = ()=>{
-                    let newIndex = index -1
+                    let newIndex = index +1
                     if(newIndex < 0){
                         newIndex = this.names.length - 1
                     }
                     if(newIndex === this.names.length){
                         newIndex = 0
                     }
+                    index = newIndex
                     this.select(newIndex)
-                    setTimeout(()=>{
+                    this.timerId =setTimeout(()=>{
                         run()
                     },3000)
                 }
-                setTimeout(run, 3000)
+                this.timerId = setTimeout(run, 3000)
             },
             getSelected(){
                 let first = this.$children[0]
@@ -95,7 +121,6 @@
 <style scoped lang="scss">
 .lf-slides{
     display: block;
-    border: 1px solid black;
     &-window{
         overflow: hidden;
     }
