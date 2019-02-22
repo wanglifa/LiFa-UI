@@ -1,5 +1,5 @@
 <template>
-    <transition name="fade">
+    <transition name="slide">
         <div class="lf-slides-item" v-if="visible" :class="{reverse}">
             <slot></slot>
         </div>
@@ -33,24 +33,24 @@
     .lf-slides-item{
         width: 100%;
     }
-    .fade-enter-active, .fade-leave-active {
-        transition: all 3s;
+    .slide-enter-active, .slide-leave-active {
+        transition: all .5s;
     }
 
-    .fade-enter {
+    .slide-enter {
         transform: translateX(100%);
     }
-    .fade-enter.reverse{
+    .slide-enter.reverse{
         transform: translateX(-100%);
     }
-    .fade-leave-active{
+    .slide-leave-active{
         position: absolute;
     }
 
-    .fade-leave-to {
+    .slide-leave-to {
         transform: translateX(-100%);
     }
-    .fade-leave-to.reverse{
+    .slide-leave-to.reverse{
         transform: translateX(100%);
     }
 </style>

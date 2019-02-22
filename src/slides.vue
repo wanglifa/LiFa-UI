@@ -1,7 +1,8 @@
 <template>
     <div class="lf-slides">
         <div class="lf-slides-window" ref="window" @mouseenter="onMouseEnter"
-        @mouseleave="onMouseLeave"
+        @mouseleave="onMouseLeave" @touchstart="onTouchStart"
+             @touchmove="onTouchMove" @touchend="onTouchEnd"
         >
             <div class="lf-slides-wrapper">
                 <slot></slot>
@@ -11,13 +12,14 @@
             <li v-for="n in childrenLength" :class="{active: selectedIndex === n-1}"
             @click="select(n-1)"
             >
-                {{n-1}}
+
             </li>
         </ul>
     </div>
 </template>
 
 <script>
+
     export default {
         name: "LiFaslides",
         props: {
@@ -33,7 +35,8 @@
           return {
               childrenLength: 0,
               lastSelectedIndex: undefined,
-              timerId: null
+              timerId: null,
+              touchStart: null
           }
         },
         mounted() {
@@ -53,6 +56,30 @@
           }
         },
         methods: {
+            onTouchStart(e){
+                if(e.touches.length > 1){return}
+                this.touchStart = {clientX:e.touches[0].clientX,clientY:e.touches[0].clientY}
+                this.pause()
+            },
+            onTouchMove(e){
+                console.log(e)
+            },
+            onTouchEnd(e){
+                let {clientX,clientY} = e.changedTouches[0]
+                let [x1,y1] = [this.touchStart.clientX,this.touchStart.clientY]
+                let [x2,y2] = [clientX,clientY]
+                let distance = Math.sqrt(Math.pow(x2 - x1,2) + Math.pow(y2 - y1,2))
+                let deltaY = Math.abs(y2-y1)
+                let rate = distance / deltaY
+                if(rate > 2){
+                    if(clientX > this.touchStart && this.touchStart.clientX){
+                        this.select(this.selectedIndex - 1)
+                    }else{
+                        this.select(this.selectedIndex + 1)
+                    }
+                }
+                this.automaticPlay()
+            },
             onMouseEnter(){
                 this.pause()
             },
@@ -67,14 +94,17 @@
                 let selected = this.getSelected()
                 this.$children.forEach((vm)=>{
                     vm.reverse = this.selectedIndex > this.lastSelectedIndex ? false : true
-                    //如果上一张是第一张，当前这张是最后一张（也就是反向动画的时候）就让它依然是反向动画
-                    if(this.lastSelectedIndex === 0 && this.selectedIndex === this.names.length-1){
-                        vm.reverse = true
+                    //如果是自动滚动的情况下
+                    if(this.timerId){
+                        //如果上一张是第一张，当前这张是最后一张（也就是反向动画的时候）就让它依然是反向动画
+                        if(this.lastSelectedIndex === 0 && this.selectedIndex === this.names.length-1){
+                            vm.reverse = true
+                        }
+                        //如果上一张是最后一张，当前这张是第一张（也就是正向动画的时候）就让它依然是正向
+                        if(this.lastSelectedIndex === this.names.length-1 && this.selectedIndex === 0){
+                            vm.reverse = false
+                        }
                     }
-//如果上一张是最后一张，当前这张是第一张（也就是正向动画的时候）就让它依然是正向
-if(this.lastSelectedIndex === this.names.length-1 && this.selectedIndex === 0){
-    vm.reverse = false
-}
                     this.$nextTick(()=>{
                         vm.selected = selected
                     })
@@ -89,15 +119,9 @@ if(this.lastSelectedIndex === this.names.length-1 && this.selectedIndex === 0){
                 //拿到初始的索引值
                 let index = this.names.indexOf(selected)
                 let run = ()=>{
-                    let newIndex = index +1
-                    if(newIndex < 0){
-                        newIndex = this.names.length - 1
-                    }
-                    if(newIndex === this.names.length){
-                        newIndex = 0
-                    }
-                    index = newIndex
-                    this.select(newIndex)
+                    this.newIndex = index +1
+                    this.select(this.newIndex)
+                    index = this.newIndex
                     this.timerId =setTimeout(()=>{
                         run()
                     },3000)
@@ -108,11 +132,19 @@ if(this.lastSelectedIndex === this.names.length-1 && this.selectedIndex === 0){
                 let first = this.$children[0]
                 return this.selected || first.$attrs.name
             },
-            select(index){
+            select(newIndex){
+                if(newIndex < 0){
+                    newIndex = this.names.length - 1
+                }
+                if(newIndex >= this.names.length){
+                    newIndex = 0
+                }
+                //让newIndex等于条件内的newIndex
+                this.newIndex = newIndex
                 //当选中新的index的时候，就把旧的index赋给lastSelectedIndex
                 this.lastSelectedIndex = this.selectedIndex
                 //然后把新的index和选中值传给selected
-                this.$emit('update:selected',this.names[index])
+                this.$emit('update:selected',this.names[newIndex])
             }
         }
     }
@@ -134,8 +166,13 @@ if(this.lastSelectedIndex === this.names.length-1 && this.selectedIndex === 0){
         align-items: center;
         li{
             list-style: none;
+            width: 4em;
+            height: 4px;
+            background: #ccc;
+            margin: 0.2em;
+            cursor: pointer;
             &.active{
-                color: red;
+                background: #4fa6ff;
             }
         }
     }
