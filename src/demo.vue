@@ -10,6 +10,9 @@
            <lf-slides-item name="3">
                <div class="box">3</div>
            </lf-slides-item>
+           <lf-slides-item name="4">
+               <div class="box">4</div>
+           </lf-slides-item>
        </lf-slides>
     </div>
 </template>
@@ -25,7 +28,7 @@
         },
         data(){
             return {
-                selected: '2'
+                selected: '1'
             }
         },
         methods: {

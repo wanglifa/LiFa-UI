@@ -18,9 +18,9 @@
                 <slot></slot>
             </div>
         </div>
-        <ul class="dots">
+        <ul class="dots" ref="ul">
             <li v-for="n in childrenLength" :class="{active: selectedIndex === n-1}"
-            @click="select(n-1)"
+
             >
 
             </li>
@@ -38,6 +38,13 @@
             autoPlay: {
                 type: Boolean,
                 default: true
+            },
+            trigger: {
+                type: String,
+                default: 'click',
+                validator(value){
+                    return ['click','hover'].indexOf(value) >= 0
+                }
             }
         },
         data() {
@@ -47,7 +54,8 @@
                 timerId: null,
                 touchStart: null,
                 isClickArrow: false,
-                arrowClickInfo: false
+                arrowClickInfo: false,
+                eventType: 'click'
             }
         },
         mounted() {
@@ -56,6 +64,18 @@
             if (this.autoPlay) {
                 this.automaticPlay()
             }
+            if(this.trigger === 'hover'){
+                this.eventType = 'mouseenter'
+            }
+            this.$nextTick(() => {
+                this.li = this.$refs.ul.children
+                for (let i = 0; i < this.li.length; i++) {
+                    this.li[i].setAttribute('data-index',i)
+                    this.li[i].addEventListener(this.eventType, this.triggerMethods)
+                }
+            })
+
+
         },
         updated() {
             this.updateChildren()
@@ -69,6 +89,14 @@
             }
         },
         methods: {
+            triggerMethods(e){
+                let index = parseInt(e.target.getAttribute('data-index'))
+                for (let j = 0; j < this.li.length; j++) {
+                    this.li[j].classList.remove('active')
+                }
+                e.target.classList.add('active')
+                this.select(index)
+            },
             onClickPrev() {
                 this.isClickArrow = true
                 this.select(this.selectedIndex - 1)
