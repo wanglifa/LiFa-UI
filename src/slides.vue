@@ -4,6 +4,16 @@
         @mouseleave="onMouseLeave" @touchstart="onTouchStart"
              @touchmove="onTouchMove" @touchend="onTouchEnd"
         >
+            <transition name="fade">
+                <div class="icon-wrapper">
+                    <span class="left" @click="onClickPrev">
+                    <i>&lt;</i>
+                </span>
+                    <span class="right" @click="onClickNext">
+                    <i>&gt;</i>
+                </span>
+                </div>
+            </transition>
             <div class="lf-slides-wrapper">
                 <slot></slot>
             </div>
@@ -19,7 +29,6 @@
 </template>
 
 <script>
-
     export default {
         name: "LiFaslides",
         props: {
@@ -28,7 +37,7 @@
             },
             autoPlay: {
                 type: Boolean,
-                default: true
+                default: false
             }
         },
         data(){
@@ -36,13 +45,17 @@
               childrenLength: 0,
               lastSelectedIndex: undefined,
               timerId: null,
-              touchStart: null
+              touchStart: null,
+              isClickArrow: false,
+              arrowClickInfo: false
           }
         },
         mounted() {
             this.childrenLength = this.$children.length
             this.updateChildren()
-            this.automaticPlay()
+            if(this.autoPlay){
+                this.automaticPlay()
+            }
         },
         updated() {
             this.updateChildren()
@@ -56,6 +69,16 @@
           }
         },
         methods: {
+            onClickPrev(){
+                this.isClickArrow = true
+              this.select(this.selectedIndex - 1)
+                this.isClickArrow = false
+            },
+            onClickNext(){
+                this.isClickArrow = true
+              this.select(this.selectedIndex + 1)
+                this.isClickArrow = false
+            },
             onTouchStart(e){
                 if(e.touches.length > 1){return}
                 this.touchStart = {clientX:e.touches[0].clientX,clientY:e.touches[0].clientY}
@@ -78,13 +101,17 @@
                         this.select(this.selectedIndex + 1)
                     }
                 }
-                this.automaticPlay()
+                if(this.autoPlay){
+                    this.automaticPlay()
+                }
             },
             onMouseEnter(){
                 this.pause()
             },
             onMouseLeave(){
-              this.automaticPlay()
+              if(this.autoPlay){
+                  this.automaticPlay()
+              }
             },
             pause(){
               window.clearTimeout(this.timerId)
@@ -93,18 +120,19 @@
             updateChildren(){
                 let selected = this.getSelected()
                 this.$children.forEach((vm)=>{
-                    vm.reverse = this.selectedIndex > this.lastSelectedIndex ? false : true
+                    let reverse = this.selectedIndex > this.lastSelectedIndex ? false : true
                     //如果是自动滚动的情况下
-                    if(this.timerId){
+                    if(this.timerId || this.arrowClickInfo){
                         //如果上一张是第一张，当前这张是最后一张（也就是反向动画的时候）就让它依然是反向动画
                         if(this.lastSelectedIndex === 0 && this.selectedIndex === this.names.length-1){
-                            vm.reverse = true
+                            reverse = true
                         }
                         //如果上一张是最后一张，当前这张是第一张（也就是正向动画的时候）就让它依然是正向
                         if(this.lastSelectedIndex === this.names.length-1 && this.selectedIndex === 0){
-                            vm.reverse = false
+                            reverse = false
                         }
                     }
+                    vm.reverse = reverse
                     this.$nextTick(()=>{
                         vm.selected = selected
                     })
@@ -133,6 +161,7 @@
                 return this.selected || first.$attrs.name
             },
             select(newIndex){
+                this.arrowClickInfo = this.isClickArrow
                 if(newIndex < 0){
                     newIndex = this.names.length - 1
                 }
@@ -155,6 +184,42 @@
     display: block;
     &-window{
         overflow: hidden;
+        position: relative;
+        .left,.right{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0,0,0,.2);
+            width: 3em;
+            height: 3em;
+            border-radius: 50%;
+            * {
+                font-style: normal;
+                color: #fff;
+            }
+        }
+        .left{
+            left: 1em;
+        }
+        .right{
+            right: 1em;
+        }
+        .fade-enter-active,.fade-leave-active{
+            transition: all .5s;
+        }
+        .fade-enter,.fade-leave-to{
+            opacity: 0;
+            .left{
+                left: -100%;
+            }
+            .right{
+                right: -100%;
+            }
+        }
     }
     &-wrapper{
         position: relative;
