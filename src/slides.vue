@@ -20,7 +20,6 @@
         </div>
         <ul class="dots" ref="ul">
             <li v-for="n in childrenLength" :class="{active: selectedIndex === n-1}"
-
             >
 
             </li>
@@ -33,7 +32,8 @@
         name: "LiFaslides",
         props: {
             selected: {
-                type: String
+                type: String,
+                default: '1'
             },
             autoPlay: {
                 type: Boolean,
@@ -45,6 +45,10 @@
                 validator(value){
                     return ['click','hover'].indexOf(value) >= 0
                 }
+            },
+            autoPlayDelay: {
+                type: Number,
+                default: 3000
             }
         },
         data() {
@@ -186,9 +190,9 @@
                     index = this.newIndex
                     this.timerId = setTimeout(() => {
                         run()
-                    }, 3000)
+                    }, this.autoPlayDelay)
                 }
-                this.timerId = setTimeout(run, 3000)
+                this.timerId = setTimeout(run,this.autoPlayDelay)
             },
             getSelected() {
                 let first = this.$children[0]
