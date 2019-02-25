@@ -36,7 +36,7 @@
     }
 </script>
 <style lang="scss" scoped>
-    @import '../var.scss';
+    @import 'var.scss';
 
 
     .lf-button {
