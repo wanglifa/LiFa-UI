@@ -18,8 +18,8 @@
 </template>
 
 <script>
-    import LfSlides from './slides.vue'
-    import LfSlidesItem from './slides-item.vue'
+    import LfSlides from './slides/slides.vue'
+    import LfSlidesItem from './slides/slides-item.vue'
 
     export default {
         name: "demo",

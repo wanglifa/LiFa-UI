@@ -13,7 +13,7 @@
 </template>
 <script>
 import CascaderItem from './cascader-items.vue'
-import clickOutside from './click-outside.js'
+import clickOutside from '../click-outside.js'
 export default {
     name: 'LiFaCascader',
     props: {
@@ -122,7 +122,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import './var.scss';
+@import '../var';
 .cascader{
     position: relative;
     display: inline-block;

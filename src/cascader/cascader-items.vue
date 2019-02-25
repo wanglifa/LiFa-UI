@@ -24,7 +24,7 @@
     </div>
 </template>
 <script>
-import Icon from './icon.vue'
+import Icon from '../icon.vue'
 export default {
     name: 'lifaCascaderItem',
     props: {
@@ -91,7 +91,7 @@ export default {
 }
 </script>
 <style lang="scss">
-    @import "./var";
+    @import "../var";
     .cascader-item{
         display: flex;
         align-items: flex-start;

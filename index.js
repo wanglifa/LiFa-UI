@@ -17,7 +17,7 @@ import TabsPane from './src/tabs/tabs-pane.vue'
 import Input from './src/input.vue'
 import Popover from './src/popover.vue'
 import Toast from './src/toast.vue'
-import db from './src/db.js'
+import db from './tests/fixtures/db.js'
 import plugin from './src/plugin.js'
 import Svg from './src/svg.js'
 export {Content, Footer, Header, Layout, Sider, Tabs, TabsBody, TabsHead, TabsItem, TabsPane,

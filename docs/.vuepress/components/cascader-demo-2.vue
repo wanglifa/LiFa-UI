@@ -17,8 +17,8 @@
   </div>
 </template>
 <script>
-  import Cascader from '../../../src/cascader.vue'
-  import db from  '../../../src/db'
+  import Cascader from '../../../src/cascader/cascader.vue'
+  import db from '../../../tests/fixtures/db'
   import LfCollaspe from './collspse-demo.vue'
   export default {
     components: {
@@ -37,7 +37,7 @@
 </lf-cascader>
 
 <script>
-import Cascader from '../../../src/cascader.vue'
+import Cascader from '../../../src/cascader/cascader.vue'
 ...
 
 data(){
