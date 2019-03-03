@@ -1,6 +1,6 @@
 <template>
     <div>
-        <lf-nav :selected.sync="selected">
+        <lf-nav :selected.sync="selected" vertical style="margin: 20px;width: 200px">
             <lf-nav-item name="home">首页</lf-nav-item>
             <lf-sub-nav name="about">
                 <template slot="title">关于</template>
