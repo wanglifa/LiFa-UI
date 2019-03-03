@@ -21,7 +21,9 @@
             <lf-nav-item name="hire">招聘</lf-nav-item>
         </lf-nav>
         <lf-nav :selected.sync="selected" style="margin: 20px;">
-            <lf-nav-item name="home">首页</lf-nav-item>
+            <lf-nav-item name="home">
+                <a href="">首页</a>
+            </lf-nav-item>
             <lf-sub-nav name="about">
                 <template slot="title">关于</template>
                 <lf-nav-item name="culture">企业文化</lf-nav-item>
