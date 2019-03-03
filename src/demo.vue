@@ -20,6 +20,26 @@
             </lf-sub-nav>
             <lf-nav-item name="hire">招聘</lf-nav-item>
         </lf-nav>
+        <lf-nav :selected.sync="selected" style="margin: 20px;">
+            <lf-nav-item name="home">首页</lf-nav-item>
+            <lf-sub-nav name="about">
+                <template slot="title">关于</template>
+                <lf-nav-item name="culture">企业文化</lf-nav-item>
+                <lf-nav-item name="developers">开发团队</lf-nav-item>
+                <lf-sub-nav name="contact">
+                    <template slot="title">联系方式</template>
+                    <lf-nav-item name="wechat">微信</lf-nav-item>
+                    <lf-nav-item name="qq">QQ</lf-nav-item>
+                    <lf-sub-nav name="phone">
+                        <template slot="title">手机</template>
+                        <lf-nav-item name="cm">移动</lf-nav-item>
+                        <lf-nav-item name="cu">联通</lf-nav-item>
+                        <lf-nav-item name="cn">电信</lf-nav-item>
+                    </lf-sub-nav>
+                </lf-sub-nav>
+            </lf-sub-nav>
+            <lf-nav-item name="hire">招聘</lf-nav-item>
+        </lf-nav>
     </div>
 </template>
 
