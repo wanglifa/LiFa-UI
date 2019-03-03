@@ -4,6 +4,7 @@
     </svg>
 </template>
 <script>
+    import './svg.js'
     export default {
         name: 'LiFaIcon',
         props: ['name']
