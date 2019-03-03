@@ -59,12 +59,19 @@
         },
         data() {
             return {
-                selected: ['culture']
+                selected: 'culture'
             }
         },
         methods: {},
         created() {
 
+        },
+        watch: {
+            selected(newVal){
+                if(newVal === 'home'){
+                    alert('hello')
+                }
+            }
         }
     }
 </script>
