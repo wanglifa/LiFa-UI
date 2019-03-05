@@ -28,18 +28,16 @@ describe('Input.vue', () => {
             })
             const vm = wrapper.vm
             const inputElement = vm.$el.querySelector('input')
-            console.log(inputElement.disabled)
             expect(inputElement.disabled).to.equal(false)
         })
-        xit('接受readonly', () => {
+        it('接受readonly', () => {
             const wrapper = mount(Input, {
+                attachToDocument: true,
                 propsData: {
-                    readonly: false
+                    readonly: true
                 }
             })
-            const vm = wrapper.vm
-            const inputElement = vm.$el.querySelector('input')
-            expect(inputElement.readonly).to.equal(false)
+            expect(wrapper.find('[readonly="readonly"]').exists()).to.be.true
         })
         it('接受error', () => {
             const wrapper = mount(Input, {

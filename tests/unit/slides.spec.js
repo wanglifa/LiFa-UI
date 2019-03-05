@@ -70,7 +70,7 @@ describe('Slides.vue', () => {
             done()
         })
     })
-    xit('点击第二个展示第二个', (done) => {
+    xit('点击第二个展示第二个', () => {
         Vue.component('LfSlidesItem', SlidesItem)
         const wrapper = mount(Slides, {
             propsData: {
