@@ -1,4 +1,4 @@
-var webpackConfig = require('@vue/cli-service/webpack.config.js')
+const webpackConfig = require('@vue/cli-service/webpack.config.js');
 
 module.exports = function(config) {
     config.set({
