@@ -14,7 +14,7 @@
         },
         data() {
             return {
-                currentPage: 20
+                currentPage: 2
             }
         },
         methods: {},
