@@ -100,7 +100,6 @@ describe('Slides.vue', () => {
             }
         })
         setTimeout(()=>{
-            console.log(wrapper.html())
             wrapper.find('[data-index="1"]').trigger('click')
         })
     })

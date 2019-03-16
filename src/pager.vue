@@ -8,13 +8,13 @@
         </span>
         <template v-for="page in pages">
             <template v-if="page === currentPage">
-                <span class="active lifa-pager-item">{{page}}</span>
+                <span class="active lifa-pager-item" :data-index="page">{{page}}</span>
             </template>
             <template v-else-if="page === '...'">
                 <lf-icon class="separator" name="dots">...</lf-icon>
             </template>
             <template v-else>
-                <span class="lifa-pager-item other" @click="onClickPage(page)">{{page}}</span>
+                <span class="lifa-pager-item other" @click="onClickPage(page)" :data-index="page">{{page}}</span>
             </template>
         </template>
         <span class="lifa-pager-nav next"
