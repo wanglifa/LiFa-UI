@@ -4,7 +4,7 @@
             <thead>
             <tr>
                 <th>
-                    <input type="checkbox" @change="onChangeItemAll($event)" ref="a" class="checkbox">
+                    <input type="checkbox" @change="onChangeItemAll($event)" ref="a" :checked="areAllItemChecked">
                 </th>
                 <th v-if="numberVisible">#</th>
                 <th v-for="column in columns" :key="column.field">
@@ -16,7 +16,7 @@
             <tr v-for="(item,index) in dataSource" :key="item.id">
                 <th>
                     <input type="checkbox" @change="onChangeItem(item, index, $event)"
-                        :checked="onChecked(item)" class="checkbox"
+                           :checked="onChecked(item)" class="checkbox"
                     >
                 </th>
                 <td v-if="numberVisible">{{index+1}}</td>
@@ -44,7 +44,7 @@
             },
             selectedItem: {
                 type: Array,
-                default: ()=>[]
+                default: () => []
             },
             striped: {
                 type: Boolean,
@@ -66,37 +66,55 @@
                 default: false
             }
         },
+        computed: {
+            areAllItemChecked() {
+                const a = this.dataSource.map(n => n.id).sort()
+                const b = this.selectedItem.map(n => n.id).sort()
+                let equal = false
+                if (a.length === b.length) {
+                    for (let i = 0; i < a.length; i++) {
+                        if (a[i] !== b[i]) {
+                            equal = false
+                            break
+                        } else {
+                            equal = true
+                        }
+                    }
+                }
+                return equal
+            }
+        },
         methods: {
-            onChangeItem(item, index, e){
+            onChangeItem(item, index, e) {
                 let copy = JSON.parse(JSON.stringify(this.selectedItem))
-                if(e.target.checked){
+                if (e.target.checked) {
                     copy.push(item)
-                }else{
+                } else {
                     //取消选中状态：点击当前的checkbox保留数组中id不等于当前id的项
-                    copy= copy.filter(i=>i.id !== item.id)
+                    copy = copy.filter(i => i.id !== item.id)
                 }
-                this.$emit('update:selectedItem',copy)
+                this.$emit('update:selectedItem', copy)
             },
-            onChangeItemAll(e){
-                if(e.target.checked){
-                    this.$emit('update:selectedItem',this.dataSource)
-                }else{
-                    this.$emit('update:selectedItem',[])
+            onChangeItemAll(e) {
+                if (e.target.checked) {
+                    this.$emit('update:selectedItem', this.dataSource)
+                } else {
+                    this.$emit('update:selectedItem', [])
                 }
             },
-            onChecked(item){
-                return this.selectedItem.filter(n=>n.id === item.id).length > 0 ? true : false
+            onChecked(item) {
+                return this.selectedItem.filter(n => n.id === item.id).length > 0 ? true : false
             }
         },
         watch: {
-            selectedItem(){
-                if(this.selectedItem.length === this.dataSource.length){
+            selectedItem() {
+                if (this.selectedItem.length === this.dataSource.length) {
                     this.$refs.a.indeterminate = false
                     this.$refs.a.checked = true
-                }else if(this.selectedItem.length === 0){
+                } else if (this.selectedItem.length === 0) {
                     this.$refs.a.indeterminate = false
                     this.$refs.a.checked = false
-                }else{
+                } else {
                     this.$refs.a.indeterminate = true
                 }
             }
@@ -106,46 +124,56 @@
 
 <style scoped lang="scss">
     @import 'var';
-    .lifa-table{
+
+    .lifa-table {
         border-collapse: collapse;
         border-spacing: 0;
         border-bottom: 1px solid $gray;
         width: 100%;
-        &.bordered{
+
+        &.bordered {
             border: 1px solid $gray;
-            td,th{
+
+            td, th {
                 border: 1px solid $gray;
             }
         }
-        &.compact{
-            td,th{
+
+        &.compact {
+            td, th {
                 padding: 4px;
             }
         }
-        &.striped{
-            tbody{
-                > tr{
-                    &:nth-child(odd){
+
+        &.striped {
+            tbody {
+                > tr {
+                    &:nth-child(odd) {
                         background: white;
                     }
-                    &:nth-child(even){
+
+                    &:nth-child(even) {
                         background: #fafafa;
                     }
                 }
             }
         }
-        .checkbox{
+
+        .checkbox {
             background: #fff;
         }
-        th,td{
+
+        th, td {
             border-bottom: 1px solid $gray;
             text-align: left;
             padding: 8px;
         }
-        th{
+
+        th {
             color: #909399;
         }
-        td{
+
+        td {
             color: #606266;
         }
 
