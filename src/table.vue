@@ -8,7 +8,14 @@
                 </th>
                 <th v-if="numberVisible">#</th>
                 <th v-for="column in columns" :key="column.field">
-                    {{column.text}}
+                    <div class="lifa-table-header">
+                        {{column.text}}
+                        <!--如果对应的key在orderBy这个对象里，就显示-->
+                        <span class="lifa-table-sorter" v-if="column.field in orderBy" @click="changeOrderBy(column.field)">
+                            <lf-icon name="asc" :class="{active:orderBy[column.field] === 'asc'}"></lf-icon>
+                            <lf-icon name="desc" :class="{active: orderBy[column.field] === 'desc'}"></lf-icon>
+                        </span>
+                    </div>
                 </th>
             </tr>
             </thead>
@@ -31,6 +38,8 @@
 </template>
 
 <script>
+    import LfIcon from './icon.vue'
+
     export default {
         name: "LiFaTable",
         props: {
@@ -64,7 +73,13 @@
             compact: {
                 type: Boolean,
                 default: false
+            },
+            //通过什么排序
+            orderBy: {
+                type: Object,
+                default: ()=>({})
             }
+
         },
         computed: {
             areAllItemChecked() {
@@ -83,6 +98,9 @@
                 }
                 return equal
             }
+        },
+        components: {
+            LfIcon
         },
         methods: {
             onChangeItem(item, index, e) {
@@ -104,6 +122,17 @@
             },
             onChecked(item) {
                 return this.selectedItem.filter(n => n.id === item.id).length > 0 ? true : false
+            },
+            changeOrderBy(key){
+                const copy = JSON.parse(JSON.stringify(this.orderBy))
+                if(copy[key] === 'asc'){
+                    copy[key] = 'desc'
+                }else if(copy[key] === 'desc'){
+                    copy[key] = true
+                }else{
+                    copy[key] = 'asc'
+                }
+                this.$emit('update:orderBy',copy)
             }
         },
         watch: {
@@ -175,6 +204,33 @@
 
         td {
             color: #606266;
+        }
+
+        &-sorter {
+            display: inline-flex;
+            flex-direction: column;
+            cursor: pointer;
+            svg {
+                width: 10px;
+                height: 10px;
+                fill: $gray;
+                &:first-child{
+                    position: relative;
+                    bottom: -1px;
+                }
+                &:last-child{
+                    position: relative;
+                    top: -1px;
+                }
+                &.active{
+                    fill: $blue;
+                }
+            }
+        }
+
+        &-header {
+            display: flex;
+            align-items: center;
         }
 
     }
