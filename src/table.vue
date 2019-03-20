@@ -34,6 +34,9 @@
             </tr>
             </tbody>
         </table>
+        <div class="lifa-table-loading" v-if="loading">
+            <lf-icon name="loading"></lf-icon>
+        </div>
     </div>
 </template>
 
@@ -78,6 +81,9 @@
             orderBy: {
                 type: Object,
                 default: ()=>({})
+            },
+            loading: {
+                type: Boolean
             }
 
         },
@@ -159,7 +165,6 @@
         border-spacing: 0;
         border-bottom: 1px solid $gray;
         width: 100%;
-
         &.bordered {
             border: 1px solid $gray;
 
@@ -167,13 +172,11 @@
                 border: 1px solid $gray;
             }
         }
-
         &.compact {
             td, th {
                 padding: 4px;
             }
         }
-
         &.striped {
             tbody {
                 > tr {
@@ -187,25 +190,20 @@
                 }
             }
         }
-
         .checkbox {
             background: #fff;
         }
-
         th, td {
             border-bottom: 1px solid $gray;
             text-align: left;
             padding: 8px;
         }
-
         th {
             color: #909399;
         }
-
         td {
             color: #606266;
         }
-
         &-sorter {
             display: inline-flex;
             flex-direction: column;
@@ -227,11 +225,29 @@
                 }
             }
         }
-
         &-header {
             display: flex;
             align-items: center;
         }
-
+        &-loading{
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,.8);
+            svg{
+                @include spin;
+                width: 50px;
+                height: 50px;
+            }
+        }
+        &-wrapper{
+            position: relative;
+        }
     }
+
 </style>

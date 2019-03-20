@@ -4,7 +4,7 @@
         <div style="margin: 28px">
             <lf-table :columns="columns" :data-source="dataSource"
                       bordered :selected-item.sync="selectedItem" :order-by.sync="orderBy"
-                      @update:orderBy="changeOrder"
+                      @update:orderBy="changeOrder" :loading="loading"
             ></lf-table>
         </div>
         <div style="margin: 28px">
@@ -47,33 +47,38 @@
                     {id: 5, name: '美美', score: 99},
                     {id: 6, name: '阿宇', score: 99}
                 ],
-                key: ''
+                key: '',
+                loading: false
             }
         },
         methods: {
             changeOrder(data){
+                this.loading = true
                 this.$nextTick(()=>{
-                    let type
-                    let arr = this.dataSource.map(item=>{
-                        type = typeof item[this.key]
-                        return item[this.key]
-                    })
-                    if( data[this.key]=== 'asc'){
-                        if(type === 'number'){
-                            arr.sort((a,b)=>a-b)
-                        }else{
-                            arr.sort((a, b) => b.localeCompare(a, 'zh-Hans-CN', {sensitivity: 'accent'}))
+                    setTimeout(()=>{
+                        let type
+                        let arr = this.dataSource.map(item=>{
+                            type = typeof item[this.key]
+                            return item[this.key]
+                        })
+                        if( data[this.key]=== 'asc'){
+                            if(type === 'number'){
+                                arr.sort((a,b)=>a-b)
+                            }else{
+                                arr.sort((a, b) => b.localeCompare(a, 'zh-Hans-CN', {sensitivity: 'accent'}))
+                            }
+                        }else if(data[this.key] === 'desc'){
+                            if(type === 'number'){
+                                arr.sort((a,b)=>b-a)
+                            }else{
+                                arr.sort((a, b) => a.localeCompare(b, 'zh-Hans-CN', {sensitivity: 'accent'}))
+                            }
                         }
-                    }else if(data[this.key] === 'desc'){
-                        if(type === 'number'){
-                            arr.sort((a,b)=>b-a)
-                        }else{
-                            arr.sort((a, b) => a.localeCompare(b, 'zh-Hans-CN', {sensitivity: 'accent'}))
-                        }
-                    }
-                    arr.map((item,index)=>{
-                        this.dataSource[index][this.key]=item
-                    })
+                        arr.map((item,index)=>{
+                            this.dataSource[index][this.key]=item
+                        })
+                        this.loading = false
+                    },300)
 
                 })
             },
