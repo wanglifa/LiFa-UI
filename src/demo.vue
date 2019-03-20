@@ -4,7 +4,7 @@
         <div style="margin: 28px">
             <lf-table :columns="columns" :data-source="dataSource"
                       bordered :selected-item.sync="selectedItem" :order-by.sync="orderBy"
-                      @update:orderBy="changeOrder" :loading="loading"
+                      @update:orderBy="changeOrder" :loading="loading" height="400px"
             ></lf-table>
         </div>
         <div style="margin: 28px">
@@ -45,7 +45,13 @@
                     {id: 3, name: '西西', score: 99},
                     {id: 4, name: '泳儿', score: 99},
                     {id: 5, name: '美美', score: 99},
-                    {id: 6, name: '阿宇', score: 99}
+                    {id: 6, name: '阿宇', score: 99},
+                    {id: 7, name: '发发', score: 100},
+                    {id: 8, name: '琳琳', score: 99},
+                    {id: 9, name: '西西', score: 99},
+                    {id: 10, name: '泳儿', score: 99},
+                    {id: 11, name: '美美', score: 99},
+                    {id: 12, name: '阿宇', score: 99}
                 ],
                 key: '',
                 loading: false
