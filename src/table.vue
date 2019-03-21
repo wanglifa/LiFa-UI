@@ -99,7 +99,9 @@
             this.updateHeadersWidth()
             window.addEventListener('resize', this.onWindowResize)
             newTable.classList.add('lifa-table-copy')
+            console.log(newTable);
             this.$refs.warpper.appendChild(newTable)
+            console.log(this.$refs.warpper);
         },
         beforeDestroy() {
             window.removeEventListener('resize', this.onWindowResize)
@@ -143,9 +145,13 @@
                 })
                 Array.from(tableHeader.children[0].children).map((node, index) => {
                     let {width} = node.getBoundingClientRect()
-                    console.log(width);
                     tableHeader2.children[0].children[index].style.width = `${width}px`
                 })
+                let th = document.createElement('th')
+                th.classList.add('lifa-table-gutter')
+                tableHeader2.children[0].appendChild(th)
+                // let tableGutter = `<th style="width: 17px"></th>`
+                // tableHeader2.children[0].appendChild(tableGutter)
             },
             onChangeItem(item, index, e) {
                 let copy = JSON.parse(JSON.stringify(this.selectedItem))
@@ -197,7 +203,6 @@
 
 <style scoped lang="scss">
     @import 'var';
-
     .lifa-table {
         border-collapse: collapse;
         border-spacing: 0;
@@ -309,6 +314,10 @@
             top: 0;
             left: 0;
             background: #fff;
+        }
+        &-gutter{
+            width: 17px;
+            box-sizing: border-box;
         }
     }
 
