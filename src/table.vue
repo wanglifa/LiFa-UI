@@ -20,6 +20,8 @@
                         </span>
                         </div>
                     </th>
+                    <th v-if="$scopedSlots.default" ref="actionsHeader"></th>
+                    <th v-if="$scopedSlots.default" style="width: 17px"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -41,6 +43,11 @@
                             <!--显示dataSource中对应表头字段里的内容-->
                             <td :key="column.field" :style="{width: `${column.width}px`}">{{item[column.field]}}</td>
                         </template>
+                        <td v-if="$scopedSlots.default">
+                            <div ref="slotWrapper" style="display: inline-block">
+                                <slot :item="item"></slot>
+                            </div>
+                        </td>
                     </tr>
                     <tr v-if="expendVisible(item.id)">
                         <td :key="`${item.id}-1`" :colspan="columns.length+ expendedCellColSpan">
@@ -125,9 +132,11 @@
             let {height} = oldTable.children[0].getBoundingClientRect()
             newTable.appendChild(oldTable.children[0])
             this.$refs.tableContent.style.marginTop = height + 'px'
-            this.$refs.wrapper.style.height = this.height - height + 'px'
+            this.$refs.wrapper.children[0].style.height = this.height - height + 'px'
             newTable.classList.add('lifa-table-copy')
             this.$refs.wrapper.appendChild(newTable)
+            this.fixButtonCol()
+
         },
         computed: {
             areAllItemChecked() {
@@ -161,6 +170,23 @@
             LfIcon
         },
         methods: {
+            fixButtonCol(){
+                let div = this.$refs.slotWrapper
+                if(div){
+                    let {width} = div[0].getBoundingClientRect()
+                    let parent = div[0].parentNode
+                    let styles = getComputedStyle(parent)
+                    let paddingLeft = styles.getPropertyValue('padding-left')
+                    let paddingRight = styles.getPropertyValue('padding-right')
+                    let paddingTop = styles.getPropertyValue('padding-top')
+                    let paddingBottom = styles.getPropertyValue('padding-bottom')
+                    let width2  = parseInt(width)+parseInt(paddingLeft)+parseInt(paddingRight)+parseInt(paddingTop)+parseInt(paddingBottom) + 'px'
+                    this.$refs.actionsHeader.style.width = width2
+                    div.map(node=>{
+                        node.parentNode.style.width = width2
+                    })
+                }
+            },
             expendItem(id){
                 if(this.expendIds.indexOf(id) >= 0){
                     this.expendIds.splice(this.expendIds.indexOf(id),1)

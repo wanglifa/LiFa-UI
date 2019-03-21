@@ -6,7 +6,12 @@
                       bordered :selected-item.sync="selectedItem" :order-by.sync="orderBy"
                       @update:orderBy="changeOrder" :loading="loading" :height="400"
                       expend-field="description" checkable
-            ></lf-table>
+            >
+                <template slot-scope="xxx">
+                    <lf-button @click="edit(xxx.item.id)">编辑</lf-button>
+                    <lf-button @click="view(xxx.item.id)">查看</lf-button>
+                </template>
+            </lf-table>
         </div>
         <div style="margin: 28px">
             <lf-table :columns="columns" :data-source="dataSource" compact :striped="false"></lf-table>
@@ -20,11 +25,13 @@
 <script>
     import LfPager from './pager.vue'
     import LfTable from './table.vue'
+    import LfButton from './button/button.vue'
     export default {
         name: "demo",
         components: {
             LfPager,
-            LfTable
+            LfTable,
+            LfButton
         },
         data() {
             return {
@@ -90,6 +97,12 @@
 
                 })
             },
+            edit(id){
+                alert(`正在编辑第${id}个`)
+            },
+            view(id){
+                alert(`正在查看第${id}个`)
+            }
         },
         watch: {
           orderBy(val,oldVal){
