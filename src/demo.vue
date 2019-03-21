@@ -4,7 +4,7 @@
         <div style="margin: 28px">
             <lf-table :columns="columns" :data-source="dataSource"
                       bordered :selected-item.sync="selectedItem" :order-by.sync="orderBy"
-                      @update:orderBy="changeOrder" :loading="loading" height="400px"
+                      @update:orderBy="changeOrder" :loading="loading" :height="400"
             ></lf-table>
         </div>
         <div style="margin: 28px">
@@ -32,26 +32,27 @@
                 selectedItem: [],
                 columns: [
                     //表头每一列显示的文本和字段
-                    {text: '姓名', field: 'name'},
-                    {text: '分数', field: 'score'}
+                    {text: '姓名', field: 'name', width: 100},
+                    {text: '分数', field: 'score',width: 100},
+                    {text: '年龄', field: 'age'}
                 ],
                 orderBy: {//true:开启排序，但是不确定asc desc
                     name: true,
                     score: 'desc'
                 },
                 dataSource: [
-                    {id: 1, name: '发发', score: 100},
-                    {id: 2, name: '琳琳', score: 99},
-                    {id: 3, name: '西西', score: 99},
-                    {id: 4, name: '泳儿', score: 99},
-                    {id: 5, name: '美美', score: 99},
-                    {id: 6, name: '阿宇', score: 99},
-                    {id: 7, name: '发发', score: 100},
-                    {id: 8, name: '琳琳', score: 99},
-                    {id: 9, name: '西西', score: 99},
-                    {id: 10, name: '泳儿', score: 99},
-                    {id: 11, name: '美美', score: 99},
-                    {id: 12, name: '阿宇', score: 99}
+                    {id: 1, name: '发发', score: 100, age:18},
+                    {id: 2, name: '琳琳', score: 99, age: 16},
+                    {id: 3, name: '西西', score: 99, age: 20},
+                    {id: 4, name: '泳儿', score: 99, age: 21},
+                    {id: 5, name: '美美', score: 99, age: 22},
+                    {id: 6, name: '阿宇', score: 99, age: 26},
+                    {id: 7, name: '发发', score: 100, age:18},
+                    {id: 8, name: '琳琳', score: 99, age: 16},
+                    {id: 9, name: '西西', score: 99, age: 20},
+                    {id: 10, name: '泳儿', score: 99, age: 21},
+                    {id: 11, name: '美美', score: 99, age:18},
+                    {id: 12, name: '阿宇', score: 99, age: 16}
                 ],
                 key: '',
                 loading: false

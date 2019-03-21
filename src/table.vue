@@ -1,14 +1,14 @@
 <template>
-    <div class="lifa-table-wrapper" ref="warpper">
-        <div :style="{height,overflow:'auto'}">
+    <div class="lifa-table-wrapper" ref="wrapper">
+        <div :style="{height: `${height}px`,overflow:'auto'}" ref="tableContent">
             <table class="lifa-table" :class="{bordered,compact,striped}" ref="table">
                 <thead>
                 <tr>
-                    <th>
+                    <th :style="{width: '50px'}">
                         <input type="checkbox" @change="onChangeItemAll($event)" ref="a" :checked="areAllItemChecked">
                     </th>
-                    <th v-if="numberVisible">#</th>
-                    <th v-for="column in columns" :key="column.field">
+                    <th v-if="numberVisible" :style="{width: '50px'}">#</th>
+                    <th v-for="column in columns" :key="column.field" :style="{width: `${column.width}px`}">
                         <div class="lifa-table-header">
                             {{column.text}}
                             <!--如果对应的key在orderBy这个对象里，就显示-->
@@ -23,15 +23,15 @@
                 </thead>
                 <tbody>
                 <tr v-for="(item,index) in dataSource" :key="item.id">
-                    <th>
+                    <th :style="{width: '50px'}">
                         <input type="checkbox" @change="onChangeItem(item, index, $event)"
                                :checked="onChecked(item)" class="checkbox"
                         >
                     </th>
-                    <td v-if="numberVisible">{{index+1}}</td>
+                    <td v-if="numberVisible" :style="{width: '50px'}">{{index+1}}</td>
                     <template v-for="column in columns">
                         <!--显示dataSource中对应表头字段里的内容-->
-                        <td :key="column.field">{{item[column.field]}}</td>
+                        <td :key="column.field" :style="{width: `${column.width}px`}">{{item[column.field]}}</td>
                     </template>
                 </tr>
                 </tbody>
@@ -89,23 +89,18 @@
                 type: Boolean
             },
             height: {
-                type: [Number, String],
+                type: Number,
             }
         },
         mounted() {
             let oldTable = this.$refs.table
-            let newTable = oldTable.cloneNode(true)
-            this.newTable = newTable
-            this.updateHeadersWidth()
-            window.addEventListener('resize', this.onWindowResize)
+            let newTable = oldTable.cloneNode()
+            let {height} = oldTable.children[0].getBoundingClientRect()
+            newTable.appendChild(oldTable.children[0])
+            this.$refs.tableContent.style.marginTop = height + 'px'
+            this.$refs.wrapper.style.height = this.height - height + 'px'
             newTable.classList.add('lifa-table-copy')
-            console.log(newTable);
-            this.$refs.warpper.appendChild(newTable)
-            console.log(this.$refs.warpper);
-        },
-        beforeDestroy() {
-            window.removeEventListener('resize', this.onWindowResize)
-            this.newTable.remove()
+            this.$refs.wrapper.appendChild(newTable)
         },
         computed: {
             areAllItemChecked() {
@@ -129,30 +124,6 @@
             LfIcon
         },
         methods: {
-            onWindowResize() {
-                this.updateHeadersWidth()
-            },
-            updateHeadersWidth() {
-                let tableHeader = Array.from(this.$refs.table.children).filter(node => node.nodeName.toLocaleLowerCase() === 'thead')[0]
-                let tableHeader2
-                Array.from(this.newTable.children).map((node) => {
-                    if (node.nodeName.toLocaleLowerCase() === 'tbody') {
-                        node.remove()
-                    } else {
-                        //也就是tableHeader=<thead>
-                        tableHeader2 = node
-                    }
-                })
-                Array.from(tableHeader.children[0].children).map((node, index) => {
-                    let {width} = node.getBoundingClientRect()
-                    tableHeader2.children[0].children[index].style.width = `${width}px`
-                })
-                let th = document.createElement('th')
-                th.classList.add('lifa-table-gutter')
-                tableHeader2.children[0].appendChild(th)
-                // let tableGutter = `<th style="width: 17px"></th>`
-                // tableHeader2.children[0].appendChild(tableGutter)
-            },
             onChangeItem(item, index, e) {
                 let copy = JSON.parse(JSON.stringify(this.selectedItem))
                 if (e.target.checked) {
@@ -307,6 +278,8 @@
 
         &-wrapper {
             position: relative;
+            overflow: hidden;
+            border: 1px solid #eee;
         }
 
         &-copy {
