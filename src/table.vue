@@ -4,7 +4,8 @@
             <table class="lifa-table" :class="{bordered,compact,striped}" ref="table">
                 <thead>
                 <tr>
-                    <th :style="{width: '50px'}">
+                    <th :style="{width: '50px'}" class="lifa-table-center"></th>
+                    <th :style="{width: '50px'}" class="lifa-table-center">
                         <input type="checkbox" @change="onChangeItemAll($event)" ref="a" :checked="areAllItemChecked">
                     </th>
                     <th v-if="numberVisible" :style="{width: '50px'}">#</th>
@@ -22,18 +23,30 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(item,index) in dataSource" :key="item.id">
-                    <th :style="{width: '50px'}">
-                        <input type="checkbox" @change="onChangeItem(item, index, $event)"
-                               :checked="onChecked(item)" class="checkbox"
+                <template v-for="(item,index) in dataSource">
+                    <tr :key="item.id">
+                        <td :style="{width: '50px'}" @click="expendItem(item.id)"
+                            class="lifa-table-center" :class="{expend: expendVisible(item.id)}"
                         >
-                    </th>
-                    <td v-if="numberVisible" :style="{width: '50px'}">{{index+1}}</td>
-                    <template v-for="column in columns">
-                        <!--显示dataSource中对应表头字段里的内容-->
-                        <td :key="column.field" :style="{width: `${column.width}px`}">{{item[column.field]}}</td>
-                    </template>
-                </tr>
+                            <lf-icon name="right"></lf-icon>
+                        </td>
+                        <td :style="{width: '50px'}" class="lifa-table-center">
+                            <input type="checkbox" @change="onChangeItem(item, index, $event)"
+                                   :checked="onChecked(item)" class="checkbox"
+                            >
+                        </td>
+                        <td v-if="numberVisible" :style="{width: '50px'}">{{index+1}}</td>
+                        <template v-for="column in columns">
+                            <!--显示dataSource中对应表头字段里的内容-->
+                            <td :key="column.field" :style="{width: `${column.width}px`}">{{item[column.field]}}</td>
+                        </template>
+                    </tr>
+                    <tr v-if="expendVisible(item.id)">
+                        <td :key="`${item.id}-1`" :colspan="columns.length+2">
+                            {{item[expendField] || '空'}}
+                        </td>
+                    </tr>
+                </template>
                 </tbody>
             </table>
         </div>
@@ -48,6 +61,11 @@
 
     export default {
         name: "LiFaTable",
+        data(){
+          return {
+              expendIds: []
+          }
+        },
         props: {
             columns: {
                 type: Array,
@@ -60,6 +78,9 @@
             selectedItem: {
                 type: Array,
                 default: () => []
+            },
+            expendField: {
+               type: String
             },
             striped: {
                 type: Boolean,
@@ -124,6 +145,16 @@
             LfIcon
         },
         methods: {
+            expendItem(id){
+                if(this.expendIds.indexOf(id) >= 0){
+                    this.expendIds.splice(this.expendIds.indexOf(id),1)
+                }else{
+                    this.expendIds.push(id)
+                }
+            },
+            expendVisible(id){
+                return this.expendIds.indexOf(id) >= 0
+            },
             onChangeItem(item, index, e) {
                 let copy = JSON.parse(JSON.stringify(this.selectedItem))
                 if (e.target.checked) {
@@ -291,6 +322,21 @@
         &-gutter{
             width: 17px;
             box-sizing: border-box;
+        }
+        & &-center{
+            text-align: center;
+            .lf-icon{
+                fill: #666;
+                width: 0.6em;
+                height: 0.6em;
+                cursor: pointer;
+            }
+            &.expend{
+                .lf-icon{
+                    transform: rotate(90deg);
+                    transition: all .3s linear;
+                }
+            }
         }
     }
 

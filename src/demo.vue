@@ -5,6 +5,7 @@
             <lf-table :columns="columns" :data-source="dataSource"
                       bordered :selected-item.sync="selectedItem" :order-by.sync="orderBy"
                       @update:orderBy="changeOrder" :loading="loading" :height="400"
+                      expend-field="description"
             ></lf-table>
         </div>
         <div style="margin: 28px">
@@ -41,9 +42,9 @@
                     score: 'desc'
                 },
                 dataSource: [
-                    {id: 1, name: '发发', score: 100, age:18},
-                    {id: 2, name: '琳琳', score: 99, age: 16},
-                    {id: 3, name: '西西', score: 99, age: 20},
+                    {id: 1, name: '发发', score: 100, age:18, description: '你最帅'},
+                    {id: 2, name: '琳琳', score: 99, age: 16, description: '为啥不做我媳妇'},
+                    {id: 3, name: '西西', score: 99, age: 20, description: '好累啊'},
                     {id: 4, name: '泳儿', score: 99, age: 21},
                     {id: 5, name: '美美', score: 99, age: 22},
                     {id: 6, name: '阿宇', score: 99, age: 26},
