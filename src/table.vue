@@ -4,8 +4,8 @@
             <table class="lifa-table" :class="{bordered,compact,striped}" ref="table">
                 <thead>
                 <tr>
-                    <th :style="{width: '50px'}" class="lifa-table-center"></th>
-                    <th :style="{width: '50px'}" class="lifa-table-center">
+                    <th :style="{width: '50px'}" class="lifa-table-center" v-if="expendField"></th>
+                    <th :style="{width: '50px'}" class="lifa-table-center" v-if="checkable">
                         <input type="checkbox" @change="onChangeItemAll($event)" ref="a" :checked="areAllItemChecked">
                     </th>
                     <th v-if="numberVisible" :style="{width: '50px'}">#</th>
@@ -27,10 +27,11 @@
                     <tr :key="item.id">
                         <td :style="{width: '50px'}" @click="expendItem(item.id)"
                             class="lifa-table-center" :class="{expend: expendVisible(item.id)}"
+                            v-if="expendField"
                         >
                             <lf-icon name="right"></lf-icon>
                         </td>
-                        <td :style="{width: '50px'}" class="lifa-table-center">
+                        <td :style="{width: '50px'}" class="lifa-table-center" v-if="checkable">
                             <input type="checkbox" @change="onChangeItem(item, index, $event)"
                                    :checked="onChecked(item)" class="checkbox"
                             >
@@ -42,7 +43,7 @@
                         </template>
                     </tr>
                     <tr v-if="expendVisible(item.id)">
-                        <td :key="`${item.id}-1`" :colspan="columns.length+2">
+                        <td :key="`${item.id}-1`" :colspan="columns.length+ expendedCellColSpan">
                             {{item[expendField] || '空'}}
                         </td>
                     </tr>
@@ -111,6 +112,11 @@
             },
             height: {
                 type: Number,
+            },
+            //是否显示选择框
+            checkable: {
+                type: Boolean,
+                default: false
             }
         },
         mounted() {
@@ -139,6 +145,16 @@
                     }
                 }
                 return equal
+            },
+            expendedCellColSpan(){
+                let result = 0
+                if(this.checkable){
+                    result += 1
+                }
+                if(this.expendField){
+                    result += 1
+                }
+                return result
             }
         },
         components: {

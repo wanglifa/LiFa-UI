@@ -5,7 +5,7 @@
             <lf-table :columns="columns" :data-source="dataSource"
                       bordered :selected-item.sync="selectedItem" :order-by.sync="orderBy"
                       @update:orderBy="changeOrder" :loading="loading" :height="400"
-                      expend-field="description"
+                      expend-field="description" checkable
             ></lf-table>
         </div>
         <div style="margin: 28px">
