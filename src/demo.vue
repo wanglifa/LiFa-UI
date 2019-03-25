@@ -1,22 +1,22 @@
 <template>
     <div>
+        <div>只能上传300kb以内的png、jpeg文件</div>
         <lf-upload accept="image/*" action="http://127.0.0.1:3000/upload" name="file"
             :file-list.sync="fileList" :parse-response="parseResponse" @update:fileList="x"
         >
-            <button>上传</button>
-            <div slot="tips">
-                <div>只能上传300kb以内的png、jpeg文件</div>
-            </div>
+            <lf-button icon="upload">上传</lf-button>
         </lf-upload>
     </div>
 </template>
 
 <script>
     import LfUpload from './upload.vue'
+    import LfButton from './button/button.vue'
     export default {
         name: "demo",
         components: {
-            LfUpload
+            LfUpload,
+            LfButton
         },
         data() {
             return {
