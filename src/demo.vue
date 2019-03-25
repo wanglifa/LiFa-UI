@@ -1,8 +1,11 @@
 <template>
     <div>
+        {{error}}
+        <br>
         <div>只能上传300kb以内的png、jpeg文件</div>
         <lf-upload accept="image/*" action="http://127.0.0.1:3000/upload" name="file"
-            :file-list.sync="fileList" :parse-response="parseResponse" @update:fileList="x"
+            :file-list.sync="fileList" :parse-response="parseResponse"
+                   @error="error=$event" :size-limit="2*1024"
         >
             <lf-button icon="upload">上传</lf-button>
         </lf-upload>
@@ -20,7 +23,8 @@
         },
         data() {
             return {
-                fileList: []
+                fileList: [],
+                error: ''
             }
         },
         methods: {
@@ -29,12 +33,18 @@
                 let url = `http://127.0.0.1:3000/preview/${id}`
                 return url
             },
-            x(){
-                console.log(this.fileList.length);
+            alert(error){
+                window.alert(error || '上传失败')
             }
         },
         watch: {
-
+            error(){
+                if(this.error !== ''){
+                    setTimeout(()=>{
+                        this.error = ''
+                    },2000)
+                }
+            }
         },
         created() {
 
