@@ -5,7 +5,7 @@
         <div>只能上传300kb以内的png、jpeg文件</div>
         <lf-upload accept="image/*" action="http://127.0.0.1:3000/upload" name="file"
             :file-list.sync="fileList" :parse-response="parseResponse"
-                   @error="error=$event" :size-limit="2*1024"
+                   @error="error=$event" multiple
         >
             <lf-button icon="upload">上传</lf-button>
         </lf-upload>
