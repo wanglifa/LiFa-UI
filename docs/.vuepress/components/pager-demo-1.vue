@@ -29,6 +29,16 @@
 <lf-pager :total-page="20" :current-page.sync="currentPage">
 
 </lf-pager>
+
+<script>
+   export default{
+       data(){
+                   return {
+                       currentPage: 2
+                   }
+       }
+   }
+<script>
  `.replace(/^ {10}/gm, '').trim(),
         currentPage: 2
 

@@ -39,6 +39,7 @@
     .lf-nav-item{
         padding: 10px 20px;
         position: relative;
+        text-align: left;
         &:not(.vertical){
             &.active{
                 &::after{

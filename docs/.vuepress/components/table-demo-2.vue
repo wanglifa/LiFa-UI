@@ -35,8 +35,8 @@ export default{
     data(){
         return {
                     columns: [
-                      {text: '姓名', field: 'name', width: 100},
-                      {text: '分数', field: 'score',width: 100},
+                      {text: '姓名', field: 'name', width: 200},
+                      {text: '分数', field: 'score',width: 200},
                       {text: '年龄', field: 'age'}
                     ],
                     dataSource: [

@@ -74,13 +74,6 @@
       `.replace(/^ {8}/gm, '').trim()
       }
     },
-    methods: {
-      onClickButton () {
-        this.$toast('<strong style="color:red;">加粗的提示</strong>', {
-          enableHtml: true
-        })
-      }
-    },
   }
 </script>
 <style scoped lang="scss">

@@ -41,6 +41,17 @@
       return {
         content:
 `
+<style>
+.box{
+     width: 100%;
+     height: 300px;
+     background: gray;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+</style>
+
 <lf-slides :selected.sync="selected" trigger="hover" :auto-play="false">
   <lf-slides-item name="1">
     <div class="box">1</div>

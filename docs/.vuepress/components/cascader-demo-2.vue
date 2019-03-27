@@ -33,7 +33,8 @@
         selected: [],
         content:
                 `
-<lf-cascader :source.sync="source" height="200px" :selected.sync="selected" :loadData="loadData">
+<lf-cascader :source.sync="source" height="200px" :selected.sync="selected"
+:loadData="loadData">
 </lf-cascader>
 
 <script>
@@ -42,10 +43,8 @@ import Cascader from '../../../src/cascader/cascader.vue'
 
 data(){
     return {
-        source: [
-
-        ],
-        selected: []
+                source: [],
+                selected: []
     }
 },
 methods: {

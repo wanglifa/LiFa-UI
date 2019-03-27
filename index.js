@@ -30,8 +30,9 @@ import CascaderItem from './src/cascader/cascader-items.vue'
 import Pager from './src/pager.vue'
 import Table from './src/table.vue'
 import Upload from './src/upload.vue'
+import Row from './src/grid/row.vue'
 export {Content, Footer, Header, Layout, Sider, Tabs, TabsBody, TabsHead, TabsItem, TabsPane,
 Input, plugin, Popover, Toast, db, Svg, Button, ButtonGroup, Col, Collapse, CollapseItem, Icon,
-    Slides,SlidesItem,Nav,NavItem,SubNav,Cascader,CascaderItem,Pager,Table,Upload
+    Slides,SlidesItem,Nav,NavItem,SubNav,Cascader,CascaderItem,Pager,Table,Upload,Row
 }
 

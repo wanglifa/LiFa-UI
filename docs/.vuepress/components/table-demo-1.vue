@@ -7,7 +7,7 @@
 </lf-table>
       </div>
       <lf-collaspe>
-        <p slot="one">使用table组件的时候，必须在data中声明一个<code>columns</code>(用来设置表头信息)和<code>dataSource</code>(用来显示你的表格主体数据)这两个对象数组。</p>
+        <p slot="one">使用table组件的时候，必须在data中声明一个<code>columns</code>(用来设置表头信息)和<code>dataSource</code>(用来显示你的表格主体数据)这两个对象数组。另外<code>columns</code>里面的每一个表头数据都必须声明一个<code>width</code>字段（最后一列除外），用来定义每一列的宽度，否则会造成表头和表格主体对不齐的问题。</p>
         <code slot="two">{{content}}</code>
       </lf-collaspe>
     </div>
@@ -35,8 +35,8 @@ export default{
     data(){
         return {
                     columns: [
-                      {text: '姓名', field: 'name', width: 100},
-                      {text: '分数', field: 'score',width: 100},
+                      {text: '姓名', field: 'name', width: 200},
+                      {text: '分数', field: 'score',width: 200},
                       {text: '年龄', field: 'age'}
                     ],
                     dataSource: [
