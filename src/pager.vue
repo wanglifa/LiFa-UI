@@ -87,7 +87,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import "var";
+    @import "../styles/var";
     .lifa-pager{
         display: flex;
         align-items: center;

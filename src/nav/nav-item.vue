@@ -35,7 +35,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import "var";
+    @import "../../styles/var";
     .lf-nav-item{
         padding: 10px 20px;
         position: relative;

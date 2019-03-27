@@ -29,7 +29,11 @@ module.exports = {
           '/components/collapse',
           '/components/tabs',
           '/components/toast',
-          'components/cascader'
+          'components/cascader',
+          'components/slides',
+          'components/nav',
+          'components/pager',
+          'components/table',
         ]
       }
     ]

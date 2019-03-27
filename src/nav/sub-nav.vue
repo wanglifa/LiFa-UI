@@ -93,7 +93,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import "var";
+    @import "../../styles/var";
     .lf-sub-nav{
         position: relative;
         .icon{

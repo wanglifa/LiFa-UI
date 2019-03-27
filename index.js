@@ -20,7 +20,18 @@ import Toast from './src/toast.vue'
 import db from './tests/fixtures/db.js'
 import plugin from './src/plugin.js'
 import Svg from './src/svg.js'
+import Slides from './src/slides/slides.vue'
+import SlidesItem from './src/slides/slides-item.vue'
+import Nav from './src/nav/nav.vue'
+import NavItem from './src/nav/nav-item.vue'
+import SubNav from './src/nav/sub-nav.vue'
+import Cascader from './src/cascader/cascader.vue'
+import CascaderItem from './src/cascader/cascader-items.vue'
+import Pager from './src/pager.vue'
+import Table from './src/table.vue'
+import Upload from './src/upload.vue'
 export {Content, Footer, Header, Layout, Sider, Tabs, TabsBody, TabsHead, TabsItem, TabsPane,
-Input, plugin, Popover, Toast, db, Svg, Button, ButtonGroup, Col, Collapse, CollapseItem, Icon
+Input, plugin, Popover, Toast, db, Svg, Button, ButtonGroup, Col, Collapse, CollapseItem, Icon,
+    Slides,SlidesItem,Nav,NavItem,SubNav,Cascader,CascaderItem,Pager,Table,Upload
 }
 

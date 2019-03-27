@@ -1,6 +1,6 @@
 <template>
     <div class="lifa-table-wrapper" ref="wrapper">
-        <div :style="{height: `${height}px`,overflow:'auto'}" ref="tableContent">
+        <div :style="{height: `${height}px`,overflow:'auto'}" ref="tableContent" :class="{bottomBor: bordered}">
             <table class="lifa-table" :class="{bordered,compact,striped}" ref="table">
                 <thead>
                 <tr>
@@ -21,7 +21,8 @@
                         </div>
                     </th>
                     <th v-if="$scopedSlots.default" ref="actionsHeader"></th>
-                    <th v-if="$scopedSlots.default" style="width: 17px"></th>
+                    <th v-if="scrollAirTh" style="width: 17px"></th>
+                    <!--<th v-if="$scopedSlots.default" style="width: 17px"></th>-->
                 </tr>
                 </thead>
                 <tbody>
@@ -44,7 +45,7 @@
                             <td :key="column.field" :style="{width: `${column.width}px`}">{{item[column.field]}}</td>
                         </template>
                         <td v-if="$scopedSlots.default">
-                            <div ref="slotWrapper" style="display: inline-block">
+                            <div ref="slotWrapper" style="display: inline-block;">
                                 <slot :item="item"></slot>
                             </div>
                         </td>
@@ -71,7 +72,8 @@
         name: "LiFaTable",
         data(){
           return {
-              expendIds: []
+              expendIds: [],
+              scrollAirTh: false
           }
         },
         props: {
@@ -92,7 +94,7 @@
             },
             striped: {
                 type: Boolean,
-                default: true
+                default: false
             },
             //是否显示索引
             numberVisible: {
@@ -131,6 +133,9 @@
             let newTable = oldTable.cloneNode()
             let {height} = oldTable.children[0].getBoundingClientRect()
             newTable.appendChild(oldTable.children[0])
+            if(this.$refs.tableContent.style.height){
+                this.scrollAirTh = true
+            }
             this.$refs.tableContent.style.marginTop = height + 'px'
             this.$refs.wrapper.children[0].style.height = this.height - height + 'px'
             newTable.classList.add('lifa-table-copy')
@@ -246,19 +251,35 @@
 </script>
 
 <style scoped lang="scss">
-    @import 'var';
+    @import '../styles/var';
+    .bottomBor{
+        border-bottom: 1px solid $gray;
+    }
     .lifa-table {
         border-collapse: collapse;
         border-spacing: 0;
-        border-bottom: 1px solid $gray;
         width: 100%;
-
+        margin: 0;
+        tr{
+            border-bottom: 0;
+        }
+        th,td{
+            width: auto;
+        }
         &.bordered {
-            border: 1px solid $gray;
-
+            box-sizing: border-box;
             td, th {
                 border: 1px solid $gray;
                 box-sizing: border-box;
+            }
+            tbody{
+                tr{
+                    &:last-child{
+                        td{
+                            border-bottom: 0;
+                        }
+                    }
+                }
             }
         }
 
@@ -352,12 +373,11 @@
         &-wrapper {
             position: relative;
             overflow: hidden;
-            border: 1px solid #eee;
         }
 
         &-copy {
             position: absolute;
-            top: 0;
+            top: 1px;
             left: 0;
             background: #fff;
         }
