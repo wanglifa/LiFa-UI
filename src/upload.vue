@@ -26,6 +26,7 @@
 
 <script>
     import LfIcon from './icon.vue'
+    import http from './http.js'
     export default {
         name: "LiFaUpload",
         props: {
@@ -91,6 +92,7 @@
                 return input
             },
             uploadFiles(rawFiles) {
+                console.log(9)
                 let newNames = []
                 for(let i = 0;i<rawFiles.length;i++){
                     let rawFile = rawFiles[i]
@@ -99,18 +101,25 @@
                     newNames[i] = newName
                 }
                 if(!this.beforeuploadFiles(rawFiles, newNames)){return}
+                console.log(11)
                 Array.from(rawFiles).forEach((rawFile,i)=>{
                     let newName = newNames[i]
                     let formData = new FormData()
                     formData.append(this.name, rawFile)
                     this.doUploadFile(formData, (response) => {
+                        console.log(12)
+                        console.log(response)
                         let url = this.parseResponse(response)
+                        console.log(url)
                         this.url = url
+                        console.log(13)
                         this.afteruploadFile(rawFile, newName, url)
+                        console.log(14)
                     }, (xhr) => {
                         this.uploadError(xhr,newName)
                     })
                 })
+                console.log(10)
             },
             uploadError(xhr,newName) {
                 let file = this.fileList.filter(f => f.name === newName)[0]
@@ -137,23 +146,19 @@
                 return name
             },
             doUploadFile(formData, success, fail) {
-                let xhr = new XMLHttpRequest()
-                xhr.open(this.method, this.action)
-                xhr.onload = () => {
-                    console.log('this.fileList');
-                    console.log(this.fileList);
-                    success(xhr.response)
-                }
-                xhr.onerror = () => {
-                    fail(xhr)
-                }
-                xhr.send(formData)
+                http[this.method.toLowerCase()](this.action,{
+                    success,
+                    fail,
+                    data: formData
+                })
             },
             beforeuploadFiles(rawFiles, newNames) {
+                console.log(4)
                 for(let i = 0;i<rawFiles.length;i++){
                     let {size,type} = rawFiles[i]
                     if(size > this.sizeLimit){
                         this.$emit('error',`文件大小不能超过${this.sizeLimit}`)
+                        console.log(6)
                         return false
                     }else{
                         //把所有的文件都放到x这个数组里
@@ -161,11 +166,14 @@
                             return {name: newNames[i],type,size,status: 'uploading'}
                         })
                         this.$emit('update:fileList',[...this.fileList,...selectFiles])
+                        console.log(7)
                         return true
                     }
                 }
+                console.log(5)
             },
             afteruploadFile(rawFile, newName, url) {
+                console.log(1)
                 //因为name是唯一的，所以根据name来获取这个文件的一些属性
                 let file = this.fileList.filter(i => i.name === newName)[0]
                 //file是通过fileList获取的，fileList是props不能直接修改
@@ -173,10 +181,13 @@
                 let index = this.fileList.indexOf(file)
                 fileCopy.url = url
                 fileCopy.status = 'success'
+                console.log(2)
                 let fileListCopy = JSON.parse(JSON.stringify(this.fileList))
                 //将数组中之前的file删除换成fileCopy
                 fileListCopy.splice(index, 1, fileCopy)
                 this.$emit('update:fileList', fileListCopy)
+                this.$emit('uploaded')
+                console.log(3)
             },
             onRemoveFile(index) {
                 let copy = JSON.parse(JSON.stringify(this.fileList))
