@@ -3,7 +3,7 @@
         {{error}}
         <br>
         <div>只能上传300kb以内的png、jpeg文件</div>
-        <lf-upload accept="image/*" action="https://node-server-19.herokuapp.com/upload" name="file"
+        <lf-upload accept="image/*" action="http://node-server-19.herokuapp.com/upload" name="file"
             :file-list.sync="fileList" :parse-response="parseResponse"
                    @error="error=$event" multiple
         >
@@ -30,7 +30,7 @@
         methods: {
             parseResponse(response){
                 let {id} = JSON.parse(response)
-                let url = `https://node-server-19.herokuapp.com//preview/${id}`
+                let url = `http://node-server-19.herokuapp.com/preview/${id}`
                 return url
             },
             alert(error){
