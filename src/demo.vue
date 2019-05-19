@@ -29,8 +29,11 @@
         },
         methods: {
             parseResponse(response){
+                console.log(response)
                 let {id} = JSON.parse(response)
+                console.log(id)
                 let url = `http://node-server-19.herokuapp.com/preview/${id}`
+                console.log(url)
                 return url
             },
             alert(error){

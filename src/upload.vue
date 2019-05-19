@@ -92,7 +92,6 @@
                 return input
             },
             uploadFiles(rawFiles) {
-                console.log(1)
                 let newNames = []
                 for(let i = 0;i<rawFiles.length;i++){
                     let rawFile = rawFiles[i]
@@ -100,26 +99,25 @@
                     let newName = this.generateName(name)
                     newNames[i] = newName
                 }
-                console.log(2)
                 if(!this.beforeuploadFiles(rawFiles, newNames)){return}
-                Array.from(rawFiles).forEach((rawFile,i)=>{
+                for (let i = 0; i < rawFiles.length; i++) {
+                    let rawFile = rawFiles[i]
                     let newName = newNames[i]
                     let formData = new FormData()
                     formData.append(this.name, rawFile)
-                    this.doUploadFile(formData, (response) => {
-                        console.log(4)
-                        console.log(response)
-                        let url = this.parseResponse(response)
-                        console.log(9)
+                    this.doUploadFiles(formData, (response) => {
+                        let url
+                        if (typeof response !== 'object') {
+                            url = this.parseResponse(response)
+                        } else {
+                            url = this.parseResponse(JSON.stringify(response))
+                        }
                         this.url = url
-                        console.log(10)
-                        this.afteruploadFile(rawFile, newName, url)
-                        console.log(5)
+                        this.afterUploadFiles(newName, url)
                     }, (xhr) => {
-                        this.uploadError(xhr,newName)
+                        this.uploadError(xhr, newName)
                     })
-                })
-                console.log(3)
+                }
             },
             uploadError(xhr,newName) {
                 let file = this.fileList.filter(f => f.name === newName)[0]
@@ -145,7 +143,7 @@
                 }
                 return name
             },
-            doUploadFile(formData, success, fail) {
+            doUploadFiles(formData, success, fail) {
                 http[this.method.toLowerCase()](this.action,{
                     success,
                     fail,
@@ -157,7 +155,6 @@
                     let {size,type} = rawFiles[i]
                     if(size > this.sizeLimit){
                         this.$emit('error',`文件大小不能超过${this.sizeLimit}`)
-                        console.log(6)
                         return false
                     }else{
                         //把所有的文件都放到x这个数组里
@@ -168,25 +165,20 @@
                         return true
                     }
                 }
-                console.log(5)
             },
-            afteruploadFile(rawFile, newName, url) {
-                console.log(6)
+            afterUploadFiles(newName, url) {
                 //因为name是唯一的，所以根据name来获取这个文件的一些属性
                 let file = this.fileList.filter(i => i.name === newName)[0]
-                console.log(file)
+                let index = this.fileList.indexOf(file)
                 //file是通过fileList获取的，fileList是props不能直接修改
                 let fileCopy = JSON.parse(JSON.stringify(file))
-                let index = this.fileList.indexOf(file)
                 fileCopy.url = url
                 fileCopy.status = 'success'
-                console.log(7)
-                let fileListCopy = JSON.parse(JSON.stringify(this.fileList))
+                let fileListCopy = [...this.fileList]
                 //将数组中之前的file删除换成fileCopy
                 fileListCopy.splice(index, 1, fileCopy)
                 this.$emit('update:fileList', fileListCopy)
                 this.$emit('uploaded')
-                console.log(8)
             },
             onRemoveFile(index) {
                 let copy = JSON.parse(JSON.stringify(this.fileList))
