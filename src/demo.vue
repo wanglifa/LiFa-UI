@@ -1,7 +1,15 @@
 <template>
     <div style="justify-content: center;display: flex">
         <div style="width: 600px;border: 1px solid red">
-            <lf-sticky distance="100">
+            <p>段落1</p>
+            <p>段落1</p>
+            <p>段落1</p>
+            <p>段落1</p>
+            <p>段落1</p>
+            <p>段落1</p>
+            <p>段落1</p>
+            <p>段落1</p>
+            <lf-sticky :distance="100">
                 <div style="border: 1px solid red;">
                     <img src="https://i.loli.net/2019/05/20/5ce2b50b09e2843554.png" alt="">
                 </div>
