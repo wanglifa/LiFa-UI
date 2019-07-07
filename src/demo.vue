@@ -1,63 +1,55 @@
 <template>
-    <div style="justify-content: center;display: flex">
-        <div style="width: 600px;border: 1px solid red">
-            <p>段落1</p>
-            <p>段落1</p>
-            <p>段落1</p>
-            <p>段落1</p>
-            <p>段落1</p>
-            <p>段落1</p>
-            <p>段落1</p>
-            <p>段落1</p>
-            <lf-sticky :distance="100">
-                <div style="border: 1px solid red;">
-                    <img src="https://i.loli.net/2019/05/20/5ce2b50b09e2843554.png" alt="">
-                </div>
-            </lf-sticky>
-            <p>段落1</p>
-            <p>段落1</p>
-            <p>段落1</p>
-            <p>段落1</p>
-            <p>段落1</p>
-            <p>段落1</p>
-            <p>段落1</p>
-            <p>段落1</p>
-        </div>
-    </div>
+  <div style="justify-content: center;display: flex">
+    <lf-table :data-source="dataSource"
+              bordered :selected-item.sync="selectedItem" :height="400"
+              expend-field="description" checkable>
+      <lf-table-column text="姓名" field="name" :width="100">
+        <template slot-scope="scope">
+          <a href="#">{{scope.value}}</a>
+        </template>
+      </lf-table-column>
+      <lf-table-column text="分数" field="score"></lf-table-column>
+      <template slot-scope="xxx">
+        <lf-button @click="edit(xxx.item.id)">编辑</lf-button>
+        <lf-button @click="view(xxx.item.id)">查看</lf-button>
+      </template>
+    </lf-table>
+  </div>
 </template>
 
 <script>
-    import LfSticky from './sticky.vue'
+    import LfTable from './table'
+    import LfTableColumn from './table-column'
+
     export default {
         name: "demo",
         components: {
-            LfSticky
+            LfTable,
+            LfTableColumn
         },
         data() {
             return {
-                fileList: [],
-                error: ''
+                dataSource: [
+                    {id: 1, name: '发发', score: 100, age: 18, description: '你最帅，将来一定会成为一个了不起的演员'},
+                    {id: 2, name: '琳琳', score: 99, age: 16, description: '为啥不做我媳妇'},
+                    {id: 3, name: '西西', score: 99, age: 20, description: '好累啊'},
+                    {id: 4, name: '泳儿', score: 99, age: 21},
+                    {id: 5, name: '美美', score: 99, age: 22},
+                    {id: 6, name: '阿宇', score: 99, age: 26},
+                    {id: 7, name: '泳儿', score: 99, age: 21},
+                    {id: 8, name: '美美', score: 99, age: 22},
+                    {id: 9, name: '阿宇', score: 99, age: 26}
+                ],
+                selectedItem: [],
             }
         },
-        methods: {
-            parseResponse(response){
-                console.log(response)
-                let {id} = JSON.parse(response)
-                console.log(id)
-                let url = `http://node-server-19.herokuapp.com/preview/${id}`
-                console.log(url)
-                return url
-            },
-            alert(error){
-                window.alert(error || '上传失败')
-            }
-        },
+        methods: {},
         watch: {
-            error(){
-                if(this.error !== ''){
-                    setTimeout(()=>{
+            error() {
+                if (this.error !== '') {
+                    setTimeout(() => {
                         this.error = ''
-                    },2000)
+                    }, 2000)
                 }
             }
         },
@@ -70,8 +62,8 @@
 </script>
 
 <style scoped lang="scss">
-img{
+  img {
     width: 100%;
-}
+  }
 
 </style>

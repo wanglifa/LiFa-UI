@@ -1,57 +1,57 @@
-import chai, {expect} from 'chai'
+import chai, { expect } from 'chai'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
-import {mount} from '@vue/test-utils'
-import Upload from '@/upload.vue'
+import {shallowMount, mount} from '@vue/test-utils'
+import upload from '../../src/upload'
+import http from '../../src/http'
+
+
 chai.use(sinonChai)
-import http from '../../src/http.js'
 
-
-describe('Upload.vue', () => {
+describe('Uploader.vue', () => {
     it('存在.', () => {
-        expect(Upload).to.exist
+        expect(upload).to.exist
     })
-    it('可以上传一个文件', (done)=>{
-        http.post = (url, options) => {
-            setTimeout(()=>{
-                options.success({id: "123123"})
-                done()
-            },1000)
-        }
-        const wrapper = mount(Upload, {
+    it('可以上传一个文件', (done) => {
+        let stub = sinon.stub(http, 'post').callsFake((url, options) => {
+            setTimeout(function () {
+                options.success('{"id": "123123"}')
+            }, 100)
+        })
+
+        const wrapper = mount(upload, {
             propsData: {
                 name: 'file',
-                action: '/xxx',
+                action: '/upload',
                 method: 'post',
-                parseResponse: (response)=>{
+                parseResponse: (response) => {
                     let object = JSON.parse(response)
                     return `/preview/${object.id}`
                 },
                 fileList: []
             },
-            slots: {
-                default: '<button id="x">click me</button>'
-            },
+            slots: {default: `<button id="x">click me</button>`},
             listeners: {
-                'update:fileList': (fileList) => {
-                    wrapper.setProps({fileList})
-                },
+                'update:fileList': (fileList) => { wrapper.setProps({fileList}) },
                 'uploaded': () => {
                     expect(wrapper.find('use').exists()).to.eq(false)
                     expect(wrapper.props().fileList[0].url).to.eq('/preview/123123')
+                    stub.restore()
+                    done()
                 }
             }
         })
         wrapper.find('#x').trigger('click')
-        let inputWrapper =  wrapper.find('input[type="file"]')
+        let inputWrapper = wrapper.find('input[type="file"]')
         let input = inputWrapper.element
-        //new File接受两个参数第一个文件内容（必须是数组），第二个是文件名
-        let file1 = new File(['xxxx'], 'xxx.txt')
+        let file1 = new File(['xxxxxxxxx'], 'xxx.txt')
+
         const data = new DataTransfer()
         data.items.add(file1)
-        input.files = data.files
+        input.files = data.files;
 
         let use = wrapper.find('use').element
         expect(use.getAttribute('xlink:href')).to.eq('#i-loading')
+
     })
 })

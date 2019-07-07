@@ -42,7 +42,14 @@
                         <td v-if="numberVisible" :style="{width: '50px'}">{{index+1}}</td>
                         <template v-for="column in columns">
                             <!--显示dataSource中对应表头字段里的内容-->
-                            <td :key="column.field" :style="{width: `${column.width}px`}">{{item[column.field]}}</td>
+                            <td :key="column.field" :style="{width: `${column.width}px`}">
+                              <template v-if="column.render">
+                                <vnodes :vnodes="column.render({value: item[column.field]})"></vnodes>
+                              </template>
+                              <template v-else>
+                                {{item[column.field]}}
+                              </template>
+                            </td>
                         </template>
                         <td v-if="$scopedSlots.default">
                             <div ref="slotWrapper" style="display: inline-block;">
@@ -73,14 +80,11 @@
         data(){
           return {
               expendIds: [],
-              scrollAirTh: false
+              scrollAirTh: false,
+              columns: []
           }
         },
         props: {
-            columns: {
-                type: Array,
-                required: true
-            },
             dataSource: {
                 type: Array,
                 required: true
@@ -129,6 +133,23 @@
             }
         },
         mounted() {
+            // this.$slots遍历拿到每一个table-columns组件
+            this.columns = this.$slots.default.map(node => {
+                // node.componentOptions.propsData拿到组件中外界传进来的props的值
+                let { text, field, width } = node.componentOptions.propsData
+                // 如果组件里面使用了插槽那么就可以拿到插槽里对应的render函数也就是
+                // <template slot-scope="scope">
+                //     <a href="#">{{scope.value}}</a>
+                // </template>
+                let render = node.data.scopedSlots && node.data.scopedSlots.default
+                return {
+                    text, field, width, render
+                }
+            })
+            let result = this.columns[0].render({value: '立发'})
+            console.log(result)
+            console.log(this.columns);
+            return
             let oldTable = this.$refs.table
             let newTable = oldTable.cloneNode()
             let {height} = oldTable.children[0].getBoundingClientRect()
@@ -172,7 +193,11 @@
             }
         },
         components: {
-            LfIcon
+            LfIcon,
+            vnodes: {
+                functional: true,
+                render: (h, ctx) => ctx.props.vnodes
+            }
         },
         methods: {
             fixButtonCol(){
