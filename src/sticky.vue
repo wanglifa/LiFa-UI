@@ -67,7 +67,6 @@
     .lifa-sticky{
         &.sticky {
             position: fixed;
-            top: 0;
         }
     }
 </style>
