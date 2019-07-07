@@ -57,7 +57,3 @@
     }
   }
 </script>
-<style>
-  .tabs {
-  }
-</style>
