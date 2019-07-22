@@ -1,7 +1,7 @@
 <template>
     <div class="popover" ref="popover">
-        <div ref="content" class="content-wrapper" v-if="visibility" 
-        :class="`position-${position}`"
+        <div ref="content" class="lifa-popover-content-wrapper" v-if="visibility"
+        :class="[`position-${position}`, popClassName]"
         >
             <slot name="content" :close="close"></slot>
         </div>
@@ -19,6 +19,9 @@
             }
         },
         props: {
+            popClassName: {
+              type: String
+            },
             position: {
                 type: String,
                 default: 'top',
@@ -32,6 +35,9 @@
                 validator(value){
                     return ['click','hover'].indexOf(value) >= 0
                 }
+            },
+            container: {
+                type: Element
             }
         },
         // computed: {
@@ -52,8 +58,8 @@
         // },
         methods: {
             positionContent(){
-                let {content,button} = this.$refs
-                document.body.appendChild(content)
+                let {content,button} = this.$refs;
+                (this.container || document.body).appendChild(content)
                 let {left, top, height, width} = button.getBoundingClientRect()
                 let {height: height2} = content.getBoundingClientRect();
                 let positions = {
@@ -134,7 +140,7 @@
             display: inline-block;
         }
     }
-    .content-wrapper{
+    .lifa-popover-content-wrapper{
         position: absolute;
         border: 1px solid #333;
         filter: drop-shadow(0 1px 1px rgba(0,0,0,.5));

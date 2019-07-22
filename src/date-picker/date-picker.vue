@@ -1,27 +1,34 @@
 <template>
-  <div>
-    <lf-popover position="bottom">
+  <div ref="wrapper" class="lifa-date-picker">
+    <lf-popover position="bottom" :pop-class-name="c('popWrapper')" :container="x">
       <lf-input type="text"></lf-input>
       <template slot="content">
         <div class="lifa-date-picker-pop">
           <div class="lifa-date-picker-nav">
-            <span><lf-icon name="settings"></lf-icon></span>
-            <span><lf-icon name="settings"></lf-icon></span>
+            <span><lf-icon name="leftleft"></lf-icon></span>
+            <span><lf-icon name="left"></lf-icon></span>
             <span @click="onClickYear">2019年</span>
             <span @click="onClickMonth">8月</span>
+            <span><lf-icon name="rightright"></lf-icon></span>
+            <span><lf-icon name="right"></lf-icon></span>
           </div>
           <div class="lifa-date-picker-panels">
             <div v-if="mode==='years'" class="lifa-date-picker-content">年</div>
             <div v-else-if="mode === 'months'" class="lifa-date-picker-content">月</div>
             <div v-else class="lifa-date-picker-content">
-              <div v-for="item in 6">
+              <div :class="c('weekdays')">
+                <span v-for="i in [1,2,3,4,5,6,0]">{{weekdays[i]}}</span>
+              </div>
+              <div v-for="item in 6" :class="c('row')">
                 <span v-for="day in visibleDays.slice(item*7-7, item*7)">
                   {{day.getDate()}}
                 </span>
               </div>
             </div>
           </div>
-          <div class="lifa-date-picker-actions"></div>
+          <div class="lifa-date-picker-actions">
+            <button>清除</button>
+          </div>
         </div>
       </template>
     </lf-popover>
@@ -39,13 +46,18 @@
         data () {
             return {
                 mode: 'days',
-                value: new Date()
+                value: new Date(),
+                weekdays: ['日','一','二','三','四','五','六'],
+                x: undefined
             }
         },
         mounted () {
-
+          this.x = this.$refs.wrapper
         },
         methods: {
+            c(className) {
+              return `lifa-date-picker-${className}`
+            },
             onClickMonth() {
                 this.mode = 'months'
             },
@@ -59,30 +71,29 @@
                 let firstDay = helper.firstDayOfMonth(date)
                 let lastDay = helper.lastDayOfMonth(date)
                 let [year, month, day] = helper.getYearMonthDate(date)
+                // 获取1号是星期几
+                let n = firstDay.getDay()
                 let arr = []
-                // firstDay.getDate()得到这个月的第一天也就是1，lastDay.getDate()得到最后一天如31
-                for (let i = firstDay.getDate(); i <= lastDay.getDate(); i++) {
-                    arr.push(new Date(year, month, i))
+                // 获取日历显示中的第一天；因为是按照星期一到星期天排的星期天是0，所以如果一号是星期天前面应该有6天
+                // （也就是应该减去6天可以得到日历现实的第一天），否则就是n-1天，所以需要再乘以3600 * 24 * 1000得到每天的毫秒数
+                let x = firstDay - (n === 0 ? 6 : n - 1) * 3600 * 24 * 1000
+                for(let i = 0; i < 42; i++) {
+                    // 因为一共是42天所以每次都在第一天后面加加
+                    arr.push(new Date(x + i * 3600 * 24 * 1000 ))
                 }
-                let arr1 = []
-                // 如果1号是周日那么firstDay.getDay() = 0，前面要加上个月的6天，否则直接减1
-                let arr1Length = firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1
-                for (let i = 0; i <= arr1Length; i++) {
-                    // 当前月的天数从1号开始往上减就到了上个月，如2月1号减1，就是1月31
-                    arr1.push(new Date(year, month, -i))
-                }
-                arr1.reverse()
-                let arr2 = []
-                for (let i = 0; i< 42- (arr.length + arr1.length);i++) {
-                    // 因为每个月都是从1号开始所以加1
-                    arr2.push(new Date(year, month+1, 1+i))
-                }
-                return [...arr1, ...arr, ...arr2]
+                return arr
             }
         }
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+  .lifa-date-picker {
+    &-nav {
+      background: red;
+    }
+    /deep/ &-popWrapper {
+      padding: 0;
+    }
+  }
 </style>
