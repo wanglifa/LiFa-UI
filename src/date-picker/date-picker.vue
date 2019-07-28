@@ -3,7 +3,7 @@
     <lf-popover position="bottom" :pop-class-name="c('popWrapper')" :container="x">
       <lf-input type="text" :value="filterValue"></lf-input>
       <template slot="content">
-        <div class="lifa-date-picker-pop">
+        <div class="lifa-date-picker-pop" @selectstart.prevent>
           <div class="lifa-date-picker-nav">
             <span :class="c('prevYear', 'navItem')" @click="onClickPrevYear"><lf-icon name="leftleft"></lf-icon></span>
             <span :class="c('prevMonth', 'navItem')" @click="onClickPrevMonth"><lf-icon name="left"></lf-icon></span>
@@ -15,18 +15,21 @@
             <span :class="c('nextYear', 'navItem')" @click="onClickNextYear"><lf-icon name="rightright"></lf-icon></span>
           </div>
           <div class="lifa-date-picker-panels">
-            <div v-if="mode==='years'" class="lifa-date-picker-content">年</div>
-            <div v-else-if="mode === 'months'" class="lifa-date-picker-content">月</div>
-            <div v-else class="lifa-date-picker-content">
-              <div :class="c('weekdays')">
-                <span v-for="i in [1,2,3,4,5,6,0]" :key="i" :class="c('weekday')">{{weekdays[i]}}</span>
-              </div>
-              <div v-for="item in 6" :class="c('row')" :key="item">
-                <span v-for="(day, index) in visibleDays.slice(item*7-7, item*7)" :key="index"
-                      :class="[c('cell'), {currentMonth: isCurrentMonth(day)}]" @click="onGetDay(day)">
-                  {{day.getDate()}}
-                </span>
-              </div>
+            <div class="lifa-date-picker-content">
+              <template v-if="mode === 'month'">
+                <div :class="c('selectMonth')">选择年和月</div>
+              </template>
+              <template v-else>
+                <div :class="c('weekdays')">
+                  <span v-for="i in [1,2,3,4,5,6,0]" :key="i" :class="c('weekday')">{{weekdays[i]}}</span>
+                </div>
+                <div v-for="item in 6" :class="c('row')" :key="item">
+                  <span v-for="(day, index) in visibleDays.slice(item*7-7, item*7)" :key="index"
+                        :class="[c('cell'), {currentMonth: isCurrentMonth(day)}]" @click="onGetDay(day)">
+                    {{day.getDate()}}
+                  </span>
+                </div>
+              </template>
             </div>
           </div>
           <div class="lifa-date-picker-actions">
@@ -70,7 +73,12 @@
                 return classNames.map(className => `lifa-date-picker-${className}`)
             },
             onClickMonth() {
-                this.mode = 'months'
+                console.log(this.mode)
+                if (this.mode !== 'month') {
+                    this.mode = 'month'
+                } else {
+                    this.mode = 'day'
+                }
             },
             onClickYear() {
                 this.mode = 'years'
@@ -160,6 +168,10 @@
       &.currentMonth {
         color: black;
       }
+    }
+    &-selectMonth {
+      width: 224px;
+      height: 224px;
     }
     /deep/ &-popWrapper {
       padding: 0;
