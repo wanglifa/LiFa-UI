@@ -5,14 +5,14 @@
       <template slot="content">
         <div class="lifa-date-picker-pop">
           <div class="lifa-date-picker-nav">
-            <span :class="c('prevYear', 'navItem')"><lf-icon name="leftleft"></lf-icon></span>
-            <span :class="c('prevMonth', 'navItem')"><lf-icon name="left"></lf-icon></span>
+            <span :class="c('prevYear', 'navItem')" @click="onClickPrevYear"><lf-icon name="leftleft"></lf-icon></span>
+            <span :class="c('prevMonth', 'navItem')" @click="onClickPrevMonth"><lf-icon name="left"></lf-icon></span>
             <span :class="c('yearAndMonth')">
-              <span @click="onClickYear">2019年</span>
-              <span @click="onClickMonth">8月</span>
+              <span @click="onClickYear">{{display.year}}年</span>
+              <span @click="onClickMonth">{{display.month+1}}月</span>
             </span>
-            <span :class="c('nextMonth', 'navItem')"><lf-icon name="rightright"></lf-icon></span>
-            <span :class="c('nextYear', 'navItem')"><lf-icon name="right"></lf-icon></span>
+            <span :class="c('nextMonth', 'navItem')" @click="onClickNextMonth"><lf-icon name="right"></lf-icon></span>
+            <span :class="c('nextYear', 'navItem')" @click="onClickNextYear"><lf-icon name="rightright"></lf-icon></span>
           </div>
           <div class="lifa-date-picker-panels">
             <div v-if="mode==='years'" class="lifa-date-picker-content">年</div>
@@ -23,7 +23,7 @@
               </div>
               <div v-for="item in 6" :class="c('row')" :key="item">
                 <span v-for="(day, index) in visibleDays.slice(item*7-7, item*7)" :key="index"
-                      :class="c('cell')" @click="onGetDay(day)">
+                      :class="[c('cell'), {currentMonth: isCurrentMonth(day)}]" @click="onGetDay(day)">
                   {{day.getDate()}}
                 </span>
               </div>
@@ -53,10 +53,13 @@
           }
         },
         data () {
+            // 展示的年和月根据当前日期来获得
+            let [year, month] = helper.getYearMonthDate(this.value)
             return {
                 mode: 'days',
                 weekdays: ['日','一','二','三','四','五','六'],
-                x: undefined
+                x: undefined,
+                display: {year, month}
             }
         },
         mounted () {
@@ -72,13 +75,48 @@
             onClickYear() {
                 this.mode = 'years'
             },
-            onGetDay(day) {
-                this.$emit('input', day)
+            onGetDay(date) {
+                // 如果是当前月就可以点击
+                if (this.isCurrentMonth(date)) {
+                    this.$emit('input', date)
+                }
+            },
+            isCurrentMonth(date) {
+                let [year1, month1] = helper.getYearMonthDate(date)
+                // 如果是当前选中的年和月等于展示的年和月
+                return year1 === this.display.year && month1 === this.display.month
+            },
+            onClickPrevMonth() {
+                // 当前日期
+                const oldDate = new Date(this.display.year, this.display.month, 1)
+                // 点击上一个月的日期
+                const newDate = helper.addMonth(oldDate, -1)
+                const [year, month] = helper.getYearMonthDate(newDate)
+                this.display = {year, month}
+            },
+            onClickPrevYear() {
+                const oldDate = new Date(this.display.year, this.display.month, 1)
+                const newDate = helper.addYear(oldDate, -1)
+                const [year, month] = helper.getYearMonthDate(newDate)
+                this.display = {year, month}
+            },
+            onClickNextMonth() {
+                const oldDate = new Date(this.display.year, this.display.month, 1)
+                const newDate = helper.addMonth(oldDate, 1)
+                const [year, month] = helper.getYearMonthDate(newDate)
+                this.display = {year, month}
+            },
+            onClickNextYear() {
+                const oldDate = new Date(this.display.year, this.display.month, 1)
+                const newDate = helper.addYear(oldDate, 1)
+                const [year, month] = helper.getYearMonthDate(newDate)
+                this.display = {year, month}
             }
         },
         computed: {
             visibleDays () {
-                let date = this.value
+                // 界面展示的当前月的日期，所以也根据display来确定
+                let date = new Date(this.display.year, this.display.month, 1)
                 let firstDay = helper.firstDayOfMonth(date)
                 let lastDay = helper.lastDayOfMonth(date)
                 let [year, month, day] = helper.getYearMonthDate(date)
@@ -116,6 +154,12 @@
       display: inline-flex;
       justify-content: center;
       align-items: center;
+    }
+    &-cell {
+      color: #ddd;
+      &.currentMonth {
+        color: black;
+      }
     }
     /deep/ &-popWrapper {
       padding: 0;
