@@ -5,22 +5,24 @@
       <template slot="content">
         <div class="lifa-date-picker-pop">
           <div class="lifa-date-picker-nav">
-            <span><lf-icon name="leftleft"></lf-icon></span>
-            <span><lf-icon name="left"></lf-icon></span>
-            <span @click="onClickYear">2019年</span>
-            <span @click="onClickMonth">8月</span>
-            <span><lf-icon name="rightright"></lf-icon></span>
-            <span><lf-icon name="right"></lf-icon></span>
+            <span :class="c('prevYear', 'navItem')"><lf-icon name="leftleft"></lf-icon></span>
+            <span :class="c('prevMonth', 'navItem')"><lf-icon name="left"></lf-icon></span>
+            <span :class="c('yearAndMonth')">
+              <span @click="onClickYear">2019年</span>
+              <span @click="onClickMonth">8月</span>
+            </span>
+            <span :class="c('nextMonth', 'navItem')"><lf-icon name="rightright"></lf-icon></span>
+            <span :class="c('nextYear', 'navItem')"><lf-icon name="right"></lf-icon></span>
           </div>
           <div class="lifa-date-picker-panels">
             <div v-if="mode==='years'" class="lifa-date-picker-content">年</div>
             <div v-else-if="mode === 'months'" class="lifa-date-picker-content">月</div>
             <div v-else class="lifa-date-picker-content">
               <div :class="c('weekdays')">
-                <span v-for="i in [1,2,3,4,5,6,0]">{{weekdays[i]}}</span>
+                <span v-for="i in [1,2,3,4,5,6,0]" :key="i" :class="c('weekday')">{{weekdays[i]}}</span>
               </div>
-              <div v-for="item in 6" :class="c('row')">
-                <span v-for="day in visibleDays.slice(item*7-7, item*7)">
+              <div v-for="item in 6" :class="c('row')" :key="item">
+                <span v-for="(day, index) in visibleDays.slice(item*7-7, item*7)" :key="index" :class="c('cell')">
                   {{day.getDate()}}
                 </span>
               </div>
@@ -55,8 +57,8 @@
           this.x = this.$refs.wrapper
         },
         methods: {
-            c(className) {
-              return `lifa-date-picker-${className}`
+            c(...classNames) {
+                return classNames.map(className => `lifa-date-picker-${className}`)
             },
             onClickMonth() {
                 this.mode = 'months'
@@ -90,7 +92,17 @@
 <style scoped lang="scss">
   .lifa-date-picker {
     &-nav {
-      background: red;
+      display: flex;
+    }
+    &-yearAndMonth {
+      margin: auto;
+    }
+    &-cell, &-weekday, &-navItem {
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
     }
     /deep/ &-popWrapper {
       padding: 0;

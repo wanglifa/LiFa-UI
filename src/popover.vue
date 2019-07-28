@@ -20,7 +20,7 @@
         },
         props: {
             popClassName: {
-              type: String
+              type: [String, Array]
             },
             position: {
                 type: String,
