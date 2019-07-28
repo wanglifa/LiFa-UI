@@ -1,6 +1,6 @@
 <template>
   <div style="justify-content: center;display: flex">
-    <lf-date-picker></lf-date-picker>
+    <lf-date-picker :value="value" @input="value = $event"></lf-date-picker>
   </div>
 </template>
 
@@ -14,7 +14,7 @@
         },
         data() {
             return {
-
+              value: new Date()
             }
         },
         methods: {},

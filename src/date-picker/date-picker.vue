@@ -1,7 +1,7 @@
 <template>
   <div ref="wrapper" class="lifa-date-picker">
     <lf-popover position="bottom" :pop-class-name="c('popWrapper')" :container="x">
-      <lf-input type="text"></lf-input>
+      <lf-input type="text" :value="filterValue"></lf-input>
       <template slot="content">
         <div class="lifa-date-picker-pop">
           <div class="lifa-date-picker-nav">
@@ -22,7 +22,8 @@
                 <span v-for="i in [1,2,3,4,5,6,0]" :key="i" :class="c('weekday')">{{weekdays[i]}}</span>
               </div>
               <div v-for="item in 6" :class="c('row')" :key="item">
-                <span v-for="(day, index) in visibleDays.slice(item*7-7, item*7)" :key="index" :class="c('cell')">
+                <span v-for="(day, index) in visibleDays.slice(item*7-7, item*7)" :key="index"
+                      :class="c('cell')" @click="onGetDay(day)">
                   {{day.getDate()}}
                 </span>
               </div>
@@ -45,10 +46,15 @@
     export default {
         name: "LiFaDatePicker",
         components: {LfIcon, LfInput, LfPopover},
+        props: {
+          value: {
+              type: Date,
+              default: () => new Date()
+          }
+        },
         data () {
             return {
                 mode: 'days',
-                value: new Date(),
                 weekdays: ['日','一','二','三','四','五','六'],
                 x: undefined
             }
@@ -65,6 +71,9 @@
             },
             onClickYear() {
                 this.mode = 'years'
+            },
+            onGetDay(day) {
+                this.$emit('input', day)
             }
         },
         computed: {
@@ -84,6 +93,10 @@
                     arr.push(new Date(x + i * 3600 * 24 * 1000 ))
                 }
                 return arr
+            },
+            filterValue () {
+                const [year, month, day] = helper.getYearMonthDate(this.value)
+                return `${year}-${month+1}-${day}`
             }
         }
     }
