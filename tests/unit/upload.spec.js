@@ -12,7 +12,7 @@ describe('Uploader.vue', () => {
     it('存在.', () => {
         expect(upload).to.exist
     })
-    it('可以上传一个文件', (done) => {
+    xit('可以上传一个文件', (done) => {
         let stub = sinon.stub(http, 'post').callsFake((url, options) => {
             setTimeout(function () {
                 options.success('{"id": "123123"}')
