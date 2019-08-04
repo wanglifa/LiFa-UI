@@ -3,7 +3,7 @@
   "version": "0.0.15",
   "main": "dist/lifa-ui.umd.min.js",
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "start": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name lifa-ui src/index.js",
     "test": "cross-env BABEL_ENV=test karma start --single-run",
     "test:unit": "cross-env BABEL_ENV=test karma start",
