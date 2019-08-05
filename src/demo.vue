@@ -1,6 +1,8 @@
 <template>
   <div style="justify-content: center;display: flex" class="page">
     <!--    <lf-date-picker :value="value" @input="value = $event"></lf-date-picker>-->
+    <div id="test" style="height: 100px; width: 100px; border: 1px solid red; position: absolute;top: 0; left: 0; z-index: 1;"
+    ></div>
   <lf-scroll style="width: 400px;height: 400px">
     <p>1</p>
     <p>2</p>
@@ -126,9 +128,33 @@ export default {
     created() {
 
     },
-    mounted() {
-
-    }
+mounted() {
+  let test = document.querySelector('#test')
+  let startPosition
+  let endPosition
+  let isMoving = false
+  let top
+  let left
+  test.addEventListener('mousedown', (e) => {
+    isMoving = true
+    let {screenX, screenY} = e
+    startPosition = {x: screenX, y: screenY}
+    top = window.getComputedStyle(test).top
+    left = window.getComputedStyle(test).left
+  })
+  document.addEventListener('mousemove', (e) => {
+    if (!isMoving) return
+    let {screenX, screenY} = e
+    endPosition = {x: screenX, y:screenY}
+    let delta = {x: endPosition.x - startPosition.x, y: endPosition.y - startPosition.y}
+    test.style.top = parseInt(top) + delta.y + 'px'
+    test.style.left = parseInt(left) + delta.x + 'px'
+  })
+  document.addEventListener('mouseup', (e) => {
+    isMoving = false
+    console.log('up')
+  })
+}
 
 
 }
@@ -136,7 +162,9 @@ export default {
 
 <style scoped lang="scss">
 
-
+.hide {
+  transform: translateX(-9999px);
+}
 
 
 </style>
