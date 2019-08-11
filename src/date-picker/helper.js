@@ -22,6 +22,13 @@ export default {
         const copy = new Date(date)
         copy.setFullYear(newMonth)
         return copy
+    },
+    range(arr) {
+      let array = []
+      for (let i = arr[0]; i < arr[1]; i++) {
+        array.push(i)
+      }
+      return array
     }
 }
 function getYearMonthDate(date) {

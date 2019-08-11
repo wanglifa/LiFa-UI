@@ -9,7 +9,7 @@
             <span :class="c('prevMonth', 'navItem')" @click="onClickPrevMonth"><lf-icon name="left"></lf-icon></span>
             <span :class="c('yearAndMonth')">
               <span @click="onClickYear">{{display.year}}年</span>
-              <span @click="onClickMonth">{{display.month+1}}月</span>
+              <span @click="onClickMonth">{{Number(display.month)+1}}月</span>
             </span>
             <span :class="c('nextMonth', 'navItem')" @click="onClickNextMonth"><lf-icon name="right"></lf-icon></span>
             <span :class="c('nextYear', 'navItem')" @click="onClickNextYear"><lf-icon name="rightright"></lf-icon></span>
@@ -17,7 +17,14 @@
           <div class="lifa-date-picker-panels">
             <div class="lifa-date-picker-content">
               <template v-if="mode === 'month'">
-                <div :class="c('selectMonth')">选择年和月</div>
+                <div :class="c('selectMonth')">
+                  <select name="" id="" @change="onSelectYear" v-model="display.year">
+                    <option v-for="list in currentYear" :value="list" :key="list">{{list}}</option>
+                  </select>
+                  <select name="" id="" @change="onSelectMonth" v-model="display.month">
+                    <option v-for="item in 12" :value="item-1" :key="item">{{item}}</option>
+                  </select>
+                </div>
               </template>
               <template v-else>
                 <div :class="c('weekdays')">
@@ -25,7 +32,9 @@
                 </div>
                 <div v-for="item in 6" :class="c('row')" :key="item">
                   <span v-for="(day, index) in visibleDays.slice(item*7-7, item*7)" :key="index"
-                        :class="[c('cell'), {currentMonth: isCurrentMonth(day)}]" @click="onGetDay(day)">
+                        :class="[c('cell'), {currentMonth: isCurrentMonth(day),
+                        selected: isSelected(day), today: isToday(day)}]"
+                        @click="onGetDay(day)">
                     {{day.getDate()}}
                   </span>
                 </div>
@@ -33,7 +42,8 @@
             </div>
           </div>
           <div class="lifa-date-picker-actions">
-            <button>清除</button>
+            <lf-button style="margin-right: 4px" @click="onClickClear">清除</lf-button>
+            <lf-button @click="onClickToday">今天</lf-button>
           </div>
         </div>
       </template>
@@ -46,18 +56,22 @@
     import LfIcon from '../icon'
     import LfPopover from '../popover'
     import helper from './helper'
+    import LfButton from '../button/button'
     export default {
         name: "LiFaDatePicker",
-        components: {LfIcon, LfInput, LfPopover},
+        components: {LfIcon, LfInput, LfPopover, LfButton},
         props: {
           value: {
-              type: Date,
-              default: () => new Date()
+              type: Date
+          },
+          startAndEndDate: {
+            type: Array,
+            default: () => [new Date(1990, 0, 1), helper.addYear(new Date(), 100)]
           }
         },
         data () {
             // 展示的年和月根据当前日期来获得
-            let [year, month] = helper.getYearMonthDate(this.value)
+            let [year, month] = helper.getYearMonthDate(this.value || new Date())
             return {
                 mode: 'days',
                 weekdays: ['日','一','二','三','四','五','六'],
@@ -67,8 +81,31 @@
         },
         mounted () {
           this.x = this.$refs.wrapper
+          console.log('this.startAndEndDate')
+          console.log(this.startAndEndDate)
+          console.log(this.currentYear)
         },
         methods: {
+          onSelectYear (e) {
+            const year = e.target.value
+            const d = new Date(year, this.display.month)
+            if ( d >= this.startAndEndDate[0] && d <= this.startAndEndDate[1]) {
+              this.display.year = year
+              console.log('aaaa')
+            } else {
+              e.target.value = this.display.year
+            }
+          },
+          onSelectMonth (e) {
+            const month = e.target.value
+            const d = new Date(this.display.year, month)
+            if ( d >= this.startAndEndDate[0] && d <= this.startAndEndDate[1]) {
+              this.display.month = month
+              console.log('bbb')
+            } else {
+              e.target.value = this.display.month
+            }
+          },
             c(...classNames) {
                 return classNames.map(className => `lifa-date-picker-${className}`)
             },
@@ -89,11 +126,23 @@
                     this.$emit('input', date)
                 }
             },
+          isSelected(date) {
+            // 当前选中的年月日等于对应的年月日就高亮
+            if (!this.value) return
+            let [y,m,d] = helper.getYearMonthDate(date)
+            let [y1,m1,d1] = helper.getYearMonthDate(this.value)
+            return y === y1 && m === m1 && d === d1
+          },
             isCurrentMonth(date) {
                 let [year1, month1] = helper.getYearMonthDate(date)
-                // 如果是当前选中的年和月等于展示的年和月
-                return year1 === this.display.year && month1 === this.display.month
+              // 如果是当前选中的年和月等于展示的年和月
+                return year1 === Number(this.display.year) && month1 === Number(this.display.month)
             },
+          isToday(date) {
+            let [y,m,d] = helper.getYearMonthDate(date)
+            let [y1,m1,d1] = helper.getYearMonthDate(new Date())
+            return y === y1 && m === m1 && d === d1
+          },
             onClickPrevMonth() {
                 // 当前日期
                 const oldDate = new Date(this.display.year, this.display.month, 1)
@@ -119,9 +168,19 @@
                 const newDate = helper.addYear(oldDate, 1)
                 const [year, month] = helper.getYearMonthDate(newDate)
                 this.display = {year, month}
-            }
+            },
+          onClickToday() {
+            const today = new Date()
+            this.$emit('update:value', today)
+          },
+          onClickClear() {
+            this.$emit('update:value', undefined)
+          }
         },
         computed: {
+          currentYear () {
+            return helper.range([this.startAndEndDate[0].getFullYear(), this.startAndEndDate[1].getFullYear() + 1])
+          },
             visibleDays () {
                 // 界面展示的当前月的日期，所以也根据display来确定
                 let date = new Date(this.display.year, this.display.month, 1)
@@ -141,6 +200,7 @@
                 return arr
             },
             filterValue () {
+              if (!this.value) return
                 const [year, month, day] = helper.getYearMonthDate(this.value)
                 return `${year}-${month+1}-${day}`
             }
@@ -149,6 +209,7 @@
 </script>
 
 <style scoped lang="scss">
+  @import "var";
   .lifa-date-picker {
     &-nav {
       display: flex;
@@ -165,13 +226,33 @@
     }
     &-cell {
       color: #ddd;
+      cursor: not-allowed;
       &.currentMonth {
         color: black;
+        &:hover {
+          background: $blue;
+          cursor: pointer;
+          color: white;
+        }
       }
+      &.selected {
+        border: 1px solid $blue;
+      }
+      &.today {
+        background: $gray;
+      }
+    }
+    &-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     &-selectMonth {
       width: 224px;
       height: 224px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     /deep/ &-popWrapper {
       padding: 0;
