@@ -33,8 +33,14 @@
         maxHeight: undefined
       }
     },
+    props: {
+      height: {
+        type: String
+      }
+    },
     mounted() {
       this.listenerDocument()
+      this.$refs.parent.style.height = this.height
       this.parentHeight = this.$refs.parent.getBoundingClientRect().height
       this.childHeight = this.$refs.child.getBoundingClientRect().height
       this.maxHeight = this.calculateContentYMax()
@@ -42,7 +48,10 @@
     },
     methods: {
       listenerDocument () {
-        document.addEventListener('mousemove', e => this.onMouseMoveScrollBar(e))
+        document.addEventListener('mousemove', e => {
+          console.log('哈哈哈')
+          this.onMouseMoveScrollBar(e)
+        })
         document.addEventListener('mouseup', e => this.onMouseUpScrollBar(e))
       },
       calculateContentYMax () {
@@ -97,7 +106,7 @@
       },
       onMouseLeave() {
         // this.scrollBarVisible = false
-        this.isScrolling = false
+        // this.isScrolling = false
       },
       onMouseDownScrollBar(e) {
         this.isScrolling = true

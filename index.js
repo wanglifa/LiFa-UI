@@ -31,8 +31,11 @@ import Pager from './src/pager.vue'
 import Table from './src/table.vue'
 import Upload from './src/upload.vue'
 import Row from './src/grid/row.vue'
+import Scroll from './src/scroll.vue'
+import Sticky from './src/sticky.vue'
+import DatePicker from './src/date-picker/date-picker.vue'
 export {Content, Footer, Header, Layout, Sider, Tabs, TabsBody, TabsHead, TabsItem, TabsPane,
 Input, plugin, Popover, Toast, db, Svg, Button, ButtonGroup, Col, Collapse, CollapseItem, Icon,
-    Slides,SlidesItem,Nav,NavItem,SubNav,Cascader,CascaderItem,Pager,Table,Upload,Row
+    Slides,SlidesItem,Nav,NavItem,SubNav,Cascader,CascaderItem,Pager,Table,Upload,Row, Scroll, Sticky, DatePicker
 }
 
