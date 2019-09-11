@@ -15,7 +15,7 @@
   </div>
 </template>
 <script>
-  import LfTable from '../../../src/table.vue'
+  import LfTable from '../../../src/table1.vue'
   import Icon from '../../../src/icon.vue'
   import Collaspe from './collspse-demo.vue'
   export default {

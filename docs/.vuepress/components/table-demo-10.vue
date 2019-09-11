@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-  import LfTable from '../../../src/table.vue'
+  import LfTable from '../../../src/table1.vue'
   import LfButton from '../../../src/button/button.vue'
   import Collaspe from './collspse-demo.vue'
   export default {

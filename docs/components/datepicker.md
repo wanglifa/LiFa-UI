@@ -1,20 +1,22 @@
 ---
-title: Button 按钮
+title: DatePicker 日期组件
 ---
 
-# 按钮
+# 日期组件
 
 
 <ClientOnly>
-<button-demo-1></button-demo-1>
-<button-demo-2></button-demo-2>
+<datepicker-demo-1></datepicker-demo-1>
 </ClientOnly>
 
 ## Attributes
 | 参数          | 说明          |   类型  | 可选值  | 默认值  |
 | :------------- |:-------------|:-------|:-------|:-------|
-| icon          | 图标类名      |  String |   —  |   —  |
-| icon-position | 图标位置      |  String |  left / right |    left |
-| loading | 是否带 loading 效果     |   Boolean |  true / false |     false |
+| value         | 要显示的日期（选中的日期）      |  Date |   —  |   —  |
+
+## Methods
+| 参数          | 说明          |   类型  | 可选值  | 默认值  |
+| :------------- |:-------------|:-------|:-------|:-------|
+| input       | 动态输入修改日期   |  Function|   —  |   —  |
 
 

@@ -49,7 +49,6 @@
     methods: {
       listenerDocument () {
         document.addEventListener('mousemove', e => {
-          console.log('哈哈哈')
           this.onMouseMoveScrollBar(e)
         })
         document.addEventListener('mouseup', e => this.onMouseUpScrollBar(e))

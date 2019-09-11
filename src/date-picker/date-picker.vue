@@ -244,7 +244,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import "var";
+  @import '../../styles/var';
 
   .lifa-date-picker {
     &-nav {
@@ -256,8 +256,8 @@
     }
 
     &-cell, &-weekday, &-navItem {
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
       display: inline-flex;
       justify-content: center;
       align-items: center;
@@ -294,7 +294,6 @@
     }
 
     &-selectMonth {
-      width: 224px;
       height: 224px;
       display: flex;
       align-items: center;

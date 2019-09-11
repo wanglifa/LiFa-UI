@@ -34,8 +34,8 @@ module.exports = {
           '/components/nav',
           '/components/pager',
           '/components/table',
-          '/components/scroll',
           '/components/datepicker',
+          '/components/scroll',
           '/components/upload',
           '/components/sticky'
         ]

@@ -4,7 +4,7 @@
 
 <script>
     export default {
-        name: "table-column.vue",
+        name: "LiFaTableColumn",
         props: {
             text: {
                 type: String,

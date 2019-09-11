@@ -1,5 +1,5 @@
 <template>
-    <div class="lifa-sticky-wrapper" ref="sticky" :style="{height}">
+    <div class="lifa-sticky-wrapper" ref="sticky">
         <div class="lifa-sticky" :class="classes" :style="{left,width,top}">
             <slot></slot>
         </div>
