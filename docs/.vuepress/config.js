@@ -1,5 +1,5 @@
 module.exports = {
-  base: '/LiFa-UI/',
+  base: '/lifa-ui/',
   title: 'LiFa UI',
   description: '一个好用的UI框架',
   markdown: {
