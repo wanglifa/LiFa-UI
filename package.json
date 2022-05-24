@@ -12,7 +12,7 @@
     "docs:build": "vuepress build docs"
   },
   "dependencies": {
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "sass": "^1.50.0",
     "sass-loader": "^7.3.1",
     "sinon": "^7.5.0",
